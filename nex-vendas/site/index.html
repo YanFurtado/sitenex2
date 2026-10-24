@@ -1,0 +1,1496 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235B2BFF'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='16' text-anchor='middle' fill='white'%3EN%3C/text%3E%3C/svg%3E">
+<style>:root{color-scheme:dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>NEX · CRM com Inteligência Artificial</title>
+<meta name="description" content="NEX: CRM com Agente de IA no WhatsApp. Atenda, qualifique e agende seus leads em segundos, 24 horas por dia, e veja onde cada venda trava.">
+<meta property="og:title" content="NEX · CRM com Inteligência Artificial">
+<meta property="og:description" content="Seu comercial nunca mais dorme. CRM, funil e Agente de IA no WhatsApp num só lugar.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#08080c">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dark-first, hero centrado com mockup do produto; daí em diante blocos alinhados à esquerda em grid de 12 colunas */
+:root{
+  --bg:#08080c; --surface:#121219; --surface-2:#191922; --line:rgba(255,255,255,.08); --line-strong:rgba(255,255,255,.16);
+  --fg:#f2f1f6; --muted:#9a98a8; --accent:#7c5cff; --accent-rgb:124,92,255; --accent-2:#2fd3ff; --ok:#3ddc97; --warn:#ffb547;
+  --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"Manrope",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gutter-l:max(16px,env(safe-area-inset-left,0px)); --gutter-r:max(16px,env(safe-area-inset-right,0px));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.035em;line-height:1}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;border-radius:999px}
+
+/* NAV */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+.nav{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:50;transition:background .4s var(--ease),border-color .4s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(8,8,12,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.logo{font-family:var(--f-display);font-weight:700;font-size:22px;letter-spacing:-.04em;display:flex;align-items:center;gap:10px}
+.logo-svg{height:26px;width:auto;fill:#4B1EF0;filter:drop-shadow(0 0 10px rgba(75,30,240,.55));transition:filter .3s}
+.logo:hover .logo-svg{filter:drop-shadow(0 0 16px rgba(75,30,240,.9)) drop-shadow(0 0 22px rgba(63,224,255,.3))}
+.logo i{width:26px;height:26px;border-radius:8px;background:var(--accent);display:grid;place-items:center;font-style:normal;font-size:14px;color:#fff;box-shadow:0 0 24px rgba(var(--accent-rgb),.6)}
+.nav ul{display:flex;gap:30px;list-style:none;margin:0;padding:0;font-size:14px;color:var(--muted)}
+.nav ul a{transition:color .2s}.nav ul a:hover{color:var(--fg)}
+@media(max-width:820px){.nav ul{display:none}}
+
+/* BUTTONS */
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;border-radius:999px;font-weight:600;font-size:15px;padding:14px 26px;transition:box-shadow .35s var(--ease),background .3s,border-color .3s;will-change:transform;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff;overflow:hidden;box-shadow:0 0 0 1px rgba(var(--accent-rgb),.6),0 10px 40px -10px rgba(var(--accent-rgb),.8)}
+.btn-primary:hover{box-shadow:0 0 0 1px rgba(var(--accent-rgb),.9),0 14px 60px -6px rgba(var(--accent-rgb),1)}
+.btn-primary::after{content:"";position:absolute;inset:0 auto 0 -60%;width:45%;transform:skewX(-14deg);background:rgba(255,255,255,.28);filter:blur(10px);transition:left .8s var(--ease)}
+.btn-primary:hover::after{left:130%}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--fg);background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.36);background:rgba(255,255,255,.05)}
+.btn .arr{transition:transform .3s var(--ease)}.btn:hover .arr{transform:translateX(4px)}
+.btn-sm{padding:10px 18px;font-size:14px}
+
+/* HERO */
+.hero{position:relative;isolation:isolate;overflow:hidden;padding-top:150px;padding-bottom:40px;text-align:center}
+/* Teia digital (canvas) */
+.web{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block}
+.web-fade{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse 60% 45% at 50% 30%,rgba(8,8,12,.55),transparent 70%),linear-gradient(to bottom,transparent 55%,var(--bg) 96%)}
+.badge{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:999px;padding:7px 16px;font-size:13.5px;color:var(--muted);backdrop-filter:blur(8px);animation:rise .9s var(--ease) both}
+.dot{position:relative;width:8px;height:8px;border-radius:50%;background:var(--ok)}
+.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--ok);animation:ping 1.8s ease-out infinite}
+@keyframes ping{to{transform:scale(2.6);opacity:0}}
+.hero h1{font-size:clamp(40px,7.4vw,92px);font-weight:700;margin-top:26px;letter-spacing:-.05em;line-height:.94}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}
+.hero h1 .w span{display:inline-block;animation:wordUp 1.1s var(--ease) both}
+.hero h1 .grad{background:linear-gradient(90deg,var(--fg),var(--accent) 45%,var(--accent-2) 70%,var(--fg));background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:wordUp 1.1s var(--ease) both,shimmer 7s linear infinite}
+@keyframes wordUp{from{transform:translateY(110%)}}
+@keyframes shimmer{to{background-position:-220% 0}}
+@keyframes rise{from{opacity:0;transform:translateY(16px);filter:blur(6px)}}
+.hero .sub{max-width:640px;margin:28px auto 0;font-size:clamp(17px,2vw,20px);color:var(--muted);animation:rise 1s .75s var(--ease) both}
+.ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px;animation:rise 1s .9s var(--ease) both}
+.micro{margin-top:20px;font-size:13px;color:var(--muted);opacity:.8;animation:rise 1s 1.05s var(--ease) both}
+
+/* LOGO NEX (hero) */
+.nex-logo-slot{width:min(560px,100%);margin:34px auto 0;animation:logoIn 1.1s .15s var(--ease) both}
+.hero-logo{display:block;width:100%;height:auto;overflow:visible;
+  filter:drop-shadow(0 0 18px rgba(75,30,240,.6)) drop-shadow(0 0 42px rgba(63,224,255,.14));
+  animation:float 5s 1.3s ease-in-out infinite}
+@keyframes logoIn{from{opacity:0;transform:translateY(18px) scale(.97);filter:blur(10px)}}
+@keyframes float{50%{transform:translateY(-14px) rotate(-.6deg)}}
+@media(max-width:560px){.nex-logo-slot{width:82%}}
+
+/* MOCKUP */
+/* MOCKUP DO APP (dashboard + pipeline) */
+.ax{--ax-bg:#0b0b12;--ax-card:#14141d;--ax-line:rgba(255,255,255,.07);display:grid;grid-template-columns:168px minmax(0,1fr);height:560px;border-radius:18px;overflow:hidden;background:var(--ax-bg);border:1px solid var(--line);font-family:var(--f-body);color:#e9e8f0;font-size:11px;line-height:1.3;text-align:left}
+.ax svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ax-side{background:linear-gradient(180deg,#6a2bff,#5a1ff0);display:flex;flex-direction:column;padding:14px 8px 10px;gap:2px}
+.ax-logo{padding:2px 8px 14px}.ax-logo svg{width:64px;height:auto;fill:#fff;stroke:none}
+.ax-side nav{display:flex;flex-direction:column;gap:1px}
+.ax-sec{font:700 8.5px var(--f-body);letter-spacing:.04em;color:rgba(255,255,255,.55);padding:9px 8px 4px}
+.ax-it{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:8px;font-weight:600;font-size:11.5px;color:#fff}
+.ax-it.on{background:#0b0b12;margin-right:-8px;border-radius:8px 0 0 8px}
+.ax-bot{margin-top:auto;border-top:1px solid rgba(255,255,255,.2);border-radius:0;padding-top:10px}
+.ax-main{display:flex;flex-direction:column;min-width:0;padding:10px 14px 0;gap:10px}
+.ax-top{display:flex;justify-content:space-between;align-items:center;color:#9a98a8;font-size:10px;letter-spacing:.12em}
+.ax-ws{display:flex;align-items:center;gap:6px;color:#fff;letter-spacing:0;font-weight:600}.ax-ws i{width:7px;height:7px;border-radius:50%;background:#3ddc97}
+.ax-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.ax-k{background:var(--ax-card);border:1px solid var(--ax-line);border-radius:10px;padding:9px 11px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.ax-kl{color:#a9a7b8;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ax-k b{font:700 19px/1.1 var(--f-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.ax-k small{font-size:9px;color:#8a8899}.ax-k small.up{color:#3ddc97}
+.ax-tools{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;overflow:hidden}
+.ax-tools>span{border:1px solid var(--ax-line);border-radius:7px;padding:5px 9px;white-space:nowrap;background:#101018;font-size:10.5px}
+.ax-sel em{font-style:normal;color:#8a8899;margin-left:4px}
+.ax-tab.on{background:#6a2bff;border-color:#6a2bff;font-weight:600}
+.ax-search{color:#77758a;min-width:120px}
+.ax-sum{color:#8a8899;border:0!important;background:none!important}.ax-sum b{color:#fff;margin-left:4px}
+.ax-plus{margin-left:auto;background:#6a2bff!important;border-color:#6a2bff!important;font-weight:700;padding:4px 10px!important}
+.ax-board{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(160px,1fr);gap:8px;flex:1;min-height:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.ax-col{background:#101018;border:1px solid var(--ax-line);border-radius:10px 10px 0 0;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.ax-ch{background:var(--c);padding:8px 10px;font:700 11.5px var(--f-body);color:#0b0b12;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden}
+.ax-ch i{width:6px;height:6px;border-radius:50%;background:rgba(11,11,18,.6);flex:none}
+.ax-meta{display:flex;gap:6px;padding:7px 8px;font-size:9px;color:#8a8899}.ax-meta span{border:1px solid var(--ax-line);border-radius:99px;padding:2px 7px;font-variant-numeric:tabular-nums}
+.ax-list{display:flex;flex-direction:column;gap:6px;padding:0 6px 6px;overflow:hidden}
+.ax-card{background:var(--ax-card);border:1px solid var(--ax-line);border-radius:8px;padding:8px 9px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.ax-bar{width:16px;height:3px;border-radius:2px}
+.ax-cn{font-weight:700;font-size:11.5px;display:flex;justify-content:space-between;width:100%;gap:6px}
+.ax-st{width:17px;height:17px;border-radius:50%;display:grid;place-items:center;font-size:9px;flex:none}
+.ax-st.w{background:rgba(255,181,71,.15);color:#ffb547}.ax-st.a{background:rgba(255,90,110,.14);color:#ff6b81}
+.ax-tg{font-size:8.5px;font-weight:700;border-radius:99px;padding:1px 6px;border:1px solid}
+.ax-tg.q{color:#ff6b81;border-color:rgba(255,107,129,.5);background:rgba(255,107,129,.1)}
+.ax-tg.m{color:#ffc94a;border-color:rgba(255,201,74,.5);background:rgba(255,201,74,.1)}
+.ax-tg.f{color:#5ac8ff;border-color:rgba(90,200,255,.5);background:rgba(90,200,255,.1)}
+.ax-src{font-size:9.5px;color:#8a8899}
+.ax-ft{display:flex;align-items:center;gap:7px;width:100%;font-size:9px;color:#8a8899}
+.ax-ft b{font-size:8.5px;color:#fff}.ax-ft em{margin-left:auto;font-style:normal;font-weight:700;font-size:11px;color:#fff;font-variant-numeric:tabular-nums}
+.ax-card.new{border-color:rgba(139,92,255,.8);box-shadow:0 0 0 3px rgba(139,92,255,.18),0 0 24px rgba(139,92,255,.35);animation:axIn .7s var(--ease) both}
+@keyframes axIn{from{opacity:0;transform:translateY(-14px) scale(.96)}}
+.ax-k b.bump{animation:axBump .6s var(--ease)}
+@keyframes axBump{40%{transform:scale(1.12);text-shadow:0 0 18px currentColor}}
+@media(max-width:900px){.ax{grid-template-columns:1fr;height:480px}.ax-side{display:none}.ax-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.ax-kpis .ax-k:nth-child(n+3){display:none}.ax-search,.ax-sum{display:none}}
+@media(max-width:560px){.ax{height:430px}.ax-board{grid-auto-columns:minmax(150px,72%)}}
+
+.shot{display:block;width:100%;height:auto;border-radius:18px;border:1px solid var(--line)}
+.stage{perspective:1600px;margin-top:72px}
+.mock{position:relative;max-width:1080px;margin:0 auto;border:1px solid var(--line);border-radius:26px;background:rgba(18,18,25,.75);padding:10px;backdrop-filter:blur(20px);box-shadow:0 50px 140px -40px rgba(var(--accent-rgb),.55);transform-origin:50% 0;animation:mockIn 1.4s 1s var(--ease) both;text-align:left}
+@keyframes mockIn{from{opacity:0;transform:translateY(70px) rotateX(14deg) scale(.96)}}
+.mock::before{content:"";position:absolute;left:12%;right:12%;top:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.app{display:grid;grid-template-columns:190px 1fr 300px;min-height:440px;border-radius:18px;overflow:hidden;background:var(--bg);border:1px solid var(--line)}
+.side{border-right:1px solid var(--line);padding:18px 14px;display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+.side .it{padding:8px 10px;border-radius:9px;display:flex;justify-content:space-between}
+.side .it.on{background:var(--surface-2);color:var(--fg)}
+.side .ct{font-family:var(--f-mono);font-size:11px;color:var(--accent)}
+.board{padding:18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;min-width:0}
+.col h4{margin:0 0 10px;font:500 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
+.lead{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:8px;font-size:12.5px}
+.lead b{display:block;font-weight:600;font-size:13px;color:var(--fg)}
+.lead .meta{display:flex;justify-content:space-between;margin-top:6px;color:var(--muted);font-size:11px}
+.chip{font:500 10px/1 var(--f-mono);padding:4px 7px;border-radius:999px;background:rgba(var(--accent-rgb),.15);color:#b9a8ff}
+.chip.ok{background:rgba(61,220,151,.13);color:var(--ok)}
+.chip.warn{background:rgba(255,181,71,.13);color:var(--warn)}
+.lead.new{border-color:rgba(var(--accent-rgb),.6);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.12);animation:pop 1s 2.4s var(--ease) both}
+@keyframes pop{from{opacity:0;transform:translateY(-10px) scale(.96)}}
+.chatp{border-left:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:8px;font-size:12.5px;min-width:0}
+.chatp .hd{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#f6a,#fb6);flex:none}
+.bub{max-width:88%;padding:9px 12px;border-radius:14px;background:var(--surface-2);animation:rise .6s var(--ease) both}
+.bub.me{align-self:flex-end;background:var(--accent);color:#fff}
+.bub:nth-child(2){animation-delay:1.6s}.bub:nth-child(3){animation-delay:2.1s}.bub:nth-child(4){animation-delay:2.7s}.bub:nth-child(5){animation-delay:3.3s}
+.ai-tag{font:500 10px var(--f-mono);color:var(--muted);align-self:flex-end;animation:rise .6s 3.6s both}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side,.chatp{display:none}}
+@media(max-width:560px){.board{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.board .col:nth-child(3){display:none}}
+
+/* LOGOS */
+.logos{padding-block:90px 30px}
+.logos p{text-align:center;font:500 12px var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.marq{margin-top:30px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent)}
+.track{display:flex;gap:64px;width:max-content;animation:marq 42s linear infinite}
+.marq:hover .track{animation-play-state:paused}
+.track span{font-family:var(--f-display);font-weight:600;font-size:22px;letter-spacing:-.03em;color:rgba(242,241,246,.3);white-space:nowrap;transition:color .3s}
+.track span:hover{color:var(--fg)}
+.track .lg{display:flex;align-items:center;height:56px;opacity:.5;transition:opacity .3s,filter .3s}
+.track .lg img{display:block;width:auto;max-width:none}
+.track .lg:hover{opacity:1;filter:drop-shadow(0 0 14px rgba(139,92,255,.8))}
+.track .lg-txt{font-family:var(--f-display);font-weight:700;font-size:26px;letter-spacing:-.03em;color:#fff}
+.track{align-items:center;gap:72px}
+.track{gap:0!important;will-change:transform}
+.mq-group{display:flex;align-items:center;flex:none}
+.mq-group>*{margin-right:72px;flex:none}
+@keyframes mqMove{from{transform:translateX(0)}to{transform:translateX(calc(-1 * var(--mq-w)))}}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section.block{padding-block:120px}
+.head{max-width:760px}
+.head h2{font-size:clamp(36px,5.4vw,64px);font-weight:600;margin-top:16px;line-height:1.02}
+.head p{margin-top:20px;font-size:18px;color:var(--muted);max-width:620px}
+.center{text-align:center;margin-inline:auto}.center p{margin-inline:auto}
+
+/* Reveal: visível em repouso; anima com a rolagem onde o navegador suporta */
+@supports (animation-timeline:view()){
+  .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+  @keyframes rv{from{opacity:0;transform:translateY(34px);filter:blur(8px)}}
+}
+
+/* BENTO */
+.bento{margin-top:64px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+.card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:24px;background:rgba(18,18,25,.6);backdrop-filter:blur(16px);padding:30px;transition:transform .5s var(--ease),border-color .4s;min-width:0}
+.card:hover{transform:translateY(-4px);border-color:var(--line-strong)}
+.card::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(var(--accent-rgb),.17),transparent 60%)}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;opacity:0;transition:opacity .5s;background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(var(--accent-rgb),.8),transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.card:hover::before,.card:hover::after{opacity:1}
+.card>*{position:relative}
+.card h3{font-size:clamp(22px,2.4vw,30px);font-weight:600;margin-top:14px;line-height:1.08}
+.card.sm h3{font-size:22px}
+.card p{margin-top:12px;color:var(--muted);font-size:15px;max-width:460px}
+.c-big{grid-column:span 4;grid-row:span 2}.c-2{grid-column:span 2}.c-3{grid-column:span 3}
+@media(max-width:900px){.c-big,.c-2,.c-3{grid-column:1/-1;grid-row:auto}}
+/* Card do Agente de IA — roxo intenso + chat que chega com a rolagem */
+.card-ai{--ai:#5B2BFF;--ai-rgb:91,43,255;
+  background:radial-gradient(120% 90% at 0% 0%,rgba(var(--ai-rgb),.55),transparent 55%),radial-gradient(90% 80% at 100% 100%,rgba(75,30,240,.45),transparent 60%),linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f);
+  border-color:rgba(var(--ai-rgb),.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 30px 90px -30px rgba(var(--ai-rgb),.7)}
+.card-ai::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(140,100,255,.28),transparent 60%)}
+.card-ai .eyebrow{color:#b9a3ff}
+.card-ai>p{color:#c9c0ef}
+.phone{margin-top:26px;max-width:540px;border:1px solid rgba(var(--ai-rgb),.45);border-radius:22px;background:rgba(10,6,28,.72);backdrop-filter:blur(14px);overflow:hidden}
+.phone-hd{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(var(--ai-rgb),.3);background:rgba(var(--ai-rgb),.14)}
+.phone-hd b{display:block;font-size:14px}
+.phone-hd small{display:flex;align-items:center;gap:6px;font-size:12px;color:#b9a3ff}
+.phone-hd small i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.phone-hd .clock{margin-left:auto;font:500 11px var(--f-mono);color:#9d8fd6}
+.ai-av{width:36px;height:36px;border-radius:12px;background:var(--ai);display:grid;place-items:center;box-shadow:0 0 22px rgba(var(--ai-rgb),.8);flex:none}
+.ai-av svg{width:24px;height:auto;fill:#fff}
+.chat{display:flex;flex-direction:column;justify-content:flex-end;gap:9px;padding:18px 16px;height:380px;overflow:hidden}
+.chat .bub{font-size:14px;animation:none;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.06);border-bottom-left-radius:5px;max-width:82%}
+.chat .bub.me{background:linear-gradient(135deg,#6a3bff,#4B1EF0);border:0;border-radius:14px;border-bottom-right-radius:5px;box-shadow:0 8px 26px -8px rgba(var(--ai-rgb),.9)}
+.chat .msg{flex:none}
+.chat .msg.in{animation:msgIn .55s var(--ease) both}
+.chat .bub.me.in{transform-origin:100% 100%}.chat .bub:not(.me).in{transform-origin:0 100%}
+@keyframes msgIn{from{opacity:0;transform:translateY(16px) scale(.92);filter:blur(4px)}}
+.typing{align-self:flex-end;display:flex;gap:5px;padding:12px 14px;border-radius:14px;border-bottom-right-radius:5px;background:rgba(var(--ai-rgb),.35)}
+.typing span{width:6px;height:6px;border-radius:50%;background:#e6dcff;animation:dots 1.1s infinite ease-in-out}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+@keyframes dots{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+.sys{align-self:center;font:500 11.5px var(--f-mono);color:var(--ok);background:rgba(61,220,151,.1);border:1px solid rgba(61,220,151,.3);border-radius:999px;padding:6px 12px;margin-top:4px}
+.sys b{font-weight:600}
+@media(max-width:560px){.chat{height:400px}}
+/* Cards roxos com efeitos ligados à rolagem (--p vai de 0 a 1; padrão 1 = completo em repouso) */
+[data-scroll]{--p:1}
+.pulse{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.pulse i{position:absolute;width:70px;height:70px;border-radius:50%;border:1px solid rgba(160,130,255,.6);animation:ring 2.8s ease-out infinite}
+.pulse i:nth-child(2){animation-delay:.93s}.pulse i:nth-child(3){animation-delay:1.86s}
+@keyframes ring{from{transform:scale(1);opacity:.7}to{transform:scale(2.5);opacity:0}}
+.speed{margin-top:22px;display:flex;flex-direction:column;gap:12px}
+.sp-core{position:relative;height:118px;display:grid;place-items:center}
+.sp-num{position:relative;font:700 clamp(34px,4vw,44px)/1 var(--f-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums;
+  color:color-mix(in srgb,#ff6b81 calc((1 - var(--p)) * 100%),#fff);text-shadow:0 0 30px rgba(140,100,255,.8)}
+.sp-lbl{font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#b9a3ff;text-align:center}
+.sp-track{height:6px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.sp-track i{display:block;height:100%;width:calc(var(--p) * 100%);border-radius:99px;background:linear-gradient(90deg,#ff6b81,#8b5cff 55%,var(--ok));box-shadow:0 0 14px rgba(139,92,255,.8)}
+.sp-ends{display:flex;justify-content:space-between;font:500 10.5px var(--f-mono);color:#9d8fd6}
+.funnel{margin-top:24px;display:flex;flex-direction:column;gap:12px}
+.fr{--rp:var(--p);display:grid;grid-template-columns:88px 1fr 38px;gap:10px;align-items:center;font-size:12px;color:#c9c0ef}
+.fr .bar{height:9px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.fr .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#6a3bff,#a78bff 70%,var(--accent-2));width:calc(var(--w) * var(--rp) * 1%);box-shadow:0 0 12px rgba(139,92,255,.7)}
+.fr span:last-child{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;color:#fff}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:22px}
+.tool{position:relative;font-size:12px;padding:7px 12px;border-radius:10px;background:rgba(255,255,255,.07);color:#d8d0f5;transition:opacity .5s var(--ease),transform .5s var(--ease),filter .5s}
+.tool::after{content:"";position:absolute;left:8px;right:8px;top:50%;height:1.5px;background:#ff6b81;transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.tool.x::after{transform:scaleX(1)}
+.tool.x{opacity:.4;transform:scale(.94);filter:grayscale(1)}
+.tool-nex{font:600 12px var(--f-body);padding:7px 14px;border-radius:999px;background:linear-gradient(135deg,#6a3bff,#4B1EF0);color:#fff;box-shadow:0 0 24px rgba(106,59,255,.8);transition:opacity .5s var(--ease),transform .6s var(--ease)}
+.tools.wait .tool-nex{opacity:0;transform:translateX(-14px) scale(.85)}
+.roles{display:flex;flex-direction:column;gap:8px;margin-top:22px}
+.role{display:grid;grid-template-columns:76px 1fr auto;gap:12px;align-items:center;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(160,130,255,.18);transition:opacity .5s var(--ease),transform .6s var(--ease),border-color .5s}
+.role b{font:600 13px var(--f-mono)}
+.role span{font-size:13px;color:#c9c0ef;min-width:0}
+.role.off{opacity:0;transform:translateX(-22px)}
+.role.on{border-color:rgba(160,130,255,.45)}
+.lvl{display:flex;gap:4px}
+.lvl i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.12);transition:background .4s,box-shadow .4s}
+.role.on .lvl i:nth-child(-n+1){background:#a78bff;box-shadow:0 0 8px #8b5cff}
+.role.on .lvl[style*="--l:2"] i:nth-child(2),.role.on .lvl[style*="--l:3"] i:nth-child(2),.role.on .lvl[style*="--l:3"] i:nth-child(3){background:#a78bff;box-shadow:0 0 8px #8b5cff}
+@media(max-width:560px){.role{grid-template-columns:64px 1fr}.lvl{display:none}}
+
+/* STEPS */
+.steps{margin-top:70px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;position:relative}
+.steps::before{content:"";position:absolute;top:34px;left:6%;right:6%;height:1px;background:linear-gradient(90deg,transparent,var(--line-strong) 10%,var(--line-strong) 90%,transparent)}
+.step{position:relative;padding-top:4px;min-width:0;text-align:center;display:flex;flex-direction:column;align-items:center}
+.step p{max-width:320px}
+/* Números do "Como funciona": enchem de roxo conforme a rolagem (--f de 0 a 1; padrão 1 = completo em repouso) */
+.num{--f:1;position:relative;overflow:hidden;width:68px;height:68px;border-radius:20px;display:grid;place-items:center;background:var(--bg);
+  border:1px solid color-mix(in srgb,#8b5cff calc(var(--f) * 100%),rgba(255,255,255,.16));
+  font:600 26px var(--f-display);color:transparent;-webkit-text-stroke:1px var(--fg);
+  box-shadow:0 0 calc(var(--f) * 44px) rgba(106,59,255,calc(var(--f) * .65));transition:transform .5s var(--ease)}
+.num::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#7a4bff,#4B1EF0);transform:translateY(calc((1 - var(--f)) * 100%));z-index:0}
+.num::after{content:"";position:absolute;left:-20%;right:-20%;height:14px;top:calc((1 - var(--f)) * 100% - 7px);background:radial-gradient(closest-side,rgba(190,170,255,.9),transparent);opacity:calc(var(--f) * (1 - var(--f)) * 4);z-index:1}
+.num span{position:relative;z-index:2;color:rgba(255,255,255,var(--f));-webkit-text-stroke:1px rgba(242,241,246,calc(1 - var(--f)))}
+.num.lit{transform:scale(1.08)}
+.step:hover .num{transform:scale(1.08)}
+.step h3{font-size:24px;font-weight:600;margin-top:26px}
+.step p{margin-top:10px;color:var(--muted);font-size:15px}
+.step .when{display:inline-block;margin-top:16px;font:500 11.5px var(--f-mono);color:var(--accent-2);letter-spacing:.06em}
+@media(max-width:820px){.steps{grid-template-columns:1fr;gap:44px}.steps::before{display:none}}
+
+/* TESTIMONIALS */
+.tgrid{margin-top:64px;display:grid;grid-template-columns:1.35fr 1fr;gap:16px}
+.tmain{border:1px solid var(--line);border-radius:28px;padding:44px;background:linear-gradient(160deg,rgba(var(--accent-rgb),.14),transparent 55%),var(--surface);display:flex;flex-direction:column;justify-content:space-between;gap:40px;min-width:0}
+.tmain blockquote{margin:0;font-family:var(--f-display);font-weight:500;font-size:clamp(24px,2.8vw,34px);line-height:1.18;letter-spacing:-.025em}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:1px solid var(--line);padding-top:28px}
+.kpi b{display:block;font:600 clamp(34px,4vw,48px)/1 var(--f-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.kpi span{display:block;margin-top:8px;font-size:13px;color:var(--muted)}
+.who{display:flex;align-items:center;gap:14px;font-size:14px}
+.who .av{width:44px;height:44px}
+.who small{display:block;color:var(--muted);font-size:13px}
+.tside{display:flex;flex-direction:column;gap:16px;min-width:0}
+.tcard{border:1px solid var(--line);border-radius:22px;padding:28px;background:var(--surface);flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.tcard p{font-size:16px}
+.sample{display:inline-block;font:500 10.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--warn);border:1px dashed rgba(255,181,71,.45);border-radius:6px;padding:4px 8px;margin-top:22px}
+/* Resultados no mesmo roxo dos cards de "Por que a NEX" */
+.tmain,.tcard{
+  background:radial-gradient(120% 90% at 0% 0%,rgba(91,43,255,.55),transparent 55%),radial-gradient(90% 80% at 100% 100%,rgba(75,30,240,.45),transparent 60%),linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f);
+  border:1px solid rgba(91,43,255,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 30px 90px -30px rgba(91,43,255,.7);
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.tmain:hover,.tcard:hover{transform:translateY(-4px);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 36px 110px -28px rgba(91,43,255,.9)}
+.tmain .kpis{border-top-color:rgba(160,130,255,.3)}
+.kpi b{text-shadow:0 0 28px rgba(140,100,255,.75)}
+.tmain .kpi span,.tmain .who small,.tcard .who small{color:#b9a3ff}
+.tcard p{color:#e4dcff}
+.wd{opacity:var(--o,1);transition:opacity .25s linear}
+.wd.hot{text-shadow:0 0 18px rgba(170,140,255,.9)}
+.tcard{will-change:transform}
+@media(max-width:900px){.tgrid{grid-template-columns:1fr}.tmain{padding:30px}}
+
+/* FINAL CTA */
+.final{position:relative;isolation:isolate;overflow:hidden;border-radius:36px;margin-block:40px 120px;padding:110px 24px;text-align:center;border:1px solid rgba(91,43,255,.55);box-shadow:0 40px 120px -30px rgba(91,43,255,.75);transition:box-shadow .5s var(--ease)}
+.final:hover{box-shadow:0 46px 140px -26px rgba(91,43,255,.95)}
+.final::before{content:"";position:absolute;inset:-50%;z-index:-2;background:conic-gradient(from 0deg,transparent 0 70%,rgba(var(--accent-rgb),.9),rgba(47,211,255,.7),transparent 95%);animation:spin 9s linear infinite}
+.final::after{content:"";position:absolute;inset:1px;z-index:-1;border-radius:35px;background:radial-gradient(120% 90% at 0% 0%,rgba(91,43,255,.55),transparent 55%),radial-gradient(90% 80% at 100% 100%,rgba(75,30,240,.45),transparent 60%),radial-gradient(ellipse at 50% 120%,rgba(122,92,255,.5),transparent 60%),linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f)}
+@keyframes spin{to{transform:rotate(1turn)}}
+.final h2{font-size:clamp(38px,6.4vw,80px);font-weight:700;max-width:900px;margin:0 auto;letter-spacing:-.045em}
+.final p{max-width:560px;margin:24px auto 0;font-size:18px;color:#d6ccf7}
+.final h2{text-shadow:0 0 40px rgba(140,100,255,.35)}
+.final .ctas,.final .final-micro{will-change:transform,opacity}
+.final .ctas{animation:none}
+.final .final-micro{margin-top:18px;font-size:13px;color:#b9a3ff;opacity:.9}
+.final .btn-primary{padding:18px 34px;font-size:16px}
+
+/* FOOTER */
+/* RODAPÉ — colunas de informação + faixa legal */
+footer{border-top:1px solid rgba(91,43,255,.3);background:linear-gradient(to bottom,#0a0817,#07060f)}
+.ft-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-block:64px 48px}
+.ft-brand p{margin-top:16px;font-size:14px;color:var(--muted);max-width:280px}
+.ft-col h4{margin:0 0 18px;font:600 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#fff}
+.ft-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:14px;color:#c9c0ef}
+.ft-col ul a{transition:color .2s}.ft-col ul a:hover{color:#fff}
+.socials{display:flex;gap:10px}
+.socials a{width:42px;height:42px;border-radius:50%;border:1px solid rgba(160,130,255,.45);display:grid;place-items:center;color:#fff;transition:background .3s,border-color .3s,box-shadow .3s}
+.socials a:hover{background:#4B1EF0;border-color:#4B1EF0;box-shadow:0 0 22px rgba(91,43,255,.8)}
+.socials svg{width:17px;height:17px;fill:currentColor}
+.conexao{display:inline-flex;flex-direction:column;gap:4px;margin-top:20px;padding:12px 16px;border-radius:14px;border:1px solid rgba(160,130,255,.3);background:rgba(91,43,255,.1)}
+.conexao small{font:500 10px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#9d8fd6}
+.conexao b{font-family:var(--f-display);font-size:18px;letter-spacing:-.02em}
+.ft-legal{background:#130a3a;border-top:1px solid rgba(91,43,255,.35)}
+.ft-legal .wrap{display:flex;gap:24px 40px;align-items:flex-start;padding-block:22px}
+.ft-legal nav{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px}
+.ft-legal nav a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.35);color:#e9e4ff}
+.ft-legal nav a:hover{text-decoration-color:#fff;color:#fff}
+.ft-legal p{margin-top:10px;font-size:12.5px;line-height:1.6;color:#b9b0e0}
+.ft-legal .made{margin-left:auto;flex:none;text-align:right;font:500 10px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#9d8fd6}
+.ft-legal .made-sep{color:#8b5cff;font-weight:400;margin:0 4px}
+.ft-legal .made b{display:block;margin-top:4px;font:600 15px var(--f-display);letter-spacing:-.01em;text-transform:none;color:#fff}
+@media(max-width:900px){.ft-top{grid-template-columns:1fr 1fr}.ft-brand{grid-column:1/-1}}
+@media(max-width:620px){.ft-legal .wrap{flex-direction:column}.ft-legal .made{margin-left:0;text-align:left}}
+@media(max-width:460px){.ft-top{grid-template-columns:1fr}}
+
+
+/* POPUP "Fale conosco" */
+.fc-fab{position:fixed;z-index:70;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:999px;border:1px solid rgba(160,130,255,.6);cursor:pointer;
+  background:linear-gradient(135deg,#6a3bff,#4B1EF0);color:#fff;font:600 14.5px var(--f-body);
+  box-shadow:0 12px 40px -8px rgba(91,43,255,.95);transition:transform .45s var(--ease),opacity .45s var(--ease),box-shadow .3s}
+.fc-fab:hover{box-shadow:0 16px 56px -6px rgba(91,43,255,1)}
+.fc-fab{animation:fabIn .8s 1.2s var(--ease) both}
+@keyframes fabIn{from{opacity:0;transform:translateY(30px) scale(.9)}}
+.fc-fab .live{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+.fc-fab.off{transform:translateY(120%);opacity:0;pointer-events:none}
+.fc{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:20px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px))}
+.fc[hidden],[hidden]{display:none!important}
+.fc-bg{position:absolute;inset:0;background:rgba(5,4,12,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:fcFade .35s ease both}
+.fc-box{position:relative;width:min(560px,100%);border-radius:28px;padding:clamp(24px,4vw,36px);text-align:left;
+  border:1px solid rgba(91,43,255,.6);
+  background:radial-gradient(120% 90% at 0% 0%,rgba(91,43,255,.55),transparent 55%),radial-gradient(90% 80% at 100% 100%,rgba(75,30,240,.45),transparent 60%),linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 40px 120px -20px rgba(91,43,255,.8);animation:fcIn .55s var(--ease) both}
+@keyframes fcFade{from{opacity:0}}
+@keyframes fcIn{from{opacity:0;transform:translateY(24px) scale(.96);filter:blur(6px)}}
+.fc.closing .fc-bg{animation:fcFade .25s ease reverse both}.fc.closing .fc-box{animation:fcIn .25s ease reverse both}
+.fc-x{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(160,130,255,.35);background:rgba(255,255,255,.04);color:#fff;font-size:18px;cursor:pointer}
+.fc-x:hover{background:rgba(255,255,255,.1)}
+.fc-box h3{font-size:clamp(26px,4vw,34px);font-weight:600;margin-top:12px;padding-right:40px}
+.fc-box>p{margin-top:10px;color:#d6ccf7;font-size:15.5px}
+.fc-opts{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.fc-opt{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:18px;border-radius:18px;border:1px solid rgba(160,130,255,.3);background:rgba(10,6,28,.55);transition:border-color .3s,background .3s,transform .3s var(--ease)}
+.fc-opt:hover{border-color:rgba(160,130,255,.8);background:rgba(91,43,255,.18);transform:translateY(-2px)}
+.fc-opt.main{border-color:rgba(160,130,255,.7);background:linear-gradient(135deg,rgba(106,59,255,.45),rgba(75,30,240,.3));box-shadow:0 0 30px -10px rgba(91,43,255,.9)}
+.fc-ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#6a3bff,#4B1EF0);box-shadow:0 0 20px rgba(91,43,255,.7)}
+.fc-ic.wa{background:#1faa59;box-shadow:0 0 20px rgba(31,170,89,.5)}
+.fc-ic svg{width:22px;height:22px;fill:#fff}
+.fc-opt b{display:block;font-size:16px}
+.fc-opt small{display:block;margin-top:3px;font-size:13.5px;color:#c9c0ef;line-height:1.45}
+.fc-opt .go{font-size:18px;color:#c9b8ff;transition:transform .3s var(--ease)}
+.fc-opt:hover .go{transform:translateX(4px)}
+.fc-note{margin-top:18px;font:500 11.5px var(--f-mono);color:#9d8fd6;letter-spacing:.04em}
+
+/* ===== Otimizações ===== */
+.skip{position:fixed;left:16px;top:-60px;z-index:200;padding:10px 16px;border-radius:10px;background:#fff;color:#0b0b12;font-weight:600;transition:top .2s}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-intrinsic-size:auto 900px}
+@media(max-width:700px){.card,.phone,.badge,.mock,.nav.scrolled,.fc-bg,.ck-bar,.map-card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}.nav.scrolled{background:rgba(8,8,12,.94)}.mock{background:#120d22}}
+@media (hover:none){.card::before,.card::after{display:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<style>
+/* ===== LP v2 ===== */
+.sec{padding-block:110px}
+.sec-head{max-width:760px;margin:0 auto;text-align:center}
+.sec-head h2{font-size:clamp(34px,5vw,58px);font-weight:600;margin-top:14px;line-height:1.03}
+.sec-head p{margin:18px auto 0;font-size:18px;color:var(--muted);max-width:620px}
+.purple-card{border:1px solid rgba(91,43,255,.55);border-radius:26px;
+  background:radial-gradient(120% 90% at 0% 0%,rgba(91,43,255,.5),transparent 55%),radial-gradient(90% 80% at 100% 100%,rgba(75,30,240,.4),transparent 60%),linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 30px 90px -30px rgba(91,43,255,.7)}
+
+/* S1 hero com formulário */
+.h2-hero{position:relative;isolation:isolate;overflow:hidden;padding-top:128px;padding-bottom:70px}
+.h2-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center}
+.h2-copy .badge{animation:rise .9s var(--ease) both}
+.h2-copy h1{font-size:clamp(40px,5.6vw,72px);font-weight:700;letter-spacing:-.045em;line-height:.98;margin-top:24px;animation:rise 1s .1s var(--ease) both}
+.h2-copy h1 em{font-style:normal;background:linear-gradient(90deg,#fff,#a78bff 40%,var(--accent-2) 75%,#fff);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite}
+.h2-copy>p{margin-top:22px;font-size:clamp(17px,1.6vw,19px);color:var(--muted);max-width:540px;animation:rise 1s .25s var(--ease) both}
+.h2-proof{display:flex;flex-direction:column;gap:12px;margin-top:30px;animation:rise 1s .4s var(--ease) both}
+.h2-proof li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;color:#e4dcff}
+.h2-proof ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.h2-proof i{flex:none;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:rgba(91,43,255,.35);border:1px solid rgba(160,130,255,.5);font-style:normal;font-size:12px;color:#fff;margin-top:1px}
+.h2-form{padding:clamp(22px,3vw,32px);animation:rise 1.1s .3s var(--ease) both}
+.h2-form h3{font-size:24px;font-weight:600}
+.h2-form .sub{margin-top:6px;color:#c9c0ef;font-size:14.5px}
+.h2-form form{display:flex;flex-direction:column;gap:14px;margin-top:22px}
+.fld{display:flex;flex-direction:column;gap:7px;min-width:0}
+.fld label{font-weight:600;font-size:13.5px}
+.fld input,.fld select{width:100%;font:500 15px var(--f-body);color:#fff;background:rgba(7,6,15,.6);border:1px solid rgba(160,130,255,.28);border-radius:13px;padding:13px 14px;transition:border-color .2s,box-shadow .2s}
+.fld input:focus,.fld select:focus{outline:none;border-color:#8b5cff;box-shadow:0 0 0 4px rgba(91,43,255,.25)}
+.fld input::placeholder{color:#7a70aa}
+.fld .err{display:none;font-size:12.5px;color:#ff6b81}
+.fld.invalid .err{display:block}.fld.invalid input,.fld.invalid select{border-color:#ff6b81}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.h2-form .btn-primary{justify-content:center;margin-top:4px;padding:16px 24px;font-size:16px;border:0;cursor:pointer;font-family:var(--f-body)}
+.h2-form .fine{font-size:12px;color:#9d8fd6;text-align:center}
+.h2-form .fine a{color:#c9b8ff}
+.h2-ok{display:flex;flex-direction:column;gap:14px;margin-top:20px;text-align:left}
+.h2-ok b{font:600 22px var(--f-display)}
+.h2-ok p{color:#c9c0ef}
+.btn-wa{background:#1faa59;color:#fff;justify-content:center;box-shadow:0 10px 40px -12px rgba(31,170,89,.9)}
+.btn-wa:hover{background:#22bb62}
+.h2-ok .alt{font-size:14px;color:#c9b8ff;text-align:center}
+@media(max-width:960px){.h2-grid{grid-template-columns:1fr;gap:40px}.h2-copy{text-align:center}.h2-copy>p{margin-inline:auto}.h2-proof ul{align-items:flex-start;max-width:440px;margin-inline:auto;text-align:left}}
+@media(max-width:480px){.row2{grid-template-columns:1fr}}
+
+/* S2 sistema (telas passando) */
+.tabs-sys{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:44px}
+.tab-sys{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:3px;align-items:flex-start;text-align:left;min-width:200px;max-width:260px;flex:1;padding:14px 16px 16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--fg);font:inherit;cursor:pointer;transition:border-color .3s,background .3s}
+.tab-sys b{font-size:15px}.tab-sys small{font-size:12.5px;color:var(--muted);line-height:1.4}
+.tab-sys.on{border-color:rgba(160,130,255,.7);background:rgba(91,43,255,.16)}
+.tab-sys .pr{position:absolute;left:0;bottom:0;height:3px;width:0;background:linear-gradient(90deg,#6a3bff,var(--accent-2))}
+.tab-sys.on .pr{animation:prog var(--dur,6s) linear forwards}
+@keyframes prog{to{width:100%}}
+.sys-stage{perspective:1600px;margin-top:30px}
+.sys-stage .mock{animation:none}
+.ax-view{display:flex;flex-direction:column;gap:10px;min-height:0;flex:1}
+.ax-view.in{animation:viewIn .6s var(--ease) both}
+@keyframes viewIn{from{opacity:0;transform:translateY(14px);filter:blur(5px)}}
+.ax-panels{display:grid;grid-template-columns:1.4fr 1fr;gap:8px;flex:1;min-height:0}
+.ax-panel{background:var(--ax-card);border:1px solid var(--ax-line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:9px;min-width:0;overflow:hidden}
+.ax-panel h5{margin:0;font:700 12px var(--f-body)}.ax-panel h5 small{display:block;font-weight:400;color:#8a8899;font-size:9.5px;margin-top:2px}
+.fn-row{display:grid;grid-template-columns:118px 1fr 24px;gap:8px;align-items:center;font-size:10px;color:#c9c7d6}
+.fn-row .tr{height:9px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
+.fn-row .tr i{display:block;height:100%;border-radius:99px;width:0;transition:width 1s var(--ease)}
+.fn-row b{text-align:right;font-variant-numeric:tabular-nums}
+.or-row{display:flex;flex-direction:column;gap:4px;font-size:10px}
+.or-row div{display:flex;justify-content:space-between;color:#c9c7d6}.or-row div span{color:#8a8899}
+.or-row .tr{height:6px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
+.or-row .tr i{display:block;height:100%;width:0;border-radius:99px;background:#8b5cff;transition:width 1s var(--ease)}
+.ax-inbox{display:grid;grid-template-columns:200px minmax(0,1fr);gap:8px;flex:1;min-height:0}
+.ib-list{background:var(--ax-card);border:1px solid var(--ax-line);border-radius:10px;display:flex;flex-direction:column;overflow:hidden}
+.ib-it{display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:center;padding:9px 10px;border-bottom:1px solid var(--ax-line)}
+.ib-it.on{background:rgba(106,43,255,.18)}
+.ib-av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:9px;font-weight:700;color:#fff}
+.ib-it b{display:block;font-size:11px}.ib-it small{display:block;font-size:9.5px;color:#8a8899;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px}
+.ib-it em{font-style:normal;font-size:9px;color:#8a8899}
+.ib-chat{background:var(--ax-card);border:1px solid var(--ax-line);border-radius:10px;display:flex;flex-direction:column;min-width:0}
+.ib-hd{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid var(--ax-line);font-size:11px}
+.ib-hd .tag{margin-left:auto;font-size:9px;font-weight:700;color:#c4a0ff;border:1px solid rgba(160,130,255,.5);border-radius:99px;padding:2px 8px}
+.ib-msgs{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;padding:12px;overflow:hidden}
+.ib-m{max-width:76%;padding:7px 10px;border-radius:11px;font-size:11px;background:rgba(255,255,255,.07);align-self:flex-start}
+.ib-m.me{align-self:flex-end;background:linear-gradient(135deg,#6a3bff,#4B1EF0)}
+.ib-m small{display:block;font-size:8.5px;opacity:.7;margin-top:3px}
+.in .ib-m{animation:rise .5s var(--ease) both}
+.in .ib-m:nth-child(2){animation-delay:.25s}.in .ib-m:nth-child(3){animation-delay:.5s}.in .ib-m:nth-child(4){animation-delay:.75s}.in .ib-m:nth-child(5){animation-delay:1s}
+@media(max-width:900px){.ax-panels{grid-template-columns:1fr}.ax-panels .ax-panel:nth-child(2){display:none}.ax-inbox{grid-template-columns:1fr}.ib-list{display:none}.tab-sys{min-width:0;max-width:none}}
+@media(max-width:560px){.tab-sys small{display:none}.tab-sys{padding:12px 12px 14px}}
+
+.ax-shot{display:block;width:100%;flex:1 1 0;height:0;min-height:0;object-fit:cover;object-position:left top;border-radius:8px}
+.ax-view[data-v="chat"]{overflow:hidden;margin-inline:-14px}
+
+/* Telas do sistema: layout de desktop sempre, reduzido proporcionalmente (sem cortes) */
+.ax-fit{position:relative;width:100%;overflow:hidden;border-radius:18px}
+#ax2{width:1058px;height:560px!important;grid-template-columns:168px minmax(0,1fr)!important;transform-origin:0 0}
+#ax2 .ax-side{display:flex}
+#ax2 .ax-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}
+#ax2 .ax-kpis .ax-k{display:flex}
+#ax2 .ax-search,#ax2 .ax-sum{display:block}
+#ax2 .ax-board{grid-auto-columns:minmax(160px,1fr)}
+#ax2 .ax-panels{grid-template-columns:1.4fr 1fr}
+#ax2 .ax-panels .ax-panel{display:flex}
+@media(max-width:600px){.sys-stage .mock{padding:5px;border-radius:16px}.ax-fit{border-radius:12px}}
+/* S3 análise com IA */
+.ia-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:center;margin-top:20px}
+.ia-copy{text-align:left}
+.ia-copy h2{font-size:clamp(34px,4.6vw,54px);font-weight:600;margin-top:14px;line-height:1.03}
+.ia-copy>p{margin-top:18px;color:var(--muted);font-size:17.5px}
+.ia-pts{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-direction:column;gap:18px}
+.ia-pts li{display:grid;grid-template-columns:44px 1fr;gap:14px}
+.ia-pts .ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#6a3bff,#4B1EF0);box-shadow:0 0 22px rgba(91,43,255,.7);font-size:18px}
+.ia-pts b{display:block;font-size:16px}.ia-pts span{color:var(--muted);font-size:14.5px}
+.ia-card{padding:24px;display:flex;flex-direction:column;gap:16px}
+.ia-hd{display:flex;align-items:center;gap:12px}
+.ia-hd .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#ff7aa8,#ffb86b);display:grid;place-items:center;font-weight:700;font-size:13px}
+.ia-hd b{display:block;font-size:15px}.ia-hd small{color:#b9a3ff;font-size:12.5px}
+.ia-hd .chip{margin-left:auto;font:600 11px var(--f-mono);padding:6px 10px;border-radius:99px;background:rgba(63,224,255,.12);color:var(--accent-2);border:1px solid rgba(63,224,255,.35);display:flex;align-items:center;gap:6px}
+.ia-hd .chip i{width:6px;height:6px;border-radius:50%;background:var(--accent-2);animation:ping 1.6s ease-out infinite}
+.ia-score{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;padding:16px;border-radius:16px;background:rgba(7,6,15,.5);border:1px solid rgba(160,130,255,.25)}
+.ia-ring{--v:87;width:84px;height:84px;border-radius:50%;background:conic-gradient(#3ddc97 calc(var(--v)*1%),rgba(255,255,255,.08) 0);display:grid;place-items:center}
+.ia-ring b{width:66px;height:66px;border-radius:50%;background:#140b38;display:grid;place-items:center;font:700 24px var(--f-display);font-variant-numeric:tabular-nums}
+.ia-score h4{margin:0;font:600 15px var(--f-body)}.ia-score p{margin-top:4px;font-size:13.5px;color:#c9c0ef}
+.ia-sum{padding:16px;border-radius:16px;background:rgba(7,6,15,.5);border:1px solid rgba(160,130,255,.25)}
+.ia-lbl{font:500 10.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#9d8fd6}
+.ia-sum p{margin-top:8px;font-size:14.5px;color:#ece6ff;min-height:4.5em}
+.ia-sum p .cur{display:inline-block;width:2px;height:1em;background:var(--accent-2);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.ia-tags{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ia-t{padding:12px 14px;border-radius:14px;background:rgba(7,6,15,.5);border:1px solid rgba(160,130,255,.25)}
+.ia-t b{display:block;margin-top:5px;font-size:14px}
+.ia-t.w b{color:#ffc94a}.ia-t.g b{color:#3ddc97}
+.ia-next{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:14px;background:linear-gradient(135deg,rgba(106,59,255,.5),rgba(75,30,240,.35));border:1px solid rgba(160,130,255,.6)}
+.ia-next span{font-size:20px}.ia-next p{font-size:14px}.ia-next p b{display:block;font-size:11px;font:500 10.5px var(--f-mono);letter-spacing:.12em;color:#d8ccff;text-transform:uppercase}
+.ia-card .rv2{transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.ia-card.wait .rv2{opacity:0;transform:translateY(12px)}
+@media(max-width:960px){.ia-grid{grid-template-columns:1fr;gap:40px}}
+@media(max-width:480px){.ia-tags{grid-template-columns:1fr}}
+
+
+/* S3 v2: painel interativo da Análise com IA */
+.ia-app{display:grid;grid-template-columns:330px minmax(0,1fr);gap:0;margin-top:52px;overflow:hidden;text-align:left;padding:0}
+.ia-cfg{padding:24px 22px;border-right:1px solid rgba(160,130,255,.25);background:rgba(7,6,15,.45);display:flex;flex-direction:column;gap:14px}
+.ia-step{display:flex;align-items:center;gap:10px;font:600 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#d8ccff;margin-top:6px}
+.ia-step .n{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#5B2BFF;color:#fff;letter-spacing:0;font-size:11px}
+.ia-modes{display:flex;flex-direction:column;gap:8px}
+.ia-mode{position:relative;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:center;padding:11px 12px;border-radius:13px;border:1px solid rgba(160,130,255,.22);background:rgba(255,255,255,.03);cursor:pointer;transition:all .25s var(--ease)}
+.ia-mode input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.ia-mode .mi{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.06);font-size:14px}
+.ia-mode b{display:block;font-size:13.5px}.ia-mode small{font-size:11.5px;color:#9d8fd6}
+.ia-mode:has(input:checked){border-color:#8b5cff;background:linear-gradient(135deg,rgba(106,59,255,.4),rgba(75,30,240,.25));box-shadow:0 0 22px -6px rgba(91,43,255,.9)}
+.ia-mode:has(input:checked) .mi{background:#5B2BFF}
+.ia-mode:has(input:focus-visible){outline:2px solid var(--accent-2);outline-offset:2px}
+.ia-f{display:flex;flex-direction:column;gap:6px}
+.ia-f label,.ia-f .lb{font-weight:600;font-size:12.5px}
+.ia-f small{font-size:11px;color:#8a80b8}.ia-f small.ok{color:#3ddc97}
+.ia-f input,.ia-f select,.ia-f textarea{width:100%;font:500 13.5px var(--f-body);color:#fff;background:rgba(7,6,15,.65);border:1px solid rgba(160,130,255,.22);border-radius:10px;padding:9px 11px;resize:vertical}
+.ia-f input:focus,.ia-f select:focus,.ia-f textarea:focus{outline:none;border-color:#8b5cff;box-shadow:0 0 0 3px rgba(91,43,255,.25)}
+.ia-seg{display:flex;gap:4px;padding:3px;border-radius:10px;background:rgba(7,6,15,.65);border:1px solid rgba(160,130,255,.18)}
+.ia-seg button{flex:1;font:500 12px var(--f-body);color:#b9b0e0;background:none;border:0;border-radius:7px;padding:7px 4px;cursor:pointer;transition:all .2s}
+.ia-seg button.on{background:rgba(255,255,255,.1);color:#fff;font-weight:600}
+.ia-more{border:1px solid rgba(160,130,255,.18);border-radius:11px;padding:0 12px;background:rgba(255,255,255,.02)}
+.ia-more summary{cursor:pointer;list-style:none;padding:10px 0;font-weight:600;font-size:12.5px;display:flex;justify-content:space-between}
+.ia-more summary::-webkit-details-marker{display:none}
+.ia-more summary::after{content:"⌄";transition:transform .3s}.ia-more[open] summary::after{transform:rotate(180deg)}
+.ia-more[open]{padding-bottom:12px}.ia-more>*:not(summary){margin-top:12px}
+.ia-tog{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:12.5px;cursor:pointer;position:relative}
+.ia-tog input{position:absolute;opacity:0}
+.ia-tog i{width:36px;height:20px;border-radius:99px;background:rgba(255,255,255,.12);position:relative;transition:background .25s}
+.ia-tog i::after{content:"";position:absolute;left:3px;top:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .25s var(--ease)}
+.ia-tog input:checked+i{background:#5B2BFF}.ia-tog input:checked+i::after{transform:translateX(16px)}
+.ia-tog input:focus-visible+i{outline:2px solid var(--accent-2);outline-offset:2px}
+.ia-run{margin-top:4px;padding:13px;border-radius:12px;border:0;cursor:pointer;font:700 14px var(--f-body);color:#fff;background:linear-gradient(135deg,#7a4bff,#4B1EF0);box-shadow:0 10px 30px -10px rgba(91,43,255,1);transition:box-shadow .3s,transform .2s}
+.ia-run:hover{box-shadow:0 14px 44px -8px rgba(91,43,255,1)}.ia-run:active{transform:scale(.98)}
+.ia-run:disabled{opacity:.6;cursor:wait}
+.ia-fine{font-size:11px;color:#8a80b8;line-height:1.5}
+.ia-out{position:relative;padding:26px;min-width:0;display:flex;flex-direction:column}
+.ia-load{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(13,8,36,.86);backdrop-filter:blur(6px);text-align:center}
+.ia-load span{font-size:13px;color:#b9a3ff}
+.spin{width:46px;height:46px;border-radius:50%;border:3px solid rgba(160,130,255,.2);border-top-color:#a78bff;animation:spin .9s linear infinite}
+.ia-lbar{width:220px;height:5px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.ia-lbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#6a3bff,var(--accent-2));animation:lb 1.8s var(--ease) forwards}
+@keyframes lb{to{width:100%}}
+.ia-res{display:flex;flex-direction:column;gap:14px}
+.ia-res.in>*{animation:rise .55s var(--ease) both}
+.ia-res.in>*:nth-child(2){animation-delay:.08s}.ia-res.in>*:nth-child(3){animation-delay:.16s}.ia-res.in>*:nth-child(4){animation-delay:.24s}.ia-res.in>*:nth-child(5){animation-delay:.32s}
+.ia-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ia-top .av{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#7a4bff,#4B1EF0);display:grid;place-items:center;font-weight:700;font-size:14px;flex:none}
+.ia-top .av.p{border-radius:50%;background:linear-gradient(135deg,#ff7aa8,#ffb86b)}
+.ia-top b{display:block;font-size:15.5px}.ia-top small{color:#b9a3ff;font-size:12.5px}
+.ia-top .chip{margin-left:auto;font:600 11px var(--f-mono);padding:6px 10px;border-radius:99px;background:rgba(63,224,255,.12);color:var(--accent-2);border:1px solid rgba(63,224,255,.35)}
+.ia-opps{display:flex;flex-direction:column;gap:8px}
+.ia-opp{display:grid;grid-template-columns:30px 1fr auto auto;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:rgba(7,6,15,.5);border:1px solid rgba(160,130,255,.2);font-size:13px}
+.ia-opp .av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:700}
+.ia-opp small{display:block;color:#9d8fd6;font-size:11.5px}
+.ia-opp em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums}
+.ia-opp .sc{font:700 12px var(--f-mono);padding:4px 8px;border-radius:99px}
+.sc.h{color:#3ddc97;background:rgba(61,220,151,.12)}.sc.w{color:#ffc94a;background:rgba(255,201,74,.12)}.sc.c{color:#5ac8ff;background:rgba(90,200,255,.12)}
+.ia-stage{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.ia-stage div{padding:8px;border-radius:10px;background:rgba(7,6,15,.5);border:1px solid rgba(160,130,255,.18);font-size:10.5px;color:#c9c0ef;display:flex;flex-direction:column;gap:6px;min-width:0}
+.ia-stage div b{font:700 18px var(--f-display);color:#fff}
+.ia-stage div.bad{border-color:rgba(255,107,129,.7);background:rgba(255,107,129,.1)}
+.ia-stage div.bad span{color:#ff8fa1}
+.ia-pts3{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.ia-pts3 li{display:grid;grid-template-columns:44px 1fr;gap:14px;text-align:left}
+.ia-pts3 .ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#6a3bff,#4B1EF0);box-shadow:0 0 22px rgba(91,43,255,.7);font-size:18px}
+.ia-pts3 b{display:block;font-size:16px}.ia-pts3 span{color:var(--muted);font-size:14.5px}
+@media(max-width:960px){.ia-app{grid-template-columns:1fr}.ia-cfg{border-right:0;border-bottom:1px solid rgba(160,130,255,.25)}.ia-pts3{grid-template-columns:1fr;max-width:480px;margin-inline:auto}}
+@media(max-width:560px){.ia-out{padding:18px}.ia-stage{grid-template-columns:repeat(3,minmax(0,1fr))}.ia-stage div:nth-child(n+4){display:none}.ia-opp{grid-template-columns:30px 1fr auto}.ia-opp em{display:none}}
+/* NEX roxo com sombras tecnológicas */
+.nex-tech{position:relative;display:inline-block;color:#8B5CF6;
+  text-shadow:0 0 6px rgba(139,92,246,.9),0 0 22px rgba(124,58,237,.75),0 0 48px rgba(91,43,255,.55),-2px 0 0 rgba(63,224,255,.45),2px 0 0 rgba(255,46,136,.35);
+  animation:nexPulse 3.2s ease-in-out infinite}
+.nex-tech::before,.nex-tech::after{content:attr(data-t);position:absolute;inset:0;pointer-events:none}
+.nex-tech::before{color:#3FE0FF;opacity:.55;mix-blend-mode:screen;clip-path:inset(0 0 62% 0);animation:nexGlitch 4.5s steps(1) infinite}
+.nex-tech::after{background:repeating-linear-gradient(0deg,rgba(255,255,255,.18) 0 1px,transparent 1px 4px);-webkit-background-clip:text;background-clip:text;color:transparent;mix-blend-mode:overlay}
+@keyframes nexPulse{50%{text-shadow:0 0 8px rgba(167,139,250,1),0 0 30px rgba(124,58,237,.95),0 0 70px rgba(91,43,255,.7),-3px 0 0 rgba(63,224,255,.6),3px 0 0 rgba(255,46,136,.45)}}
+@keyframes nexGlitch{0%,86%,100%{transform:none;opacity:0}88%{transform:translate(-3px,-1px);opacity:.7}90%{transform:translate(3px,1px);clip-path:inset(40% 0 30% 0);opacity:.6}92%{transform:translate(-1px,0);clip-path:inset(70% 0 5% 0);opacity:.5}}
+@media (prefers-reduced-motion:reduce){.nex-tech,.nex-tech::before{animation:none}}
+/* S4 estrutura (fotos) */
+.ph-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:210px;gap:14px;margin-top:56px}
+.ph{position:relative;overflow:hidden;border-radius:22px;border:1px dashed rgba(160,130,255,.45);background:radial-gradient(120% 100% at 0% 0%,rgba(91,43,255,.35),transparent 60%),repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 12px,transparent 12px 24px),#0f0a26;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;transition:transform .5s var(--ease),border-color .4s}
+.ph:hover{transform:translateY(-4px);border-color:rgba(160,130,255,.9)}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph .cam{position:absolute;top:18px;right:18px;font:500 10.5px var(--f-mono);letter-spacing:.1em;color:#9d8fd6;text-transform:uppercase}
+.ph b{position:relative;font:600 19px var(--f-display);letter-spacing:-.02em}
+.ph span{position:relative;font-size:13.5px;color:#c9c0ef;margin-top:4px}
+.ph.big{grid-column:span 2;grid-row:span 2}
+.ph.has-img{border-style:solid;border-color:rgba(160,130,255,.5)}
+.ph.has-img img{object-position:50% 45%;transition:transform .8s var(--ease)}
+.ph.has-img:hover img{transform:scale(1.04)}
+.ph.has-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,6,28,.92) 0%,rgba(10,6,28,.35) 40%,transparent 65%)}
+.ph.has-img b,.ph.has-img span{z-index:1}.ph.wide{grid-column:span 2}
+@media(max-width:900px){.ph-grid{grid-template-columns:1fr 1fr;grid-auto-rows:180px}.ph.big{grid-column:1/-1;grid-row:span 2}}
+@media(max-width:520px){.ph-grid{grid-template-columns:1fr}.ph.wide{grid-column:auto}}
+
+/* S5 planos */
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:60px;align-items:stretch}
+.plan{display:flex;flex-direction:column;gap:20px;padding:30px;border-radius:26px;border:1px solid var(--line-strong);background:rgba(18,18,25,.7);text-align:left;transition:transform .5s var(--ease),box-shadow .5s}
+.plan:hover{transform:translateY(-6px)}
+.plan.hot{border-color:rgba(91,43,255,.7);background:radial-gradient(120% 90% at 0% 0%,rgba(91,43,255,.55),transparent 55%),linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f);box-shadow:0 30px 90px -30px rgba(91,43,255,.9)}
+.plan .pl-tag{align-self:flex-start;font:600 10.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border-radius:99px;background:rgba(255,255,255,.06);color:#c9c0ef}
+.plan.hot .pl-tag{background:#fff;color:#4B1EF0}
+.plan h3{font-size:28px;font-weight:600}
+.plan .desc{color:var(--muted);font-size:14.5px;margin-top:-10px}
+.plan .price{font:700 34px var(--f-display);letter-spacing:-.03em}
+.plan .price small{display:block;font:400 13px var(--f-body);color:var(--muted);letter-spacing:0;margin-top:4px}
+.plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;flex:1}
+.plan li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:14.5px;color:#e4dcff}
+.plan li::before{content:"✓";width:20px;height:20px;border-radius:6px;display:grid;place-items:center;font-size:11px;background:rgba(91,43,255,.35);color:#fff}
+.plan li.off{color:#6f6a8a}.plan li.off::before{content:"–";background:rgba(255,255,255,.05)}
+.plan .btn{justify-content:center}
+@media(max-width:960px){.plans{grid-template-columns:1fr;max-width:480px;margin-inline:auto}}
+
+
+/* S5 v2: planos Gold / Platinum / Black */
+.pcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:60px;align-items:start;text-align:left}
+.pc{position:relative;display:flex;flex-direction:column;gap:18px;padding:30px 26px;border-radius:24px;border:1px solid rgba(255,255,255,.1);background:#141319;transition:transform .5s var(--ease),border-color .4s}
+.pc:hover{transform:translateY(-4px);border-color:rgba(139,92,246,.45)}
+.pc.hot{border:1.5px solid #8B5CF6;background:radial-gradient(120% 70% at 50% 0%,rgba(124,58,237,.35),transparent 60%),#16121f;box-shadow:0 30px 90px -30px rgba(124,58,237,.9),0 0 0 6px rgba(124,58,237,.08)}
+@media(min-width:961px){.pc.hot{margin-top:-14px}}
+.pc-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);padding:6px 16px;border-radius:99px;background:linear-gradient(135deg,#8B5CF6,#7C3AED);font:700 12px var(--f-body);letter-spacing:.04em;color:#fff;white-space:nowrap;box-shadow:0 8px 24px -6px rgba(124,58,237,.9)}
+.pc h3{font:700 15px var(--f-mono);letter-spacing:.24em;color:#c4b5fd}
+.pc.hot h3{color:#fff}
+.pc-desc{color:#a9a6b8;font-size:14.5px;min-height:3.2em;margin-top:-6px}
+.pc-price{font:700 clamp(40px,4vw,52px)/1 var(--f-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:4px}
+.pc-price small{font-size:18px;font-weight:600;color:#c4b5fd;letter-spacing:0}
+.pc-price span{font:500 15px var(--f-body);color:#a9a6b8;letter-spacing:0}
+.pc-chips{display:flex;flex-wrap:wrap;gap:6px}
+.pc-chips span{font:600 12px var(--f-body);padding:6px 10px;border-radius:99px;background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.35);color:#ddd6fe}
+.pc-btn{display:flex;justify-content:center;padding:15px;border-radius:14px;background:#7C3AED;color:#fff;font:700 15px var(--f-body);transition:background .25s,box-shadow .3s}
+.pc-btn:hover{background:#8B5CF6;box-shadow:0 12px 34px -10px rgba(124,58,237,1)}
+.pc.hot .pc-btn{background:linear-gradient(135deg,#8B5CF6,#7C3AED);box-shadow:0 12px 34px -12px rgba(124,58,237,1)}
+.pc ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pc li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:14px;color:#f2f1f6;line-height:1.4}
+.pc li::before{content:"✓";color:#fff;font-weight:700;font-size:13px}
+.pc li.off{color:#5d5a6c}.pc li.off::before{content:""}
+.pc-list{padding-top:18px!important;border-top:1px solid rgba(255,255,255,.08)}
+.pc-more summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font:600 14px var(--f-body);color:#c4b5fd}
+.pc-more summary::-webkit-details-marker{display:none}
+.pc-more summary::after{content:"⌄";transition:transform .3s var(--ease)}
+.pc-more[open] summary::after{transform:rotate(180deg)}
+.pc-more summary:hover{color:#fff}
+.pc-more .c,.pc-more[open] .o{display:none}.pc-more[open] .c{display:inline}
+.pc-full{display:flex;flex-direction:column;gap:18px;margin-top:18px;animation:rise .45s var(--ease) both}
+.pc-cat h5{margin:0 0 10px;font:600 11px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#a78bfa}
+.pc-cat li{font-size:13px}
+.pc-foot{margin-top:40px;text-align:center;display:flex;flex-direction:column;gap:6px;font-size:13.5px;color:#a9a6b8}
+@media(max-width:960px){.pcs{grid-template-columns:1fr;max-width:480px;margin-inline:auto;gap:30px}}
+/* S6 quem somos */
+.qs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;margin-top:56px;align-items:stretch}
+.map{position:relative;overflow:hidden;border-radius:26px;border:1px solid rgba(160,130,255,.4);background:#0c0a1c;min-height:420px}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.pin{position:absolute;left:52%;top:46%;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center}
+.pin i{width:34px;height:34px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:linear-gradient(135deg,#7a4bff,#4B1EF0);box-shadow:0 0 30px rgba(122,75,255,.9);display:grid;place-items:center}
+.pin i::after{content:"";width:12px;height:12px;border-radius:50%;background:#fff}
+.pin::after{content:"";position:absolute;bottom:-10px;width:70px;height:70px;border-radius:50%;border:2px solid rgba(122,75,255,.7);transform:translateY(50%) scaleY(.4);animation:pinPulse 2.4s ease-out infinite}
+@keyframes pinPulse{from{opacity:.9;transform:translateY(50%) scaleY(.4) scale(.3)}to{opacity:0;transform:translateY(50%) scaleY(.4) scale(1.6)}}
+.map-card{position:absolute;left:18px;right:18px;bottom:18px;padding:18px;border-radius:18px;background:rgba(10,7,26,.85);backdrop-filter:blur(12px);border:1px solid rgba(160,130,255,.4);display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.map-card div{flex:1;min-width:200px}
+.map-card b{display:block;font-size:15px}.map-card span{font-size:13.5px;color:#c9c0ef}
+.map-card .btn{padding:11px 18px;font-size:14px}
+.about{padding:clamp(26px,3.4vw,40px);text-align:left;display:flex;flex-direction:column;gap:18px}
+.about h3{font-size:clamp(28px,3.4vw,40px);font-weight:600;line-height:1.05}
+.about p{color:#d6ccf7;font-size:16px}
+.about-facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.about-facts div{padding:14px 16px;border-radius:14px;background:rgba(7,6,15,.5);border:1px solid rgba(160,130,255,.25)}
+.about-facts b{display:block;font:600 16px var(--f-display)}.about-facts span{font-size:13px;color:#b9a3ff}
+@media(max-width:960px){.qs{grid-template-columns:1fr}.map{min-height:360px}}
+@media(max-width:480px){.about-facts{grid-template-columns:1fr}}
+
+/* S7 FAQ */
+.faq{max-width:820px;margin:56px auto 0;display:flex;flex-direction:column;gap:12px;text-align:left}
+.faq details{border-radius:18px;border:1px solid var(--line-strong);background:rgba(18,18,25,.7);transition:border-color .3s,background .3s}
+.faq details[open]{border-color:rgba(91,43,255,.7);background:linear-gradient(160deg,rgba(29,15,77,.9),rgba(13,10,31,.9))}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:20px 22px;font:600 17px var(--f-body)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";margin-left:auto;flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(160,130,255,.45);font-size:18px;font-weight:400;transition:transform .35s var(--ease),background .3s}
+.faq details[open] summary::after{transform:rotate(45deg);background:#4B1EF0;border-color:#4B1EF0}
+.faq .ans{padding:0 22px 22px;color:#d6ccf7;font-size:15.5px;line-height:1.65}
+.faq details[open] .ans{animation:rise .45s var(--ease) both}
+
+/* S8 CTA */
+.cta2{position:relative;isolation:isolate;overflow:hidden;border-radius:36px;margin-block:20px 110px;padding:100px 24px;text-align:center;border:1px solid rgba(91,43,255,.55)}
+.cta2::before{content:"";position:absolute;inset:-50%;z-index:-2;background:conic-gradient(from 0deg,transparent 0 70%,rgba(124,92,255,.9),rgba(47,211,255,.7),transparent 95%);animation:spin 9s linear infinite}
+.cta2::after{content:"";position:absolute;inset:1px;z-index:-1;border-radius:35px;background:radial-gradient(ellipse at 50% 120%,rgba(122,92,255,.55),transparent 60%),linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f)}
+.cta2 .big{font:700 clamp(64px,11vw,140px)/1 var(--f-display);letter-spacing:-.05em;background:linear-gradient(180deg,#fff,#a78bff);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.cta2 .big-l{font:500 12px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:#b9a3ff;margin-top:6px}
+.cta2 h2{font-size:clamp(34px,5.4vw,66px);font-weight:700;max-width:880px;margin:30px auto 0;letter-spacing:-.04em}
+.cta2 p{max-width:560px;margin:20px auto 0;font-size:18px;color:#d6ccf7}
+.cta2 .ctas{animation:none;margin-top:40px}
+.cta2 .btn-primary{padding:18px 34px;font-size:16px}
+@keyframes spin{to{transform:rotate(1turn)}}
+</style>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="logo"><svg class="logo-svg" viewBox="100 15 1820 640" role="img" aria-label="NEX"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
+    <ul>
+      <li><a href="#sistema">Sistema</a></li><li><a href="#ia">Análise com IA</a></li>
+      <li><a href="#planos">Planos</a></li><li><a href="#quem-somos">Quem somos</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#demo" class="btn btn-primary btn-sm mag">Fale conosco</a>
+  </div>
+</header>
+<main id="top">
+<span id="conteudo" tabindex="-1"></span>
+<section class="h2-hero" id="topo">
+  <canvas class="web" id="web" aria-hidden="true"></canvas>
+  <div class="web-fade" aria-hidden="true"></div>
+  <div class="wrap h2-grid">
+    <div class="h2-copy">
+      <span class="badge"><span class="dot"></span>CRM + Agente de IA no seu WhatsApp</span>
+      <h1>Responda todo lead em segundos e <em>venda mais</em> com o mesmo time.</h1>
+      <p>A NEX atende, qualifica e agenda seus clientes pelo WhatsApp 24 horas por dia, e mostra para você exatamente onde cada venda está travando.</p>
+      <div class="h2-proof"><ul>
+        <li><i>✓</i>Agente de IA treinado com as informações do seu negócio</li>
+        <li><i>✓</i>Funil, conversas e equipe num só lugar</li>
+        <li><i>✓</i>Implantação guiada e teste antes de publicar</li>
+      </ul></div>
+    </div>
+    <div class="h2-form purple-card" id="form-topo">
+      <span class="eyebrow">Fale com um especialista</span>
+      <h3 style="margin-top:10px">Veja a NEX funcionando no seu negócio</h3>
+      <p class="sub">Preencha e receba o contato do nosso time pelo WhatsApp.</p>
+      <form id="lead-form" novalidate>
+        <div class="fld"><label for="lf-nome">Nome</label><input id="lf-nome" type="text" autocomplete="name" placeholder="Seu nome"><span class="err">Informe seu nome.</span></div>
+        <div class="row2">
+          <div class="fld"><label for="lf-whats">WhatsApp</label><input id="lf-whats" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000"><span class="err">WhatsApp com DDD.</span></div>
+          <div class="fld"><label for="lf-emp">Empresa</label><input id="lf-emp" type="text" autocomplete="organization" placeholder="Nome da empresa"><span class="err">Informe a empresa.</span></div>
+        </div>
+        <div class="fld"><label for="lf-leads">Quantos contatos você recebe por mês?</label>
+          <select id="lf-leads"><option value="">Selecione</option><option>Menos de 50</option><option>50 a 200</option><option>200 a 500</option><option>Mais de 500</option></select><span class="err">Selecione uma opção.</span></div>
+        <button type="submit" class="btn btn-primary">Quero ver a NEX no meu negócio →</button>
+        <p class="fine">Sem compromisso. Seus dados seguem a <a href="https://nexinteligence.com.br/privacidade" target="_blank" rel="noopener">Política de privacidade</a>.</p>
+      </form>
+      <div class="h2-ok" id="lead-ok" hidden>
+        <b id="lead-ok-t">Pronto!</b>
+        <p>Toque no botão para enviar seus dados no WhatsApp. Nosso time responde das 8h às 18h.</p>
+        <a class="btn btn-wa" id="lead-wa" href="https://wa.me/5587991302323" target="_blank" rel="noopener">Enviar no WhatsApp →</a>
+        <a class="alt" href="diagnostico.html">Ou faça o diagnóstico completo do seu comercial →</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="logos" id="clientes" aria-label="Clientes">
+    <div class="wrap">
+      <p>Empresas que já vendem com a NEX</p>
+      <div class="marq">
+        <div class="track">
+          <span class="lg"><img src="logos/610d9cad.png" alt="Depel" style="height:34px" decoding="async"></span><span class="lg"><img src="logos/a268884b.png" alt="A&amp;A Dental Institute" style="height:40px" decoding="async"></span><span class="lg"><img src="logos/b17427f7.png" alt="RA Cursos" style="height:52px" decoding="async"></span><span class="lg"><img src="logos/9e6122f5.png" alt="Sirify" style="height:30px" decoding="async"></span><span class="lg"><img src="logos/371315a9.png" alt="Conexão" style="height:30px" decoding="async"></span>
+          <span class="lg" aria-hidden="true"><img src="logos/610d9cad.png" alt="" style="height:34px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/a268884b.png" alt="" style="height:40px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/b17427f7.png" alt="" style="height:52px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/9e6122f5.png" alt="" style="height:30px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/371315a9.png" alt="" style="height:30px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/610d9cad.png" alt="" style="height:34px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/a268884b.png" alt="" style="height:40px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/b17427f7.png" alt="" style="height:52px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/9e6122f5.png" alt="" style="height:30px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/371315a9.png" alt="" style="height:30px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/610d9cad.png" alt="" style="height:34px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/a268884b.png" alt="" style="height:40px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/b17427f7.png" alt="" style="height:52px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/9e6122f5.png" alt="" style="height:30px" decoding="async"></span><span class="lg" aria-hidden="true"><img src="logos/371315a9.png" alt="" style="height:30px" decoding="async"></span>
+        </div>
+      </div>
+    </div>
+  </section><section class="sec" id="sistema" style="padding-top:60px">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Por dentro da NEX</span>
+      <h2>Tudo o que o seu comercial precisa, numa tela só.</h2>
+      <p>Indicadores, funil de vendas e todas as conversas do WhatsApp reunidos no sistema NEX. Você sabe o que está acontecendo sem precisar perguntar para ninguém.</p>
+    </div>
+    <div class="tabs-sys" role="tablist">
+      <button class="tab-sys on" data-t="dash" role="tab"><b>Dashboard</b><small>Leads, valores e conversão em tempo real</small><i class="pr"></i></button>
+      <button class="tab-sys" data-t="pipe" role="tab"><b>Pipeline</b><small>Cada negociação na etapa certa</small><i class="pr"></i></button>
+      <button class="tab-sys" data-t="chat" role="tab"><b>Conversas</b><small>WhatsApp da equipe e da IA juntos</small><i class="pr"></i></button>
+    </div>
+    <div class="sys-stage"><div class="mock" style="max-width:1080px">
+      <div class="ax-fit" id="ax2-fit"><div class="ax" id="ax2">
+        <aside class="ax-side">
+    <div class="ax-logo"><svg viewBox="100 15 1820 640"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></div>
+    <nav><div class="ax-sec">— VISÃO GERAL</div><div class="ax-it"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>Dashboard</div><div class="ax-it"><svg viewBox="0 0 24 24"><path d="M5 6h14v14H5zM5 10h14M9 3v4M15 3v4"/></svg>Agenda</div><div class="ax-it"><svg viewBox="0 0 24 24"><path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20c0-3 3-5 6-5s6 2 6 5M16 5a3 3 0 0 1 0 6M18 15c2 .5 3 2 3 5"/></svg>Equipe</div><div class="ax-sec">— VENDAS</div><div class="ax-it on"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM9.5 4v16M14.5 4v16"/></svg>Pipeline</div><div class="ax-it"><svg viewBox="0 0 24 24"><path d="M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Contatos</div><div class="ax-sec">— ATENDIMENTO</div><div class="ax-it"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>Conversas</div><div class="ax-it"><svg viewBox="0 0 24 24"><path d="M4 10v4h3l7 4V6l-7 4zM18 9a4 4 0 0 1 0 6"/></svg>Campanhas</div><div class="ax-sec">— AUTOMAÇÃO E IA</div><div class="ax-it"><svg viewBox="0 0 24 24"><path d="M6 9h12v10H6zM12 5v4M9 13h.01M15 13h.01"/></svg>Agente de IA</div><div class="ax-it"><svg viewBox="0 0 24 24"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg>Análise com IA</div></nav>
+    <div class="ax-it ax-bot"><svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19 12l2-1-2-4-2 1-2-2V3h-4v3L9 8 7 7l-2 4 2 1v0l-2 1 2 4 2-1 2 2v3h4v-3l2-2 2 1 2-4z"/></svg>Configurações</div>
+  </aside>
+        <div class="ax-main">
+          <div class="ax-top"><span class="ax-hi">Olá, EQUIPE · Demonstração</span><span class="ax-ws"><i></i>Clínica</span></div>
+          <div class="ax-view" data-v="dash">
+  <div class="ax-kpis"><div class="ax-k"><span class="ax-kl">Total de oportunidades</span><b style="color:#6f8bff"><span id="ax-tot">23</span></b><small class="up">↑ 5 (+27,8%) vs. anterior</small></div><div class="ax-k"><span class="ax-kl">Valor total em aberto</span><b style="color:#2fd6a1">R$ 108.100</b><small class="up">↑ R$ 12.845 (+13,5%)</small></div><div class="ax-k"><span class="ax-kl">Consultas agendadas</span><b style="color:#c4a0ff">5</b><small class="up">↑ 2 esta semana</small></div><div class="ax-k"><span class="ax-kl">Valor médio por oportunidade</span><b style="color:#ffc94a">R$ 4.700</b><small class="">média dos últimos 30 dias</small></div></div>
+    
+  <div class="ax-panels">
+    <div class="ax-panel"><h5>Funil de conversão<small>Últimos 30 dias · Clínica</small></h5>
+      <div class="fn-row"><span>Novo Lead</span><span class="tr"><i data-w="100" style="background:#4f7cff"></i></span><b>23</b></div><div class="fn-row"><span>Tentativa de Contato</span><span class="tr"><i data-w="70" style="background:#ff9b3d"></i></span><b>16</b></div><div class="fn-row"><span>Em Contato</span><span class="tr"><i data-w="48" style="background:#38d0f5"></i></span><b>11</b></div><div class="fn-row"><span>Consulta Agendada</span><span class="tr"><i data-w="22" style="background:#c98a3e"></i></span><b>5</b></div><div class="fn-row"><span>Consulta Confirmada</span><span class="tr"><i data-w="6" style="background:#7b61ff"></i></span><b>1</b></div>
+    </div>
+    <div class="ax-panel"><h5>Origem dos leads<small>Últimos 30 dias</small></h5>
+      <div class="or-row"><div>Tráfego pago<span>12 leads · 52%</span></div><span class="tr"><i data-w="52"></i></span></div><div class="or-row"><div>Indicação<span>4 leads · 17%</span></div><span class="tr"><i data-w="17"></i></span></div><div class="or-row"><div>Site<span>4 leads · 17%</span></div><span class="tr"><i data-w="17"></i></span></div><div class="or-row"><div>Orgânico<span>2 leads · 9%</span></div><span class="tr"><i data-w="9"></i></span></div><div class="or-row"><div>Eventos<span>1 leads · 4%</span></div><span class="tr"><i data-w="4"></i></span></div>
+    </div>
+  </div>
+</div><div class="ax-view" data-v="pipe" hidden><div class="ax-tools"><span class="ax-sel">Clínica <em>31</em></span><span class="ax-tab on">Quadro</span><span class="ax-tab">Lista</span><span class="ax-search">⌕ Nome ou telefone…</span><span class="ax-sum">31 leads <b>R$ 151.150</b></span><span class="ax-plus">+</span></div>
+    <div class="ax-board"><div class="ax-col"><div class="ax-ch" style="--c:#4f7cff"><i></i>Novo Lead</div><div class="ax-meta"><span>R$ 31 mil</span><span id="ax-n">7 leads</span></div><div class="ax-list" id="ax-first"><div class="ax-card"><i class="ax-bar" style="background:#4f7cff"></i><div class="ax-cn">Mariana Souza<span class="ax-st w">!</span></div><span class="ax-tg q">♨ Quente</span><div class="ax-src">◁ Tráfego pago</div><div class="ax-ft"><b>MS</b><span>◷ 15d</span><em>R$ 4.500</em></div></div><div class="ax-card"><i class="ax-bar" style="background:#ff4f8b"></i><div class="ax-cn">Rafael Lima<span class="ax-st w">!</span></div><div class="ax-src">◁ Tráfego pago</div><div class="ax-ft"><b>RL</b><span>◷ 15d</span><em>R$ 1.200</em></div></div><div class="ax-card"><i class="ax-bar" style="background:#ff4f8b"></i><div class="ax-cn">Beatriz Santos<span class="ax-st w">!</span></div><span class="ax-tg m">◐ Morno</span><div class="ax-src">◁ Site</div><div class="ax-ft"><b>BS</b><span>◷ 16d</span><em>R$ 9.800</em></div></div></div></div><div class="ax-col"><div class="ax-ch" style="--c:#ff9b3d"><i></i>Tentativa de Contato</div><div class="ax-meta"><span>R$ 19,3 mil</span><span>5 leads</span></div><div class="ax-list"><div class="ax-card"><i class="ax-bar" style="background:#22c58b"></i><div class="ax-cn">Patrícia Almeida<span class="ax-st a">◷</span></div><div class="ax-src">◁ Eventos</div><div class="ax-ft"><b>PA</b><span>◷ 17d</span><em>R$ 250</em></div></div><div class="ax-card"><i class="ax-bar" style="background:#ff4f8b"></i><div class="ax-cn">Bruno Fernandes<span class="ax-st a">◷</span></div><span class="ax-tg m">◐ Morno</span><div class="ax-src">◁ Tráfego pago</div><div class="ax-ft"><b>BF</b><span>◷ 17d</span><em>R$ 9.800</em></div></div><div class="ax-card"><i class="ax-bar" style="background:#ff4f8b"></i><div class="ax-cn">Felipe Araújo<span class="ax-st a">◷</span></div><span class="ax-tg f">✻ Frio</span><div class="ax-src">◁ Tráfego pago</div><div class="ax-ft"><b>FA</b><span>◷ 16d</span><em>R$ 1.200</em></div></div></div></div><div class="ax-col"><div class="ax-ch" style="--c:#38d0f5"><i></i>Em Contato</div><div class="ax-meta"><span>R$ 30,7 mil</span><span>6 leads</span></div><div class="ax-list"><div class="ax-card"><i class="ax-bar" style="background:#8b5cff"></i><div class="ax-cn">Fernanda Castro<span class="ax-st a">◷</span></div><span class="ax-tg q">♨ Quente</span><div class="ax-src">◁ Orgânico</div><div class="ax-ft"><b>FC</b><span>◷ 17d</span><em>R$ 7.200</em></div></div><div class="ax-card"><i class="ax-bar" style="background:#ff4f8b"></i><div class="ax-cn">Rodrigo Mendes<span class="ax-st a">◷</span></div><span class="ax-tg m">◐ Morno</span><div class="ax-src">◁ Tráfego pago</div><div class="ax-ft"><b>RM</b><span>◷ 16d</span><em>R$ 1.200</em></div></div><div class="ax-card"><i class="ax-bar" style="background:#4f7cff"></i><div class="ax-cn">André Moreira<span class="ax-st a">◷</span></div><span class="ax-tg f">✻ Frio</span><div class="ax-src">◁ Tráfego pago</div><div class="ax-ft"><b>AM</b><span>◷ 15d</span><em>R$ 4.500</em></div></div></div></div><div class="ax-col"><div class="ax-ch" style="--c:#c98a3e"><i></i>Consulta Agendada</div><div class="ax-meta"><span>R$ 29,5 mil</span><span>5 leads</span></div><div class="ax-list"><div class="ax-card"><i class="ax-bar" style="background:#4f7cff"></i><div class="ax-cn">Gabriela Nunes<span class="ax-st a">◷</span></div><span class="ax-tg q">♨ Quente</span><div class="ax-src">◁ Tráfego pago</div><div class="ax-ft"><b>GN</b><span>◷ 16d</span><em>R$ 4.500</em></div></div><div class="ax-card"><i class="ax-bar" style="background:#ff4f8b"></i><div class="ax-cn">Tatiane Lopes<span class="ax-st a">◷</span></div><span class="ax-tg q">♨ Quente</span><div class="ax-src">◁ Tráfego pago</div><div class="ax-ft"><b>TL</b><span>◷ 17d</span><em>R$ 3.500</em></div></div><div class="ax-card"><i class="ax-bar" style="background:#8b5cff"></i><div class="ax-cn">Eduardo Pinto<span class="ax-st a">◷</span></div><span class="ax-tg m">◐ Morno</span><div class="ax-src">◁ Site</div><div class="ax-ft"><b>EP</b><span>◷ 17d</span><em>R$ 7.200</em></div></div></div></div><div class="ax-col"><div class="ax-ch" style="--c:#7b61ff"><i></i>Consulta Confirmada</div><div class="ax-meta"><span>R$ 11,3 mil</span><span>3 leads</span></div><div class="ax-list"><div class="ax-card"><i class="ax-bar" style="background:#ff4f8b"></i><div class="ax-cn">Renata Freitas<span class="ax-st a">◷</span></div><span class="ax-tg m">◐ Morno</span><div class="ax-src">◁ Tráfego pago</div><div class="ax-ft"><b>RF</b><span>◷ 16d</span><em>R$ 1.200</em></div></div><div class="ax-card"><i class="ax-bar" style="background:#22c58b"></i><div class="ax-cn">Leandro Vieira<span class="ax-st a">◷</span></div><span class="ax-tg m">◐ Morno</span><div class="ax-src">◁ Orgânico</div><div class="ax-ft"><b>LV</b><span>◷ 17d</span><em>R$ 250</em></div></div><div class="ax-card"><i class="ax-bar" style="background:#ff4f8b"></i><div class="ax-cn">Priscila Monteiro<span class="ax-st a">◷</span></div><span class="ax-tg q">♨ Quente</span><div class="ax-src">◁ Tráfego pago</div><div class="ax-ft"><b>PM</b><span>◷ 17d</span><em>R$ 9.800</em></div></div></div></div><div class="ax-col"><div class="ax-ch" style="--c:#f5c84b"><i></i>Consulta Realizada</div><div class="ax-meta"><span>R$ 15,2 mil</span><span>3 leads</span></div><div class="ax-list"><div class="ax-card"><i class="ax-bar" style="background:#4f7cff"></i><div class="ax-cn">Simone Correia<span class="ax-st w">!</span></div><span class="ax-tg q">♨ Quente</span><div class="ax-src">◁ Tráfego pago</div><div class="ax-ft"><b>SC</b><span>◷ 17d</span><em>R$ 4.500</em></div></div><div class="ax-card"><i class="ax-bar" style="background:#8b5cff"></i><div class="ax-cn">Paulo Henrique<span class="ax-st w">!</span></div><span class="ax-tg m">◐ Morno</span><div class="ax-src">◁ Indicação</div><div class="ax-ft"><b>PH</b><span>◷ 17d</span><em>R$ 7.200</em></div></div></div></div></div></div><div class="ax-view" data-v="chat" hidden><img class="ax-shot" src="conversas.webp" loading="lazy" decoding="async" alt="Tela de Conversas do NEX com a lista de leads do WhatsApp, etapa do funil e responsável de cada conversa" width="1604" height="800"></div>
+        </div>
+      </div></div>
+    </div></div>
+  </div>
+</section>
+<section class="sec" id="ia" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Nosso diferencial · Análise com IA</span>
+      <h2>A <span class="nex-tech" data-t="NEX">NEX</span> não só guarda suas conversas. Ela entende cada uma.</h2>
+      <p>Escolha o que analisar e a IA lê os atendimentos por você: mostra quem está pronto para comprar, onde o funil trava e qual o próximo passo. Teste abaixo.</p>
+    </div>
+
+    <div class="ia-app purple-card" id="ia-app">
+      <form class="ia-cfg" id="ia-cfg" onsubmit="return false">
+        <div class="ia-step"><span class="n">1</span>O que analisar</div>
+        <div class="ia-modes" role="radiogroup" aria-label="O que analisar">
+          <label class="ia-mode"><input type="radio" name="ia-mode" value="funil" checked><span class="mi">⛉</span><span><b>Funil completo</b><small>Todas as etapas de um funil</small></span></label>
+          <label class="ia-mode"><input type="radio" name="ia-mode" value="etapa"><span class="mi">≋</span><span><b>Uma etapa do funil</b><small>Só os leads de uma etapa</small></span></label>
+          <label class="ia-mode"><input type="radio" name="ia-mode" value="op"><span class="mi">◯</span><span><b>Uma oportunidade</b><small>Um lead específico</small></span></label>
+        </div>
+        <div class="ia-f"><label for="ia-funil">Funil</label><select id="ia-funil"><option>Clínica</option><option>Comercial</option></select></div>
+        <div class="ia-f" id="ia-etapa-f" hidden><label for="ia-etapa">Etapa</label><select id="ia-etapa"><option>Tentativa de Contato</option><option selected>Em Contato</option><option>Consulta Agendada</option></select></div>
+        <div class="ia-f" id="ia-op-f" hidden><label for="ia-op">Oportunidade</label><select id="ia-op"><option>Fernanda Castro</option><option>Gabriela Nunes</option></select></div>
+
+        <div class="ia-step"><span class="n">2</span>Ajustes</div>
+        <div class="ia-f" id="ia-qtd-f"><label for="ia-qtd">Quantidade de oportunidades</label><input id="ia-qtd" type="number" min="1" max="50" value="10"><small>Leads em aberto com conversa, até 50.</small></div>
+        <div class="ia-f"><span class="lb">Priorizar por</span>
+          <div class="ia-seg" data-name="prio"><button type="button" class="on">Maior valor</button><button type="button">Mais recente</button><button type="button">Parados</button></div></div>
+        <details class="ia-more"><summary>Mais opções</summary>
+          <div class="ia-f"><label for="ia-msgs">Mensagens por conversa</label><input id="ia-msgs" type="number" min="5" max="100" value="20"><small>As mais recentes de cada conversa, de 5 a 100.</small></div>
+          <label class="ia-tog"><span>Incluir anotações internas</span><input type="checkbox" id="ia-notes"><i></i></label>
+          <div class="ia-f"><span class="lb">Idioma do resultado</span><div class="ia-seg" data-name="lang"><button type="button" class="on">Português</button><button type="button">English</button><button type="button">Español</button></div></div>
+          <div class="ia-f"><label for="ia-foco">Foco da análise <small>(opcional)</small></label><textarea id="ia-foco" rows="2" placeholder="Ex.: por que os leads param na proposta?"></textarea></div>
+        </details>
+
+        <div class="ia-step"><span class="n">3</span>Motor de IA</div>
+        <div class="ia-f"><label for="ia-prov">Provedor</label><select id="ia-prov"><option>NexAI</option></select><small class="ok">● Pronto para usar</small></div>
+        <button type="button" class="ia-run" id="ia-run">✦ Analisar com IA</button>
+        <p class="ia-fine">As conversas escolhidas são enviadas ao provedor de IA selecionado. Conversas da equipe não entram.</p>
+      </form>
+
+      <div class="ia-out" id="ia-out" aria-live="polite">
+        <div class="ia-load" id="ia-load" hidden><div class="spin"></div><b>Analisando conversas…</b><span id="ia-load-t">Lendo 10 oportunidades</span><div class="ia-lbar"><i></i></div></div>
+        <div class="ia-res" id="ia-res"></div>
+      </div>
+    </div>
+
+    <ul class="ia-pts3">
+      <li><span class="ic">◎</span><div><b>Temperatura de cada lead</b><span>Saiba quem está quente e merece atenção agora.</span></div></li>
+      <li><span class="ic">⛉</span><div><b>Gargalos do funil</b><span>Veja em que etapa os leads param e por quê.</span></div></li>
+      <li><span class="ic">➜</span><div><b>Próxima ação sugerida</b><span>A IA indica o melhor passo para levar cada conversa até a venda.</span></div></li>
+    </ul>
+  </div>
+</section>
+<section class="sec" id="estrutura" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Estrutura de verdade</span>
+      <h2>Por trás do sistema, um time inteiro cuidando do seu comercial.</h2>
+      <p>A NEX é um produto da Conexão. Você conta com sala operacional, suporte próprio e especialistas que acompanham sua operação de perto.</p>
+    </div>
+    <div class="ph-grid"><figure class="ph big has-img" style="margin:0"><img src="sala-operacional.webp" alt="Time da Conexão trabalhando na sala operacional, com a frase Juntos somos um! na parede" loading="lazy" decoding="async" width="1200" height="1600"><b>Sala operacional</b><span>Onde o time acompanha cada cliente em tempo real</span></figure><figure class="ph  has-img" style="margin:0"><img src="time-trafego.webp" alt="Gestor de tráfego da Conexão trabalhando no computador, com a marca Conexão na TV ao fundo" loading="lazy" decoding="async" style="object-position:40% 35%"><b>Time de tráfego</b><span>Campanhas no Meta e no Google</span></figure><figure class="ph  has-img" style="margin:0"><img src="suporte-nex.webp" alt="Celular com o NEX aberto num suporte de mesa, com o quadro de tarefas da equipe ao fundo" loading="lazy" decoding="async" style="object-position:50% 42%"><b>Suporte NEX</b><span>Atendimento a quem já é cliente</span></figure><figure class="ph wide has-img" style="margin:0"><img src="alinhamento-nex.webp" alt="Reunião de alinhamento da equipe NEX na sala da Conexão" loading="lazy" decoding="async" style="object-position:50% 62%"><b>Equipe especializada</b><span>Briefing, estratégia e configuração do seu agente</span></figure></div>
+  </div>
+</section>
+<section class="sec" id="planos" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Planos</span>
+      <h2>Escolha o plano ideal para a sua operação</h2>
+    </div>
+    <div class="pcs"><article class="pc rv">
+  
+  <h3>GOLD</h3>
+  <p class="pc-desc">CRM completo, WhatsApp por QR Code e automações para o time vender organizado.</p>
+  <div class="pc-price"><small>R$</small>597,00<span>/mês</span></div>
+  <div class="pc-chips"><span>400 créditos/mês</span><span>2 conexões</span><span>1 usuário</span></div>
+  <a class="pc-btn" href="https://wa.me/5587991302323?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20assinar%20o%20plano%20Gold%20da%20NEX." target="_blank" rel="noopener">Assinar Gold</a>
+  <ul class="pc-list"><li class="">2.500 leads no funil</li><li class="">CRM completo com funil visual</li><li class="">WhatsApp por QR Code</li><li class="">Automações com gatilhos, botões e menus</li><li class="">Agente de IA 24/7, com áudio e imagem</li><li class="">Análise com IA do funil e de cada lead</li><li class="off">WhatsApp API Oficial e campanhas por template</li><li class="off">Instagram, Messenger, Telegram e outros canais</li><li class="off">Meta Ads com a origem do lead</li><li class="off">API de leads, n8n e ManyChat</li><li class="off">Onboarding assistido e suporte prioritário</li></ul>
+  <details class="pc-more"><summary><span class="o">Ver a lista completa</span><span class="c">Fechar a lista completa</span></summary><div class="pc-full"><div class="pc-cat"><h5>Comercial · CRM</h5><ul><li class="">Painéis prontos e painel personalizado</li><li class="">Vários funis, em quadro ou lista</li><li class="">Ficha do lead com campos personalizados e histórico</li><li class="">Rastreio do lead (UTM e anúncio)</li><li class="">Agenda com atividades e lembrete ao lead</li><li class="">Equipe: chat interno e tarefas</li><li class="">Cargos e permissões por pessoa</li><li class="">Importar de outro CRM (Kommo, Pipedrive, RD Station, HubSpot, CSV)</li><li class="">Relatórios e leads em CSV e PDF</li></ul></div><div class="pc-cat"><h5>Atendimento</h5><ul><li class="">WhatsApp por QR Code, com proteção do número</li><li class="">Conversas com filtros, respostas rápidas e anotação interna</li><li class="">Grupos do WhatsApp com @menção</li><li class="">Mensagem programada para o lead</li><li class="off">WhatsApp API Oficial com templates aprovados</li><li class="off">Campanhas por template, com público e agendamento</li><li class="off">Mensagens recorrentes</li><li class="off">Instagram Direct e Facebook Messenger</li><li class="off">Telegram, X, Bluesky, Reddit, TikTok e Google Business</li></ul></div><div class="pc-cat"><h5>Automações</h5><ul><li class="">Editor em texto e em canvas, com templates prontos</li><li class="">Gatilhos de lead, mensagem, etapa e tempo sem resposta</li><li class="">Botões, menus, perguntas, Se/Senão e esperas</li><li class="">Fila de envio, horário comercial e execuções</li></ul></div><div class="pc-cat"><h5>Inteligência Artificial</h5><ul><li class="">Agente de IA 24/7 no WhatsApp</li><li class="">Agente que marca horário, move etapa e passa ao humano</li><li class="">Transcrição de áudio e leitura de imagem</li><li class="">Análise com IA do funil e das oportunidades</li><li class="">Análise do lead na ficha (resumo e temperatura)</li></ul></div><div class="pc-cat"><h5>Integrações</h5><ul><li class="">Google Agenda</li><li class="off">Meta Ads (Lead Ads) com a origem marcada</li><li class="off">Feegow e eBrain (agenda de clínica)</li><li class="off">API de leads</li><li class="off">n8n e ManyChat</li><li class="off">Importar o histórico das conexões</li></ul></div><div class="pc-cat"><h5>Suporte</h5><ul><li class="">Suporte pelo botão, com a equipe NEX</li><li class="off">Migração de outro sistema e onboarding assistido</li><li class="off">Suporte prioritário</li></ul></div></div></details>
+</article><article class="pc hot rv">
+  <span class="pc-badge">Mais vendido</span>
+  <h3>PLATINUM</h3>
+  <p class="pc-desc">Agente de IA 24/7, WhatsApp oficial e todos os canais no mesmo chat.</p>
+  <div class="pc-price"><small>R$</small>897,00<span>/mês</span></div>
+  <div class="pc-chips"><span>700 créditos/mês</span><span>5 conexões</span><span>3 usuários</span></div>
+  <a class="pc-btn" href="https://wa.me/5587991302323?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20assinar%20o%20plano%20Platinum%20da%20NEX." target="_blank" rel="noopener">Assinar Platinum</a>
+  <ul class="pc-list"><li class="">15.000 leads no funil</li><li class="">CRM completo com funil visual</li><li class="">WhatsApp por QR Code</li><li class="">Automações com gatilhos, botões e menus</li><li class="">WhatsApp API Oficial e campanhas por template</li><li class="">Instagram, Messenger, Telegram e outros canais</li><li class="">Agente de IA 24/7, com áudio e imagem</li><li class="">Análise com IA do funil e de cada lead</li><li class="">Meta Ads com a origem do lead</li><li class="off">API de leads, n8n e ManyChat</li><li class="off">Onboarding assistido e suporte prioritário</li></ul>
+  <details class="pc-more"><summary><span class="o">Ver a lista completa</span><span class="c">Fechar a lista completa</span></summary><div class="pc-full"><div class="pc-cat"><h5>Comercial · CRM</h5><ul><li class="">Painéis prontos e painel personalizado</li><li class="">Vários funis, em quadro ou lista</li><li class="">Ficha do lead com campos personalizados e histórico</li><li class="">Rastreio do lead (UTM e anúncio)</li><li class="">Agenda com atividades e lembrete ao lead</li><li class="">Equipe: chat interno e tarefas</li><li class="">Cargos e permissões por pessoa</li><li class="">Importar de outro CRM (Kommo, Pipedrive, RD Station, HubSpot, CSV)</li><li class="">Relatórios e leads em CSV e PDF</li></ul></div><div class="pc-cat"><h5>Atendimento</h5><ul><li class="">WhatsApp por QR Code, com proteção do número</li><li class="">Conversas com filtros, respostas rápidas e anotação interna</li><li class="">Grupos do WhatsApp com @menção</li><li class="">Mensagem programada para o lead</li><li class="">WhatsApp API Oficial com templates aprovados</li><li class="">Campanhas por template, com público e agendamento</li><li class="">Mensagens recorrentes</li><li class="">Instagram Direct e Facebook Messenger</li><li class="">Telegram, X, Bluesky, Reddit, TikTok e Google Business</li></ul></div><div class="pc-cat"><h5>Automações</h5><ul><li class="">Editor em texto e em canvas, com templates prontos</li><li class="">Gatilhos de lead, mensagem, etapa e tempo sem resposta</li><li class="">Botões, menus, perguntas, Se/Senão e esperas</li><li class="">Fila de envio, horário comercial e execuções</li></ul></div><div class="pc-cat"><h5>Inteligência Artificial</h5><ul><li class="">Agente de IA 24/7 no WhatsApp</li><li class="">Agente que marca horário, move etapa e passa ao humano</li><li class="">Transcrição de áudio e leitura de imagem</li><li class="">Análise com IA do funil e das oportunidades</li><li class="">Análise do lead na ficha (resumo e temperatura)</li></ul></div><div class="pc-cat"><h5>Integrações</h5><ul><li class="">Google Agenda</li><li class="">Meta Ads (Lead Ads) com a origem marcada</li><li class="">Feegow e eBrain (agenda de clínica)</li><li class="off">API de leads</li><li class="off">n8n e ManyChat</li><li class="off">Importar o histórico das conexões</li></ul></div><div class="pc-cat"><h5>Suporte</h5><ul><li class="">Suporte pelo botão, com a equipe NEX</li><li class="off">Migração de outro sistema e onboarding assistido</li><li class="off">Suporte prioritário</li></ul></div></div></details>
+</article><article class="pc rv">
+  
+  <h3>BLACK</h3>
+  <p class="pc-desc">Tudo integrado: API, n8n, ManyChat e o histórico das conexões, com onboarding assistido.</p>
+  <div class="pc-price"><small>R$</small>1.297,00<span>/mês</span></div>
+  <div class="pc-chips"><span>1.000 créditos/mês</span><span>10 conexões</span><span>5 usuários</span></div>
+  <a class="pc-btn" href="https://wa.me/5587991302323?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20assinar%20o%20plano%20Black%20da%20NEX." target="_blank" rel="noopener">Assinar Black</a>
+  <ul class="pc-list"><li class="">50.000 leads no funil</li><li class="">CRM completo com funil visual</li><li class="">WhatsApp por QR Code</li><li class="">Automações com gatilhos, botões e menus</li><li class="">WhatsApp API Oficial e campanhas por template</li><li class="">Instagram, Messenger, Telegram e outros canais</li><li class="">Agente de IA 24/7, com áudio e imagem</li><li class="">Análise com IA do funil e de cada lead</li><li class="">Meta Ads com a origem do lead</li><li class="">API de leads, n8n e ManyChat</li><li class="">Onboarding assistido e suporte prioritário</li></ul>
+  <details class="pc-more"><summary><span class="o">Ver a lista completa</span><span class="c">Fechar a lista completa</span></summary><div class="pc-full"><div class="pc-cat"><h5>Comercial · CRM</h5><ul><li class="">Painéis prontos e painel personalizado</li><li class="">Vários funis, em quadro ou lista</li><li class="">Ficha do lead com campos personalizados e histórico</li><li class="">Rastreio do lead (UTM e anúncio)</li><li class="">Agenda com atividades e lembrete ao lead</li><li class="">Equipe: chat interno e tarefas</li><li class="">Cargos e permissões por pessoa</li><li class="">Importar de outro CRM (Kommo, Pipedrive, RD Station, HubSpot, CSV)</li><li class="">Relatórios e leads em CSV e PDF</li></ul></div><div class="pc-cat"><h5>Atendimento</h5><ul><li class="">WhatsApp por QR Code, com proteção do número</li><li class="">Conversas com filtros, respostas rápidas e anotação interna</li><li class="">Grupos do WhatsApp com @menção</li><li class="">Mensagem programada para o lead</li><li class="">WhatsApp API Oficial com templates aprovados</li><li class="">Campanhas por template, com público e agendamento</li><li class="">Mensagens recorrentes</li><li class="">Instagram Direct e Facebook Messenger</li><li class="">Telegram, X, Bluesky, Reddit, TikTok e Google Business</li></ul></div><div class="pc-cat"><h5>Automações</h5><ul><li class="">Editor em texto e em canvas, com templates prontos</li><li class="">Gatilhos de lead, mensagem, etapa e tempo sem resposta</li><li class="">Botões, menus, perguntas, Se/Senão e esperas</li><li class="">Fila de envio, horário comercial e execuções</li></ul></div><div class="pc-cat"><h5>Inteligência Artificial</h5><ul><li class="">Agente de IA 24/7 no WhatsApp</li><li class="">Agente que marca horário, move etapa e passa ao humano</li><li class="">Transcrição de áudio e leitura de imagem</li><li class="">Análise com IA do funil e das oportunidades</li><li class="">Análise do lead na ficha (resumo e temperatura)</li></ul></div><div class="pc-cat"><h5>Integrações</h5><ul><li class="">Google Agenda</li><li class="">Meta Ads (Lead Ads) com a origem marcada</li><li class="">Feegow e eBrain (agenda de clínica)</li><li class="">API de leads</li><li class="">n8n e ManyChat</li><li class="">Importar o histórico das conexões</li></ul></div><div class="pc-cat"><h5>Suporte</h5><ul><li class="">Suporte pelo botão, com a equipe NEX</li><li class="">Migração de outro sistema e onboarding assistido</li><li class="">Suporte prioritário</li></ul></div></div></details>
+</article></div>
+    <div class="pc-foot">
+      <p>Implementação: R$ 1.597,00, valor único, em todos os planos.</p>
+      <p>Precisa de mais usuários ou conexões? Adicionais disponíveis em qualquer plano.</p>
+    </div>
+  </div>
+</section>
+<section class="sec" id="quem-somos" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Quem somos</span>
+      <h2>Tecnologia feita no Sertão, para empresas do Brasil inteiro.</h2>
+    </div>
+    <div class="qs">
+      <div class="map rv" aria-label="Mapa com a localização da NEX em Petrolina, PE">
+        <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="82" y="85" width="58" height="45" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="284" y="70" width="82" height="47" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="285" y="361" width="56" height="42" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="905" y="194" width="44" height="29" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="180" y="77" width="44" height="34" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="496" y="301" width="41" height="36" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="4" y="74" width="56" height="54" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="624" y="289" width="50" height="28" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="879" y="263" width="90" height="59" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="692" y="378" width="33" height="49" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="817" y="286" width="55" height="45" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="403" y="53" width="60" height="60" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="63" y="97" width="34" height="33" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="166" y="56" width="51" height="58" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="104" y="0" width="66" height="29" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="103" y="186" width="69" height="21" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="895" y="106" width="69" height="44" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="649" y="129" width="52" height="58" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="485" y="62" width="37" height="51" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="491" y="247" width="49" height="25" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="104" y="383" width="51" height="36" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="848" y="354" width="40" height="53" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="210" y="270" width="53" height="29" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="556" y="13" width="78" height="53" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="658" y="46" width="74" height="36" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="375" y="85" width="52" height="34" rx="6" fill="rgba(91,43,255,0.12)"/><path d="M-20 331 Q 277 352 1020 354" stroke="rgba(160,130,255,0.1)" stroke-width="1.5" fill="none"/><path d="M-20 548 Q 248 561 1020 562" stroke="rgba(160,130,255,0.1)" stroke-width="4" fill="none"/><path d="M-20 219 Q 219 161 1020 214" stroke="rgba(160,130,255,0.14)" stroke-width="1.5" fill="none"/><path d="M-20 246 Q 246 307 1020 240" stroke="rgba(160,130,255,0.1)" stroke-width="4" fill="none"/><path d="M-20 126 Q 314 206 1020 140" stroke="rgba(160,130,255,0.1)" stroke-width="4" fill="none"/><path d="M-20 599 Q 403 531 1020 567" stroke="rgba(160,130,255,0.1)" stroke-width="4" fill="none"/><path d="M-20 136 Q 348 163 1020 94" stroke="rgba(160,130,255,0.2)" stroke-width="1.5" fill="none"/><path d="M-20 584 Q 357 647 1020 628" stroke="rgba(160,130,255,0.2)" stroke-width="1.5" fill="none"/><path d="M-20 105 Q 497 171 1020 126" stroke="rgba(160,130,255,0.1)" stroke-width="2" fill="none"/><path d="M-20 99 Q 480 35 1020 111" stroke="rgba(160,130,255,0.1)" stroke-width="4" fill="none"/><path d="M-20 210 Q 454 266 1020 204" stroke="rgba(160,130,255,0.14)" stroke-width="2" fill="none"/><path d="M-20 599 Q 432 611 1020 577" stroke="rgba(160,130,255,0.1)" stroke-width="1.5" fill="none"/><path d="M-20 249 Q 241 316 1020 227" stroke="rgba(160,130,255,0.2)" stroke-width="2" fill="none"/><path d="M-20 351 Q 429 344 1020 368" stroke="rgba(160,130,255,0.1)" stroke-width="1.5" fill="none"/><path d="M524 -20 Q 541 300 485 620" stroke="rgba(160,130,255,0.12)" stroke-width="1.5" fill="none"/><path d="M955 -20 Q 990 300 948 620" stroke="rgba(160,130,255,0.08)" stroke-width="3" fill="none"/><path d="M79 -20 Q 131 300 92 620" stroke="rgba(160,130,255,0.12)" stroke-width="2" fill="none"/><path d="M711 -20 Q 710 300 727 620" stroke="rgba(160,130,255,0.12)" stroke-width="3" fill="none"/><path d="M816 -20 Q 842 300 764 620" stroke="rgba(160,130,255,0.08)" stroke-width="2" fill="none"/><path d="M485 -20 Q 573 300 510 620" stroke="rgba(160,130,255,0.08)" stroke-width="1.5" fill="none"/><path d="M748 -20 Q 837 300 727 620" stroke="rgba(160,130,255,0.18)" stroke-width="3" fill="none"/><path d="M697 -20 Q 721 300 673 620" stroke="rgba(160,130,255,0.18)" stroke-width="2" fill="none"/><path d="M908 -20 Q 989 300 892 620" stroke="rgba(160,130,255,0.08)" stroke-width="2" fill="none"/><path d="M363 -20 Q 316 300 381 620" stroke="rgba(160,130,255,0.08)" stroke-width="2" fill="none"/><path d="M60 -20 Q 25 300 98 620" stroke="rgba(160,130,255,0.12)" stroke-width="1.5" fill="none"/><path d="M756 -20 Q 729 300 746 620" stroke="rgba(160,130,255,0.12)" stroke-width="2" fill="none"/><path d="M-20 520 C 200 470 330 560 520 500 S 820 430 1020 470 L1020 620 L-20 620 Z" fill="rgba(63,224,255,.08)"/><path d="M-20 520 C 200 470 330 560 520 500 S 820 430 1020 470" stroke="rgba(63,224,255,.35)" stroke-width="2" fill="none"/><text x="760" y="560" fill="rgba(63,224,255,.5)" font-size="16" font-family="JetBrains Mono, monospace" letter-spacing="3">RIO SÃO FRANCISCO</text></svg>
+        <div class="pin"><i></i></div>
+        <div class="map-card"><div><b>NEX · Conexão Marketing e Tecnologia</b><span>Rua Manoel Clementino, 1002-1038, Sala 07, Centro, Petrolina (PE), CEP 56302-170</span></div><a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Rua+Manoel+Clementino+1002+Centro+Petrolina+PE+56302-170" target="_blank" rel="noopener">Como chegar →</a></div>
+      </div>
+      <div class="about purple-card rv">
+        <span class="eyebrow">Sobre a NEX</span>
+        <h3>Nascemos dentro de uma assessoria de marketing que via leads se perdendo todos os dias.</h3>
+        <p>A Conexão gera clientes para empresas há anos com tráfego pago e estratégia. Percebemos que boa parte desses contatos morria no atendimento: resposta lenta, follow-up esquecido, planilha desatualizada.</p>
+        <p>A NEX foi criada para fechar esse buraco. Um CRM com Inteligência Artificial que atende, organiza e mostra onde está cada venda, com o suporte de quem entende de marketing e de vendas.</p>
+        <div class="about-facts">
+          <div><b>Petrolina (PE)</b><span>Sede e sala operacional</span></div>
+          <div><b>Brasil inteiro</b><span>Atendimento remoto</span></div>
+          <div><b>8h às 18h</b><span>Suporte com time próprio</span></div>
+          <div><b>Um produto da Conexão</b><span>Marketing e Tecnologia</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sec" id="faq" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Dúvidas frequentes</span><h2>Ainda com alguma dúvida?</h2></div>
+    <div class="faq"><details open><summary>Preciso trocar meu número de WhatsApp?</summary><div class="ans">Não. A NEX conecta o número que sua empresa já usa. Os clientes continuam falando com você pelo mesmo contato, agora com tudo registrado no CRM.</div></details><details><summary>A IA pode responder algo errado para o meu cliente?</summary><div class="ans">O agente responde com base nas informações do seu negócio, definidas no briefing. Antes de publicar, você testa o agente por 3 a 5 dias. Assuntos sensíveis podem ser passados automaticamente para uma pessoa da equipe.</div></details><details><summary>Quanto tempo leva para começar a usar?</summary><div class="ans">Depois da reunião de briefing, configuramos o agente e o CRM em 10 a 20 dias. Em seguida vem o período de teste, e só então o agente vai para o ar.</div></details><details><summary>Funciona para o meu segmento?</summary><div class="ans">A NEX atende empresas que vendem pelo WhatsApp: clínicas, imobiliárias, escolas e cursos, serviços, construção, seguros e outros. O agente é treinado com a linguagem e as regras do seu negócio.</div></details><details><summary>Meus dados e os dos meus clientes ficam seguros?</summary><div class="ans">Sim. A plataforma segue a LGPD, usa conexão criptografada, dados criptografados no banco e controle de acesso por perfil. Os dados dos seus clientes pertencem à sua empresa.</div></details><details><summary>Tem fidelidade ou taxa de cancelamento?</summary><div class="ans">As condições de contratação, prazo e cancelamento ficam definidas no contrato, de acordo com o plano escolhido. Nosso time explica tudo na reunião de apresentação.</div></details></div>
+  </div>
+</section>
+<div class="wrap">
+  <section class="cta2 rv" id="cta-final">
+    <div class="big" id="cta-clock">00:00</div>
+    <div class="big-l">Tempo que você está nesta página</div>
+    <h2>Enquanto você lê, algum lead está esperando resposta.</h2>
+    <p>Cada minuto sem atendimento é um cliente mais perto do concorrente. Coloque a NEX para responder por você hoje.</p>
+    <div class="ctas">
+      <a href="#demo" class="btn btn-primary mag">Quero a NEX no meu comercial <span class="arr">→</span></a>
+      <a href="#form-topo" class="btn btn-ghost mag">Preencher o formulário</a>
+    </div>
+  </section>
+</div>
+</main>
+<footer>
+  <div class="wrap ft-top">
+    <div class="ft-brand">
+      <a href="#top" class="logo"><svg class="logo-svg" viewBox="100 15 1820 640" role="img" aria-label="NEX"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
+      <p>Inteligência comercial com IA. CRM, funil e atendimento automático para o seu comercial nunca mais dormir.</p>
+    </div>
+    <div class="ft-col">
+      <h4>Produto</h4>
+      <ul><li><a href="#sistema">Sistema</a></li><li><a href="#ia">Análise com IA</a></li><li><a href="#planos">Planos</a></li><li><a href="#faq">Dúvidas</a></li><li><a href="#demo">Fale conosco</a></li></ul>
+    </div>
+    <div class="ft-col">
+      <h4>Informações</h4>
+      <ul><li><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Termos de uso</a></li><li><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Política de privacidade</a></li><li><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">LGPD e segurança de dados</a></li><li><a href="#">Suporte</a></li></ul>
+    </div>
+    <div class="ft-col">
+      <h4>Redes sociais</h4>
+      <div class="socials">
+        <a href="https://www.instagram.com/nex_intelligence/" target="_blank" rel="noopener" aria-label="Instagram da NEX"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4.7a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-9.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg></a>
+        <a href="https://wa.me/5587991302323" target="_blank" rel="noopener" aria-label="WhatsApp da NEX: +55 87 99130-2323"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-legal">
+    <div class="wrap">
+      <div>
+        <nav aria-label="Legal"><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Termos de uso</a><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Política de privacidade</a><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">LGPD</a><a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Segurança</a><a href="#demo">Contato</a><a href="#">Preferências de cookies</a></nav>
+        <p>© 2026 Cnx Marketing e Tecnologia. Todos os direitos reservados. M. Leite Empreendimento em Marketing Ltda · CNPJ 47.633.832/0001-09. NEX é um produto da Conexão | Marketing e Tecnologia.</p>
+      </div>
+      <div class="made">Um produto da<b>Conexão <span class="made-sep">|</span> Marketing e Tecnologia</b></div>
+    </div>
+  </div>
+</footer>
+<script>
+/* Faixa de logos: loop infinito sem buracos. Duplica as marcas até cobrir a tela e anima por pixels (velocidade constante). */
+(() => {
+  const marq = document.querySelector('.marq'), track = marq && marq.querySelector('.track'); if (!track) return;
+  const originals = [...track.children].filter(el => !el.hasAttribute('aria-hidden'));
+  const SPEED = 110; // px por segundo
+  function build() {
+    track.style.animation = 'none';
+    track.innerHTML = '';
+    const group = document.createElement('div'); group.className = 'mq-group';
+    originals.forEach(el => group.appendChild(el.cloneNode(true)));
+    track.appendChild(group);
+    // repete o grupo até ficar mais largo que a área visível
+    let guard = 0;
+    while (group.scrollWidth < marq.clientWidth + 40 && guard++ < 12) originals.forEach(el => { const c = el.cloneNode(true); c.setAttribute('aria-hidden', 'true'); const im = c.querySelector('img'); if (im) im.alt = ''; group.appendChild(c); });
+    const copy = group.cloneNode(true); copy.setAttribute('aria-hidden', 'true'); copy.querySelectorAll('img').forEach(i => i.alt = '');
+    track.appendChild(copy);
+    const w = group.getBoundingClientRect().width;
+    track.style.setProperty('--mq-w', w + 'px');
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) track.style.animation = `mqMove ${(w / SPEED).toFixed(2)}s linear infinite`;
+  }
+  const imgs = originals.flatMap(el => [...el.querySelectorAll('img')]);
+  Promise.all(imgs.map(i => i.complete && i.naturalWidth ? 1 : new Promise(r => { i.addEventListener('load', r, { once: true }); i.addEventListener('error', r, { once: true }); }))).then(build);
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(build, 200); });
+})();
+</script>
+
+<!-- COOKIES: banner + painel de preferências -->
+<style>
+.ck-bar{position:fixed;z-index:85;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(440px,calc(100% - 32px));padding:20px;border-radius:20px;border:1px solid rgba(139,92,246,.5);background:rgba(16,11,36,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 24px 70px -20px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.03);text-align:left;animation:ckIn .6s var(--ease) both}
+@keyframes ckIn{from{opacity:0;transform:translateY(20px)}}
+.ck-bar b{display:block;font:600 16px var(--f-display);letter-spacing:-.01em}
+.ck-bar p{margin-top:6px;font-size:13.5px;color:#c9c0ef;line-height:1.55}
+.ck-bar p a,.ck-panel a{color:#c4b5fd;text-decoration:underline;text-underline-offset:2px}
+.ck-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.ck-btn{padding:11px 12px;border-radius:12px;font:600 13.5px var(--f-body);cursor:pointer;border:1px solid rgba(139,92,246,.6);background:#7C3AED;color:#fff;transition:background .2s}
+.ck-btn:hover{background:#8B5CF6}
+.ck-link{margin-top:10px;background:none;border:0;padding:0;font:600 13px var(--f-body);color:#c4b5fd;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.ck-modal{position:fixed;inset:0;z-index:95;display:grid;place-items:center;padding:20px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px))}
+.ck-modal[hidden],.ck-bar[hidden]{display:none!important}
+.ck-bg{position:absolute;inset:0;background:rgba(5,4,12,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.ck-panel{position:relative;width:min(540px,100%);max-height:calc(100vh - 40px);overflow:auto;border-radius:24px;padding:clamp(22px,4vw,30px);text-align:left;border:1px solid rgba(91,43,255,.6);background:linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f);box-shadow:0 40px 120px -20px rgba(91,43,255,.7);animation:ckIn .45s var(--ease) both}
+.ck-panel h3{font-size:24px;font-weight:600;padding-right:40px}
+.ck-panel>p{margin-top:8px;font-size:14px;color:#c9c0ef}
+.ck-x{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(160,130,255,.35);background:rgba(255,255,255,.04);color:#fff;font-size:16px;cursor:pointer}
+.ck-cats{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.ck-cat{padding:14px 16px;border-radius:16px;border:1px solid rgba(160,130,255,.25);background:rgba(7,6,15,.5)}
+.ck-cat-hd{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ck-cat-hd b{font-size:15px}
+.ck-cat p{margin-top:6px;font-size:13px;color:#b9b0e0;line-height:1.5}
+.ck-cat small{display:block;margin-top:6px;font:500 11px var(--f-mono);color:#8a80b8}
+.ck-always{font:600 11.5px var(--f-mono);color:#3ddc97;white-space:nowrap}
+.ck-sw{position:relative;flex:none;display:inline-flex;cursor:pointer}
+.ck-sw input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.ck-sw i{width:42px;height:24px;border-radius:99px;background:rgba(255,255,255,.15);position:relative;transition:background .25s}
+.ck-sw i::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .25s var(--ease)}
+.ck-sw input:checked+i{background:#7C3AED}.ck-sw input:checked+i::after{transform:translateX(18px)}
+.ck-sw input:focus-visible+i{outline:2px solid var(--accent-2);outline-offset:2px}
+.ck-acts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:20px}
+.ck-acts .ck-btn.ghost{background:transparent;color:#e4dcff;border-color:rgba(160,130,255,.4)}
+.ck-acts .ck-btn.ghost:hover{background:rgba(255,255,255,.06)}
+.ck-saved{margin-top:12px;font:500 12px var(--f-mono);color:#3ddc97;text-align:center}
+@media(max-width:520px){.ck-acts{grid-template-columns:1fr}.ck-row{grid-template-columns:1fr}}
+</style>
+<div class="ck-bar" id="ck-bar" role="region" aria-label="Aviso de cookies" hidden>
+  <b>Sua privacidade, sua escolha</b>
+  <p>Usamos cookies para o site funcionar e, com sua permissão, para medir os resultados dos nossos anúncios no Facebook e no Instagram. Saiba mais nos <a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Termos e Política</a>.</p>
+  <div class="ck-row"><button type="button" class="ck-btn" data-ck="all">Aceitar todos</button><button type="button" class="ck-btn" data-ck="none">Recusar opcionais</button></div>
+  <button type="button" class="ck-link" data-ck="open">Personalizar</button>
+</div>
+<div class="ck-modal" id="ck-modal" role="dialog" aria-modal="true" aria-labelledby="ck-title" hidden>
+  <div class="ck-bg" data-ck="close"></div>
+  <div class="ck-panel">
+    <button type="button" class="ck-x" data-ck="close" aria-label="Fechar">✕</button>
+    <span class="eyebrow">Preferências de cookies</span>
+    <h3 id="ck-title" style="margin-top:10px">Escolha o que podemos usar</h3>
+    <p>Você pode mudar estas escolhas quando quiser pelo link "Preferências de cookies", no rodapé.</p>
+    <div class="ck-cats">
+      <div class="ck-cat"><div class="ck-cat-hd"><b>Necessários</b><span class="ck-always">Sempre ativos</span></div><p>Fazem o site funcionar e guardam a sua escolha de cookies. Não podem ser desligados.</p><small>Preferência de consentimento · segurança</small></div>
+      <div class="ck-cat"><div class="ck-cat-hd"><b>Marketing</b><label class="ck-sw"><input type="checkbox" id="ck-mk" aria-label="Cookies de marketing"><i></i></label></div><p>Medem os resultados dos anúncios da NEX no Facebook e no Instagram e ajudam a mostrar anúncios mais relevantes.</p><small>Meta Pixel</small></div>
+    </div>
+    <div class="ck-acts"><button type="button" class="ck-btn ghost" data-ck="none">Recusar opcionais</button><button type="button" class="ck-btn ghost" data-ck="save">Salvar escolhas</button><button type="button" class="ck-btn" data-ck="all">Aceitar todos</button></div>
+    <p class="ck-saved" id="ck-saved" hidden>Preferências salvas.</p>
+  </div>
+</div>
+<script>
+/* Consentimento de cookies (LGPD).
+   Nenhuma tag opcional roda antes do aceite. Para ativar, preencha os IDs abaixo. */
+(() => {
+  const CFG = {
+    metaPixel: ''   // ← cole aqui o ID do Pixel da Meta, ex.: '123456789012345'
+  };
+  const KEY = 'nex-cookie-consent-v1';
+  const $ = id => document.getElementById(id);
+  const bar = $('ck-bar'), modal = $('ck-modal'), mk = $('ck-mk');
+  const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } };
+  const write = c => { try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {} };
+  const loaded = {};
+  const addScript = src => { const s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); };
+  function apply(c) {
+    window.nexConsent = c;
+    if (c.marketing && CFG.metaPixel && !loaded.px) { loaded.px = 1;
+      !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', CFG.metaPixel); fbq('track', 'PageView'); }
+    document.dispatchEvent(new CustomEvent('nex:consent', { detail: c }));
+  }
+  function decide(c) {
+    c.date = new Date().toISOString(); write(c); apply(c);
+    bar.hidden = true;
+    if (!modal.hidden) { $('ck-saved').hidden = false; setTimeout(closePanel, 700); }
+  }
+  let last = null;
+  function openPanel(trigger) {
+    last = trigger || document.activeElement;
+    const c = read() || { marketing: false };
+    mk.checked = !!c.marketing; $('ck-saved').hidden = true;
+    modal.hidden = false; document.documentElement.style.overflow = 'hidden'; modal.querySelector('.ck-x').focus();
+  }
+  function closePanel() { modal.hidden = true; document.documentElement.style.overflow = ''; last && last.focus && last.focus(); }
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-ck]'); if (!t) return;
+    const a = t.dataset.ck;
+    if (a === 'all') decide({ marketing: true });
+    else if (a === 'none') decide({ marketing: false });
+    else if (a === 'save') decide({ marketing: mk.checked });
+    else if (a === 'open') openPanel(t);
+    else if (a === 'close') closePanel();
+  });
+  document.querySelectorAll('a').forEach(l => { if (l.textContent.trim() === 'Preferências de cookies') { l.setAttribute('href', '#cookies'); l.setAttribute('role', 'button'); l.addEventListener('click', e => { e.preventDefault(); openPanel(l); }); } });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closePanel(); });
+
+  /* Eventos de conversão do Meta Pixel (só disparam com consentimento de marketing e Pixel carregado). */
+  const track = (name, params) => { try { if (window.nexConsent && window.nexConsent.marketing && window.fbq) fbq('track', name, params || {}); } catch (e) {} };
+  window.nexTrack = track;
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a'); if (!a) return;
+    const h = a.getAttribute('href') || '';
+    if (a.classList.contains('pc-btn')) { const plan = a.textContent.replace('Assinar', '').trim(); const val = { Gold: 597, Platinum: 897, Black: 1297 }[plan]; track('InitiateCheckout', { content_name: 'Plano ' + plan, value: val, currency: 'BRL' }); }
+    else if (a.id === 'lead-wa') track('Lead', { content_name: 'Formulário do topo' });
+    else if (h.includes('wa.me')) track('Contact', { content_name: 'WhatsApp' });
+    else if (h.includes('diagnostico.html')) track('ViewContent', { content_name: 'Diagnóstico comercial' });
+  }, true);
+  const saved = read();
+  if (saved) apply(saved); else bar.hidden = false;
+})();
+</script>
+
+<button type="button" class="fc-fab" id="fc-fab" aria-haspopup="dialog"><span class="live"></span>Fale conosco</button>
+<div class="fc" id="fc" role="dialog" aria-modal="true" aria-labelledby="fc-title" hidden>
+  <div class="fc-bg" data-close></div>
+  <div class="fc-box">
+    <button type="button" class="fc-x" data-close aria-label="Fechar">✕</button>
+    <span class="eyebrow">Fale conosco</span>
+    <h3 id="fc-title">Como você prefere começar?</h3>
+    <p>Em 3 minutos você descobre onde seu comercial está perdendo vendas. Ou fale direto com o nosso time.</p>
+    <div class="fc-opts">
+      <a class="fc-opt main" href="diagnostico.html">
+        <span class="fc-ic"><svg viewBox="0 0 24 24"><path d="M4 19h16v2H4zM6 10h3v7H6zm5-4h3v11h-3zm5 7h3v4h-3z"/></svg></span>
+        <span><b>Fazer o diagnóstico do meu comercial</b><small>5 etapas rápidas. Você vê na hora os pontos fracos e o que resolve cada um.</small></span>
+        <span class="go">→</span>
+      </a>
+      <a class="fc-opt" href="https://wa.me/5587991302323?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20NEX%20e%20quero%20agendar%20uma%20apresenta%C3%A7%C3%A3o." target="_blank" rel="noopener">
+        <span class="fc-ic wa"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg></span>
+        <span><b>Falar agora no WhatsApp</b><small>+55 87 99130-2323</small></span>
+        <span class="go">→</span>
+      </a>
+    </div>
+    <p class="fc-note">Sem compromisso · Seus dados seguem a nossa Política de privacidade</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(pointer: fine)').matches;
+  const WA = '5587991302323';
+  const $ = id => document.getElementById(id);
+
+  // nav com vidro ao rolar
+  const nav = $('nav'); const onS = () => nav.classList.toggle('scrolled', scrollY > 20);
+  addEventListener('scroll', onS, { passive: true }); onS();
+
+  // botões magnéticos
+  if (fine && !reduce) document.querySelectorAll('.mag').forEach(el => {
+    el.addEventListener('mousemove', e => { const r = el.getBoundingClientRect(); el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .3}px,${(e.clientY - r.top - r.height / 2) * .3}px)`; });
+    el.addEventListener('mouseleave', () => el.style.transform = '');
+  });
+
+  // ---------- S1 formulário ----------
+  const form = $('lead-form'), wh = $('lf-whats');
+  wh.addEventListener('input', () => {
+    const d = wh.value.replace(/\D/g, '').slice(0, 11);
+    wh.value = d.length > 10 ? `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}` : d.length > 6 ? `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}` : d.length > 2 ? `(${d.slice(0, 2)}) ${d.slice(2)}` : d;
+  });
+  form.addEventListener('input', e => e.target.closest('.fld')?.classList.remove('invalid'));
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const v = { nome: $('lf-nome').value.trim(), whats: wh.value.trim(), emp: $('lf-emp').value.trim(), leads: $('lf-leads').value };
+    const checks = [['lf-nome', !!v.nome], ['lf-whats', v.whats.replace(/\D/g, '').length >= 10], ['lf-emp', !!v.emp], ['lf-leads', !!v.leads]];
+    let first = null;
+    checks.forEach(([id, ok]) => { $(id).closest('.fld').classList.toggle('invalid', !ok); if (!ok && !first) first = $(id); });
+    if (first) { first.focus(); return; }
+    const msg = `Olá! Vim pelo site da NEX e quero ver a NEX no meu negócio.\n\nNome: ${v.nome}\nEmpresa: ${v.emp}\nWhatsApp: ${v.whats}\nContatos por mês: ${v.leads}`;
+    $('lead-wa').href = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+    $('lead-ok-t').textContent = `Pronto, ${v.nome.split(/\s+/)[0]}!`;
+    form.hidden = true; $('lead-ok').hidden = false; $('lead-wa').focus();
+  });
+
+  // ---------- S2 telas passando ----------
+  // escala o mockup para caber inteiro na largura disponível
+  const fit = $('ax2-fit'), ax2 = $('ax2');
+  const scaleAx = () => { const k = Math.min(1, fit.clientWidth / 1058); ax2.style.transform = `scale(${k})`; fit.style.height = (560 * k) + 'px'; };
+  new ResizeObserver(scaleAx).observe(fit); scaleAx();
+
+  const tabs = [...document.querySelectorAll('.tab-sys')], views = [...document.querySelectorAll('#ax2 .ax-view')];
+  const sideItems = [...document.querySelectorAll('#ax2 .ax-it')];
+  const sideMap = { dash: 'Dashboard', pipe: 'Pipeline', chat: 'Conversas' };
+  const DUR = 6000; let cur = 0, timer = null, inView = false;
+  document.querySelector('.tabs-sys').style.setProperty('--dur', DUR / 1000 + 's');
+  function fillBars(v) { v.querySelectorAll('[data-w]').forEach(i => { i.style.width = '0'; requestAnimationFrame(() => requestAnimationFrame(() => i.style.width = i.dataset.w + '%')); }); }
+  function go(i, user) {
+    cur = (i + tabs.length) % tabs.length; const key = tabs[cur].dataset.t;
+    tabs.forEach((t, k) => { t.classList.toggle('on', k === cur); t.setAttribute('aria-selected', k === cur); const pr = t.querySelector('.pr'); pr.style.animation = 'none'; void pr.offsetWidth; pr.style.animation = ''; });
+    views.forEach(v => { const on = v.dataset.v === key; v.hidden = !on; v.classList.remove('in'); if (on) { void v.offsetWidth; v.classList.add('in'); fillBars(v); } });
+    sideItems.forEach(s => s.classList.toggle('on', s.textContent.trim() === sideMap[key]));
+    clearTimeout(timer); if (!reduce && inView) timer = setTimeout(() => go(cur + 1), DUR);
+  }
+  tabs.forEach((t, i) => t.addEventListener('click', () => go(i, true)));
+  document.addEventListener('visibilitychange', () => { if (document.hidden) clearTimeout(timer); else if (inView) go(cur); });
+  new IntersectionObserver(([e]) => { inView = e.isIntersecting; if (inView) go(cur); else clearTimeout(timer); }, { threshold: .35 }).observe($('ax2'));
+  go(0);
+
+  // ---------- S3 análise com IA (demo interativa) ----------
+  const iaRes = $('ia-res'), iaLoad = $('ia-load'), iaRun = $('ia-run');
+  const modeOf = () => document.querySelector('input[name="ia-mode"]:checked').value;
+  const segVal = n => document.querySelector(`.ia-seg[data-name="${n}"] .on`).textContent;
+  document.querySelectorAll('.ia-seg').forEach(g => g.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; g.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); }));
+  document.querySelectorAll('input[name="ia-mode"]').forEach(r => r.addEventListener('change', () => {
+    const m = modeOf(); $('ia-etapa-f').hidden = m !== 'etapa'; $('ia-op-f').hidden = m !== 'op'; $('ia-qtd-f').hidden = m === 'op';
+  }));
+  const T = {
+    'Português': { sum: 'Resumo', gar: 'Gargalo', obj: 'Objeção mais comum', next: 'Próxima ação sugerida', pri: 'Priorize agora', int: 'Intenção', ob1: 'Objeção' },
+    'English': { sum: 'Summary', gar: 'Bottleneck', obj: 'Most common objection', next: 'Suggested next step', pri: 'Prioritize now', int: 'Intent', ob1: 'Objection' },
+    'Español': { sum: 'Resumen', gar: 'Cuello de botella', obj: 'Objeción más común', next: 'Próxima acción sugerida', pri: 'Prioriza ahora', int: 'Intención', ob1: 'Objeción' },
+  };
+  const opps = [['Fernanda Castro', 'FC', '#8b5cff', 'Em Contato', 'R$ 7.200', 87, 'h', 2], ['Gabriela Nunes', 'GN', '#4f7cff', 'Consulta Agendada', 'R$ 4.500', 74, 'w', 1], ['Bruno Fernandes', 'BF', '#ff4f8b', 'Tentativa de Contato', 'R$ 9.800', 61, 'w', 9], ['Rodrigo Mendes', 'RM', '#ff4f8b', 'Em Contato', 'R$ 1.200', 42, 'c', 6]];
+  const lbl = (t) => `<span class="ia-lbl">${t}</span>`;
+  const box = (inner, cls = 'ia-sum') => `<div class="${cls}">${inner}</div>`;
+  function render() {
+    const m = modeOf(), t = T[segVal('lang')], prio = segVal('prio'), qtd = Math.max(1, Math.min(50, +$('ia-qtd').value || 10));
+    const foco = $('ia-foco').value.trim(), notes = $('ia-notes').checked;
+    const extra = [notes ? 'anotações internas incluídas' : null, foco ? `foco: “${foco}”` : null].filter(Boolean).join(' · ');
+    let order = [...opps];
+    if (prio === 'Parados') order.sort((a, b) => b[7] - a[7]); else if (prio === 'Mais recente') order.sort((a, b) => a[7] - b[7]); else order.sort((a, b) => parseFloat(b[4].replace(/\D/g, '')) - parseFloat(a[4].replace(/\D/g, '')));
+    const oppRow = o => `<div class="ia-opp"><span class="av" style="background:${o[2]}">${o[1]}</span><span><b>${o[0]}</b><small>${o[3]} · ${o[7]}d sem avançar</small></span><em>${o[4]}</em><span class="sc ${o[6]}">${o[5]}</span></div>`;
+    let h = '';
+    if (m === 'op') {
+      const name = $('ia-op').value, o = opps.find(x => x[0] === name);
+      const fc = name === 'Fernanda Castro';
+      h += `<div class="ia-top"><span class="av p">${o[1]}</span><div><b>${name}</b><small>${o[3]} · ${$('ia-msgs').value} mensagens analisadas</small></div><span class="chip">Score ${o[5]}/100</span></div>`;
+      h += box(`<div class="ia-score" style="padding:0;border:0;background:none"><div class="ia-ring" style="--v:${o[5]}"><b>${o[5]}</b></div><div><h4>${fc ? 'Lead quente · alta chance de fechar' : 'Lead morno · precisa de um empurrão'}</h4><p>${fc ? 'Pediu valores, comparou horários e perguntou sobre formas de pagamento.' : 'Agendou, mas não confirmou presença e demorou a responder.'}</p></div></div>`);
+      h += box(lbl(t.sum) + `<p>${fc ? 'Quer fazer clareamento antes de um casamento em 30 dias. Gostou da clínica pelo Instagram, achou o valor alto e perguntou se dá para parcelar.' : 'Quer avaliação para implante. Marcou consulta para sexta às 10h, mas ainda não confirmou e perguntou se pode remarcar.'}</p>`);
+      h += `<div class="ia-tags"><div class="ia-t w">${lbl(t.ob1)}<b>${fc ? 'Preço do tratamento' : 'Agenda apertada'}</b></div><div class="ia-t g">${lbl(t.int)}<b>${fc ? 'Agendar avaliação' : 'Manter a consulta'}</b></div></div>`;
+      h += `<div class="ia-next"><span>➜</span><p><b>${t.next}</b>${fc ? 'Enviar as condições de parcelamento e oferecer horário ainda nesta semana.' : 'Confirmar presença hoje e oferecer dois horários alternativos.'}</p></div>`;
+    } else if (m === 'etapa') {
+      const et = $('ia-etapa').value, list = order.filter(o => o[3] === et).concat(order.filter(o => o[3] !== et)).slice(0, 3);
+      h += `<div class="ia-top"><span class="av">≋</span><div><b>Etapa: ${et}</b><small>${Math.min(qtd, 6)} oportunidades · priorizado por ${prio.toLowerCase()}${extra ? ' · ' + extra : ''}</small></div><span class="chip">Funil ${$('ia-funil').value}</span></div>`;
+      h += box(lbl(t.sum) + `<p>Metade dos leads desta etapa recebeu a primeira resposta, mas não teve follow-up depois de 2 dias. Os que receberam proposta com valor e horário avançaram duas vezes mais rápido.</p>`);
+      h += `<div class="ia-tags"><div class="ia-t w">${lbl(t.obj)}<b>Valor sem parcelamento</b></div><div class="ia-t g">${lbl(t.gar)}<b>Follow-up após 48h</b></div></div>`;
+      h += box(lbl(t.pri) + `<div class="ia-opps" style="margin-top:10px">${list.map(oppRow).join('')}</div>`);
+      h += `<div class="ia-next"><span>➜</span><p><b>${t.next}</b>Ativar o follow-up automático de 48h nesta etapa e enviar o valor já com opção de parcelamento.</p></div>`;
+    } else {
+      h += `<div class="ia-top"><span class="av">⛉</span><div><b>Funil ${$('ia-funil').value} · visão completa</b><small>${qtd} oportunidades · priorizado por ${prio.toLowerCase()}${extra ? ' · ' + extra : ''}</small></div><span class="chip">Saúde do funil 64/100</span></div>`;
+      h += `<div class="ia-stage">${[['Novo Lead', 7], ['Tentativa', 5, 1], ['Em Contato', 6], ['Agendada', 5], ['Confirmada', 3]].map(([n, v, bad]) => `<div class="${bad ? 'bad' : ''}"><span>${n}</span><b>${v}</b>${bad ? '<span>gargalo</span>' : ''}</div>`).join('')}</div>`;
+      h += box(lbl(t.sum) + `<p>Os leads chegam bem pelo tráfego pago, mas 4 em cada 10 param em Tentativa de Contato sem um segundo contato. Quem chega a Em Contato tem boa chance de agendar.</p>`);
+      h += box(lbl(t.pri) + `<div class="ia-opps" style="margin-top:10px">${order.slice(0, 3).map(oppRow).join('')}</div>`);
+      h += `<div class="ia-next"><span>➜</span><p><b>${t.next}</b>Retomar hoje os 3 leads acima e criar uma cadência de 3 mensagens para quem não respondeu em Tentativa de Contato.</p></div>`;
+    }
+    iaRes.innerHTML = h; iaRes.classList.remove('in'); void iaRes.offsetWidth; iaRes.classList.add('in');
+  }
+  iaRun.addEventListener('click', () => {
+    const m = modeOf();
+    $('ia-load-t').textContent = m === 'op' ? `Lendo ${$('ia-msgs').value} mensagens de ${$('ia-op').value}` : `Lendo ${Math.max(1, Math.min(50, +$('ia-qtd').value || 10))} oportunidades`;
+    iaRun.disabled = true; iaLoad.hidden = false;
+    const lb = iaLoad.querySelector('.ia-lbar i'); lb.style.animation = 'none'; void lb.offsetWidth; lb.style.animation = '';
+    setTimeout(() => { render(); iaLoad.hidden = true; iaRun.disabled = false; }, reduce ? 0 : 1800);
+  });
+  render();
+
+  // ---------- S7 FAQ: um aberto por vez ----------
+  const dets = [...document.querySelectorAll('.faq details')];
+  dets.forEach(d => d.addEventListener('toggle', () => { if (d.open) dets.forEach(o => o !== d && (o.open = false)); }));
+
+  // ---------- S8 relógio ----------
+  const clock = $('cta-clock'), start = Date.now();
+  setInterval(() => { const s = Math.floor((Date.now() - start) / 1000); clock.textContent = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); }, 1000);
+})();
+</script>
+<script>
+/* Popup "Fale conosco": abre pelos CTAs da página e pelo botão flutuante. */
+(() => {
+  const fc = document.getElementById('fc'), fab = document.getElementById('fc-fab');
+  if (!fc) return;
+  let last = null;
+  const open = trigger => {
+    last = trigger || document.activeElement;
+    fc.hidden = false; fc.classList.remove('closing');
+    document.documentElement.style.overflow = 'hidden';
+    fc.querySelector('.fc-opt').focus();
+  };
+  const close = () => {
+    fc.classList.add('closing');
+    setTimeout(() => { fc.hidden = true; fc.classList.remove('closing'); document.documentElement.style.overflow = ''; last && last.focus && last.focus(); }, 240);
+  };
+  document.querySelectorAll('a[href="#demo"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); open(a); }));
+  fab.addEventListener('click', () => open(fab));
+  fc.addEventListener('click', e => { if (e.target.closest('[data-close]')) close(); });
+  document.addEventListener('keydown', e => {
+    if (fc.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'Tab') { // mantém o foco dentro do popup
+      const f = [...fc.querySelectorAll('a,button')], i = f.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+    }
+  });
+})();
+</script><script>
+/* Teia digital: nós em deriva, conexões por proximidade, pacotes de dados correndo pelas linhas
+   e atração suave ao cursor. Pausa fora da tela; estático com prefers-reduced-motion. */
+(() => {
+  const cv = document.getElementById('web'); if (!cv) return;
+  const hero = cv.parentElement, ctx = cv.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const VIOLET = [124, 92, 255], CYAN = [63, 224, 255];
+  let W = 0, H = 0, dpr = 1, nodes = [], packets = [], LINK = 150, raf = 0, visible = true;
+  const mouse = { x: -9999, y: -9999, on: false };
+
+  function build() {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    W = hero.clientWidth; H = hero.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    LINK = Math.max(110, Math.min(170, W / 9));
+    const weak = W < 700 || (navigator.hardwareConcurrency || 8) <= 4;
+    const n = Math.min(weak ? 55 : 150, Math.round((W * H) / (weak ? 16000 : 11000)));
+    nodes = Array.from({ length: n }, () => {
+      const hub = Math.random() < 0.12;
+      return { x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .28, vy: (Math.random() - .5) * .28,
+               r: hub ? 2.4 : 1.2 + Math.random() * .8, hub, ph: Math.random() * 6.28 };
+    });
+    packets = [];
+  }
+
+  function mix(t) { return VIOLET.map((v, i) => Math.round(v + (CYAN[i] - v) * t)); }
+
+  function frame(t) {
+    ctx.clearRect(0, 0, W, H);
+    const L2 = LINK * LINK;
+
+    // movimento + atração ao cursor
+    for (const p of nodes) {
+      if (!reduce) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < -20) p.x = W + 20; if (p.x > W + 20) p.x = -20;
+        if (p.y < -20) p.y = H + 20; if (p.y > H + 20) p.y = -20;
+        if (mouse.on) {
+          const dx = mouse.x - p.x, dy = mouse.y - p.y, d = Math.hypot(dx, dy);
+          if (d < 220 && d > 1) { p.x += dx / d * .35; p.y += dy / d * .35; }
+        }
+      }
+    }
+
+    // conexões
+    ctx.lineWidth = 1;
+    const links = [];
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j], dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
+        if (d2 > L2) continue;
+        const k = 1 - d2 / L2;
+        // perto do cursor as linhas acendem em ciano
+        let near = 0;
+        if (mouse.on) {
+          const mx = (a.x + b.x) / 2 - mouse.x, my = (a.y + b.y) / 2 - mouse.y;
+          near = Math.max(0, 1 - Math.hypot(mx, my) / 240);
+        }
+        const c = mix(near);
+        ctx.strokeStyle = `rgba(${c[0]},${c[1]},${c[2]},${(.06 + .32 * k) * (1 + near * 1.6)})`;
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        if (k > .35) links.push([a, b]);
+      }
+    }
+
+    // linhas do cursor para os nós próximos
+    if (mouse.on) {
+      for (const p of nodes) {
+        const d = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+        if (d < 180) {
+          ctx.strokeStyle = `rgba(63,224,255,${.45 * (1 - d / 180)})`;
+          ctx.beginPath(); ctx.moveTo(mouse.x, mouse.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+        }
+      }
+    }
+
+    // pacotes de dados correndo pela teia
+    if (!reduce && links.length && packets.length < 28 && Math.random() < .25) {
+      const [a, b] = links[(Math.random() * links.length) | 0];
+      packets.push(Math.random() < .5 ? { a, b, t: 0, s: .012 + Math.random() * .018 } : { a: b, b: a, t: 0, s: .012 + Math.random() * .018 });
+    }
+    ctx.globalCompositeOperation = 'lighter';
+    for (let i = packets.length - 1; i >= 0; i--) {
+      const q = packets[i]; q.t += q.s;
+      if (q.t >= 1) { q.b.flash = 1; packets.splice(i, 1); continue; }
+      const x = q.a.x + (q.b.x - q.a.x) * q.t, y = q.a.y + (q.b.y - q.a.y) * q.t;
+      const tx = q.a.x + (q.b.x - q.a.x) * Math.max(0, q.t - .18), ty = q.a.y + (q.b.y - q.a.y) * Math.max(0, q.t - .18);
+      const g = ctx.createLinearGradient(tx, ty, x, y);
+      g.addColorStop(0, 'rgba(63,224,255,0)'); g.addColorStop(1, 'rgba(160,240,255,.9)');
+      ctx.strokeStyle = g; ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(x, y); ctx.stroke();
+      ctx.fillStyle = 'rgba(220,250,255,.95)';
+      ctx.beginPath(); ctx.arc(x, y, 1.6, 0, 6.283); ctx.fill();
+    }
+
+    // nós (hubs pulsam; nós que recebem pacote piscam)
+    for (const p of nodes) {
+      const pulse = p.hub ? .5 + .5 * Math.sin(t / 700 + p.ph) : 0;
+      const f = p.flash || 0;
+      const rad = p.r + pulse * 1.2 + f * 2.5;
+      if (p.hub || f > .05) {
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad * 7);
+        g.addColorStop(0, f > .05 ? `rgba(63,224,255,${.5 * f + .15})` : `rgba(124,92,255,${.25 + .2 * pulse})`);
+        g.addColorStop(1, 'rgba(124,92,255,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, rad * 7, 0, 6.283); ctx.fill();
+      }
+      const c = mix(Math.min(1, f + (p.hub ? .2 : 0)));
+      ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${p.hub ? .95 : .7})`;
+      ctx.beginPath(); ctx.arc(p.x, p.y, rad, 0, 6.283); ctx.fill();
+      if (f) p.flash = f > .02 ? f * .92 : 0;
+    }
+    ctx.globalCompositeOperation = 'source-over';
+
+    if (!reduce && visible) raf = requestAnimationFrame(frame);
+  }
+
+  hero.addEventListener('mousemove', e => { const r = hero.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; mouse.on = true; });
+  hero.addEventListener('mouseleave', () => { mouse.on = false; });
+  new IntersectionObserver(([en]) => {
+    visible = en.isIntersecting;
+    cancelAnimationFrame(raf);
+    if (visible) raf = requestAnimationFrame(frame);
+  }).observe(hero);
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { build(); if (reduce) frame(0); }, 150); });
+  build(); raf = requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
