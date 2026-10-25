@@ -192,7 +192,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @keyframes marq{to{transform:translateX(-50%)}}
 
 /* SECTIONS */
-section.block{padding-block:120px}
+section.block{padding-block:90px}
 .head{max-width:760px}
 .head h2{font-size:clamp(36px,5.4vw,64px);font-weight:600;margin-top:16px;line-height:1.02}
 .head p{margin-top:20px;font-size:18px;color:var(--muted);max-width:620px}
@@ -426,7 +426,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
 
 <style>
 /* ===== LP v2 ===== */
-.sec{padding-block:110px}
+.sec{padding-block:50px}
 .sec-head{max-width:760px;margin:0 auto;text-align:center}
 .sec-head h2{font-size:clamp(34px,5vw,58px);font-weight:600;margin-top:14px;line-height:1.03}
 .sec-head p{margin:18px auto 0;font-size:18px;color:var(--muted);max-width:620px}
@@ -642,21 +642,23 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
 @keyframes nexGlitch{0%,86%,100%{transform:none;opacity:0}88%{transform:translate(-3px,-1px);opacity:.7}90%{transform:translate(3px,1px);clip-path:inset(40% 0 30% 0);opacity:.6}92%{transform:translate(-1px,0);clip-path:inset(70% 0 5% 0);opacity:.5}}
 @media (prefers-reduced-motion:reduce){.nex-tech,.nex-tech::before{animation:none}}
 /* S4 estrutura (fotos) */
-.ph-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:210px;gap:14px;margin-top:56px}
+.ph-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:434px;gap:14px;margin-top:56px}
 .ph{position:relative;overflow:hidden;border-radius:22px;border:1px dashed rgba(160,130,255,.45);background:radial-gradient(120% 100% at 0% 0%,rgba(91,43,255,.35),transparent 60%),repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 12px,transparent 12px 24px),#0f0a26;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;transition:transform .5s var(--ease),border-color .4s}
 .ph:hover{transform:translateY(-4px);border-color:rgba(160,130,255,.9)}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ph .cam{position:absolute;top:18px;right:18px;font:500 10.5px var(--f-mono);letter-spacing:.1em;color:#9d8fd6;text-transform:uppercase}
 .ph b{position:relative;font:600 19px var(--f-display);letter-spacing:-.02em}
 .ph span{position:relative;font-size:13.5px;color:#c9c0ef;margin-top:4px}
-.ph.big{grid-column:span 2;grid-row:span 2}
+.ph.big{grid-column:auto;grid-row:auto}
 .ph.has-img{border-style:solid;border-color:rgba(160,130,255,.5)}
 .ph.has-img img{object-position:50% 45%;transition:transform .8s var(--ease)}
 .ph.has-img:hover img{transform:scale(1.04)}
 .ph.has-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,6,28,.92) 0%,rgba(10,6,28,.35) 40%,transparent 65%)}
-.ph.has-img b,.ph.has-img span{z-index:1}.ph.wide{grid-column:span 2}
-@media(max-width:900px){.ph-grid{grid-template-columns:1fr 1fr;grid-auto-rows:180px}.ph.big{grid-column:1/-1;grid-row:span 2}}
-@media(max-width:520px){.ph-grid{grid-template-columns:1fr}.ph.wide{grid-column:auto}}
+.ph.has-img b,.ph.has-img span{z-index:1}.ph.wide{grid-column:auto}
+.ph.slides img+img{opacity:0;animation:phfade 10s ease-in-out infinite}
+@keyframes phfade{0%,40%{opacity:0}50%,90%{opacity:1}100%{opacity:0}}
+@media(max-width:900px){.ph-grid{grid-auto-rows:380px}}
+@media(max-width:620px){.ph-grid{grid-template-columns:1fr;grid-auto-rows:340px}}
 
 /* S5 planos */
 .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:60px;align-items:stretch}
@@ -745,7 +747,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
 .faq details[open] .ans{animation:rise .45s var(--ease) both}
 
 /* S8 CTA */
-.cta2{position:relative;isolation:isolate;overflow:hidden;border-radius:36px;margin-block:20px 110px;padding:100px 24px;text-align:center;border:1px solid rgba(91,43,255,.55)}
+.cta2{position:relative;isolation:isolate;overflow:hidden;border-radius:36px;margin-block:20px 50px;padding:100px 24px;text-align:center;border:1px solid rgba(91,43,255,.55)}
 .cta2::before{content:"";position:absolute;inset:-50%;z-index:-2;background:conic-gradient(from 0deg,transparent 0 70%,rgba(124,92,255,.9),rgba(47,211,255,.7),transparent 95%);animation:spin 9s linear infinite}
 .cta2::after{content:"";position:absolute;inset:1px;z-index:-1;border-radius:35px;background:radial-gradient(ellipse at 50% 120%,rgba(122,92,255,.55),transparent 60%),linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f)}
 .cta2 .big{font:700 clamp(64px,11vw,140px)/1 var(--f-display);letter-spacing:-.05em;background:linear-gradient(180deg,#fff,#a78bff);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
@@ -914,7 +916,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
       <h2>Por trás do sistema, um time inteiro cuidando do seu comercial.</h2>
       <p>A NEX é um produto da Conexão. Você conta com sala operacional, suporte próprio e especialistas que acompanham sua operação de perto.</p>
     </div>
-    <div class="ph-grid"><figure class="ph big has-img" style="margin:0"><img src="sala-operacional.webp" alt="Time da Conexão trabalhando na sala operacional, com a frase Juntos somos um! na parede" loading="lazy" decoding="async" width="1200" height="1600"><b>Sala operacional</b><span>Onde o time acompanha cada cliente em tempo real</span></figure><figure class="ph  has-img" style="margin:0"><img src="time-trafego.webp" alt="Gestor de tráfego da Conexão trabalhando no computador, com a marca Conexão na TV ao fundo" loading="lazy" decoding="async" style="object-position:40% 35%"><b>Time de tráfego</b><span>Campanhas no Meta e no Google</span></figure><figure class="ph  has-img" style="margin:0"><img src="suporte-nex.webp" alt="Celular com o NEX aberto num suporte de mesa, com o quadro de tarefas da equipe ao fundo" loading="lazy" decoding="async" style="object-position:50% 42%"><b>Suporte NEX</b><span>Atendimento a quem já é cliente</span></figure><figure class="ph wide has-img" style="margin:0"><img src="alinhamento-nex.webp" alt="Reunião de alinhamento da equipe NEX na sala da Conexão" loading="lazy" decoding="async" style="object-position:50% 62%"><b>Equipe especializada</b><span>Briefing, estratégia e configuração do seu agente</span></figure></div>
+    <div class="ph-grid"><figure class="ph big slides has-img" style="margin:0"><img src="suporte-nex-sala.webp" alt="Time da Conexão trabalhando na sala de suporte, com a frase Juntos somos um! na parede" loading="lazy" decoding="async" width="1200" height="1600" style="object-position:50% 55%"><img src="alinhamento-nex.webp" alt="Sala de suporte da Conexão, com mesa de mármore e monitor" loading="lazy" decoding="async" width="720" height="1280" style="object-position:50% 60%"><b>Suporte NEX</b><span>Atendimento a quem já é cliente</span></figure><figure class="ph wide slides has-img" style="margin:0"><img src="equipe-especializada.webp" alt="Equipe especializada da Conexão em reunião de alinhamento na sala, ao redor da mesa de mármore" loading="lazy" decoding="async" width="1200" height="1600" style="object-position:50% 60%"><img src="suporte-nex.webp" alt="Profissional da Conexão trabalhando no notebook" loading="lazy" decoding="async" width="720" height="1280" style="object-position:50% 55%"><b>Equipe especializada</b><span>Briefing, estratégia e configuração do seu agente</span></figure></div>
   </div>
 </section>
 <section class="sec" id="planos" style="padding-top:40px">
