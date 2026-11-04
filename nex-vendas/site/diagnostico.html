@@ -355,6 +355,19 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
 </div>
 
 <script>
+/* Meta Pixel "NEX CRM": só carrega se o visitante aceitou os cookies de marketing no site (mesma escolha salva pela página inicial). */
+(() => {
+  const PIXEL = '4820743728147875';
+  let ok = false;
+  try { ok = !!(JSON.parse(localStorage.getItem('nex-cookie-consent-v1') || 'null') || {}).marketing; } catch (e) {}
+  if (ok) {
+    !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', PIXEL); fbq('track', 'PageView');
+  }
+  window.nexTrack = (name, params) => { try { if (ok && window.fbq) fbq('track', name, params || {}); } catch (e) {} };
+})();
+</script>
+<script>
 (() => {
   const WA = '5587991302323';
   const form = document.getElementById('form');
@@ -431,7 +444,7 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
   form.addEventListener('submit', e => {
     e.preventDefault();
     if (!validate(cur)) return;
-    cur++; if (cur > TOTAL) renderResult();
+    cur++; if (cur > TOTAL) { renderResult(); window.nexTrack('Lead', { content_name: 'Diagnóstico comercial' }); }
     show(cur); save();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -533,6 +546,7 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
     try { navigator.clipboard.writeText(summary).then(ok, fallback); } catch (e) { fallback(); }
   });
 
+  $('r-wa').addEventListener('click', () => window.nexTrack('Contact', { content_name: 'Diagnóstico no WhatsApp' }));
   document.querySelectorAll('[data-back]').forEach(a => a.addEventListener('click', e => { if (history.length > 1) { e.preventDefault(); history.back(); } }));
   restore(); show(cur);
 })();
