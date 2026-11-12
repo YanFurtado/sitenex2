@@ -421,6 +421,9 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
 @media (hover:none){.card::before,.card::after{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
+<link rel="stylesheet" href="nex-cookies.css?v=1">
+<!-- Meta Pixel (ID e eventos centralizados em nex-pixel.js; só carrega com consentimento de marketing) -->
+<script src="nex-pixel.js?v=1"></script>
 </head>
 <body>
 
@@ -805,8 +808,8 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
       <div class="h2-ok" id="lead-ok" hidden>
         <b id="lead-ok-t">Pronto!</b>
         <p>Toque no botão para enviar seus dados no WhatsApp. Nosso time responde das 8h às 18h.</p>
-        <a class="btn btn-wa" id="lead-wa" href="https://wa.me/5587988578910" target="_blank" rel="noopener">Enviar no WhatsApp →</a>
-        <a class="alt" href="diagnostico.html">Ou faça o diagnóstico completo do seu comercial →</a>
+        <a class="btn btn-wa" id="lead-wa" data-meta-event="Contact" data-meta-name="WhatsApp (formulário do topo)" href="https://wa.me/5587988578910" target="_blank" rel="noopener">Enviar no WhatsApp →</a>
+        <a class="alt" href="diagnostico.html" data-meta-event="ViewContent" data-meta-name="Diagnóstico comercial">Ou faça o diagnóstico completo do seu comercial →</a>
       </div>
     </div>
   </div>
@@ -932,7 +935,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
   <p class="pc-desc">CRM completo, WhatsApp por QR Code e automações para o time vender organizado.</p>
   <div class="pc-price"><small>R$</small>597,00<span>/mês</span></div>
   <div class="pc-chips"><span>400 créditos/mês</span><span>2 conexões</span><span>1 usuário</span></div>
-  <a class="pc-btn" href="https://wa.me/5587988578910?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20assinar%20o%20plano%20Gold%20da%20NEX." target="_blank" rel="noopener">Assinar Gold</a>
+  <a class="pc-btn" data-meta-event="InitiateCheckout" data-meta-name="Plano Gold" data-meta-value="597" href="https://wa.me/5587988578910?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20assinar%20o%20plano%20Gold%20da%20NEX." target="_blank" rel="noopener">Assinar Gold</a>
   <ul class="pc-list"><li class="">2.500 leads no funil</li><li class="">CRM completo com funil visual</li><li class="">WhatsApp por QR Code</li><li class="">Automações com gatilhos, botões e menus</li><li class="">Agente de IA 24/7, com áudio e imagem</li><li class="">Análise com IA do funil e de cada lead</li><li class="off">WhatsApp API Oficial e campanhas por template</li><li class="off">Instagram, Messenger, Telegram e outros canais</li><li class="off">Meta Ads com a origem do lead</li><li class="off">API de leads, n8n e ManyChat</li><li class="off">Onboarding assistido e suporte prioritário</li></ul>
   <details class="pc-more"><summary><span class="o">Ver a lista completa</span><span class="c">Fechar a lista completa</span></summary><div class="pc-full"><div class="pc-cat"><h5>Comercial · CRM</h5><ul><li class="">Painéis prontos e painel personalizado</li><li class="">Vários funis, em quadro ou lista</li><li class="">Ficha do lead com campos personalizados e histórico</li><li class="">Rastreio do lead (UTM e anúncio)</li><li class="">Agenda com atividades e lembrete ao lead</li><li class="">Equipe: chat interno e tarefas</li><li class="">Cargos e permissões por pessoa</li><li class="">Importar de outro CRM (Kommo, Pipedrive, RD Station, HubSpot, CSV)</li><li class="">Relatórios e leads em CSV e PDF</li></ul></div><div class="pc-cat"><h5>Atendimento</h5><ul><li class="">WhatsApp por QR Code, com proteção do número</li><li class="">Conversas com filtros, respostas rápidas e anotação interna</li><li class="">Grupos do WhatsApp com @menção</li><li class="">Mensagem programada para o lead</li><li class="off">WhatsApp API Oficial com templates aprovados</li><li class="off">Campanhas por template, com público e agendamento</li><li class="off">Mensagens recorrentes</li><li class="off">Instagram Direct e Facebook Messenger</li><li class="off">Telegram, X, Bluesky, Reddit, TikTok e Google Business</li></ul></div><div class="pc-cat"><h5>Automações</h5><ul><li class="">Editor em texto e em canvas, com templates prontos</li><li class="">Gatilhos de lead, mensagem, etapa e tempo sem resposta</li><li class="">Botões, menus, perguntas, Se/Senão e esperas</li><li class="">Fila de envio, horário comercial e execuções</li></ul></div><div class="pc-cat"><h5>Inteligência Artificial</h5><ul><li class="">Agente de IA 24/7 no WhatsApp</li><li class="">Agente que marca horário, move etapa e passa ao humano</li><li class="">Transcrição de áudio e leitura de imagem</li><li class="">Análise com IA do funil e das oportunidades</li><li class="">Análise do lead na ficha (resumo e temperatura)</li></ul></div><div class="pc-cat"><h5>Integrações</h5><ul><li class="">Google Agenda</li><li class="off">Meta Ads (Lead Ads) com a origem marcada</li><li class="off">Feegow e eBrain (agenda de clínica)</li><li class="off">API de leads</li><li class="off">n8n e ManyChat</li><li class="off">Importar o histórico das conexões</li></ul></div><div class="pc-cat"><h5>Suporte</h5><ul><li class="">Suporte pelo botão, com a equipe NEX</li><li class="off">Migração de outro sistema e onboarding assistido</li><li class="off">Suporte prioritário</li></ul></div></div></details>
 </article><article class="pc hot rv">
@@ -941,7 +944,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
   <p class="pc-desc">Agente de IA 24/7, WhatsApp oficial e todos os canais no mesmo chat.</p>
   <div class="pc-price"><small>R$</small>897,00<span>/mês</span></div>
   <div class="pc-chips"><span>700 créditos/mês</span><span>5 conexões</span><span>3 usuários</span></div>
-  <a class="pc-btn" href="https://wa.me/5587988578910?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20assinar%20o%20plano%20Platinum%20da%20NEX." target="_blank" rel="noopener">Assinar Platinum</a>
+  <a class="pc-btn" data-meta-event="InitiateCheckout" data-meta-name="Plano Platinum" data-meta-value="897" href="https://wa.me/5587988578910?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20assinar%20o%20plano%20Platinum%20da%20NEX." target="_blank" rel="noopener">Assinar Platinum</a>
   <ul class="pc-list"><li class="">15.000 leads no funil</li><li class="">CRM completo com funil visual</li><li class="">WhatsApp por QR Code</li><li class="">Automações com gatilhos, botões e menus</li><li class="">WhatsApp API Oficial e campanhas por template</li><li class="">Instagram, Messenger, Telegram e outros canais</li><li class="">Agente de IA 24/7, com áudio e imagem</li><li class="">Análise com IA do funil e de cada lead</li><li class="">Meta Ads com a origem do lead</li><li class="off">API de leads, n8n e ManyChat</li><li class="off">Onboarding assistido e suporte prioritário</li></ul>
   <details class="pc-more"><summary><span class="o">Ver a lista completa</span><span class="c">Fechar a lista completa</span></summary><div class="pc-full"><div class="pc-cat"><h5>Comercial · CRM</h5><ul><li class="">Painéis prontos e painel personalizado</li><li class="">Vários funis, em quadro ou lista</li><li class="">Ficha do lead com campos personalizados e histórico</li><li class="">Rastreio do lead (UTM e anúncio)</li><li class="">Agenda com atividades e lembrete ao lead</li><li class="">Equipe: chat interno e tarefas</li><li class="">Cargos e permissões por pessoa</li><li class="">Importar de outro CRM (Kommo, Pipedrive, RD Station, HubSpot, CSV)</li><li class="">Relatórios e leads em CSV e PDF</li></ul></div><div class="pc-cat"><h5>Atendimento</h5><ul><li class="">WhatsApp por QR Code, com proteção do número</li><li class="">Conversas com filtros, respostas rápidas e anotação interna</li><li class="">Grupos do WhatsApp com @menção</li><li class="">Mensagem programada para o lead</li><li class="">WhatsApp API Oficial com templates aprovados</li><li class="">Campanhas por template, com público e agendamento</li><li class="">Mensagens recorrentes</li><li class="">Instagram Direct e Facebook Messenger</li><li class="">Telegram, X, Bluesky, Reddit, TikTok e Google Business</li></ul></div><div class="pc-cat"><h5>Automações</h5><ul><li class="">Editor em texto e em canvas, com templates prontos</li><li class="">Gatilhos de lead, mensagem, etapa e tempo sem resposta</li><li class="">Botões, menus, perguntas, Se/Senão e esperas</li><li class="">Fila de envio, horário comercial e execuções</li></ul></div><div class="pc-cat"><h5>Inteligência Artificial</h5><ul><li class="">Agente de IA 24/7 no WhatsApp</li><li class="">Agente que marca horário, move etapa e passa ao humano</li><li class="">Transcrição de áudio e leitura de imagem</li><li class="">Análise com IA do funil e das oportunidades</li><li class="">Análise do lead na ficha (resumo e temperatura)</li></ul></div><div class="pc-cat"><h5>Integrações</h5><ul><li class="">Google Agenda</li><li class="">Meta Ads (Lead Ads) com a origem marcada</li><li class="">Feegow e eBrain (agenda de clínica)</li><li class="off">API de leads</li><li class="off">n8n e ManyChat</li><li class="off">Importar o histórico das conexões</li></ul></div><div class="pc-cat"><h5>Suporte</h5><ul><li class="">Suporte pelo botão, com a equipe NEX</li><li class="off">Migração de outro sistema e onboarding assistido</li><li class="off">Suporte prioritário</li></ul></div></div></details>
 </article><article class="pc rv">
@@ -950,7 +953,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
   <p class="pc-desc">Tudo integrado: API, n8n, ManyChat e o histórico das conexões, com onboarding assistido.</p>
   <div class="pc-price"><small>R$</small>1.297,00<span>/mês</span></div>
   <div class="pc-chips"><span>1.000 créditos/mês</span><span>10 conexões</span><span>5 usuários</span></div>
-  <a class="pc-btn" href="https://wa.me/5587988578910?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20assinar%20o%20plano%20Black%20da%20NEX." target="_blank" rel="noopener">Assinar Black</a>
+  <a class="pc-btn" data-meta-event="InitiateCheckout" data-meta-name="Plano Black" data-meta-value="1297" href="https://wa.me/5587988578910?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20assinar%20o%20plano%20Black%20da%20NEX." target="_blank" rel="noopener">Assinar Black</a>
   <ul class="pc-list"><li class="">50.000 leads no funil</li><li class="">CRM completo com funil visual</li><li class="">WhatsApp por QR Code</li><li class="">Automações com gatilhos, botões e menus</li><li class="">WhatsApp API Oficial e campanhas por template</li><li class="">Instagram, Messenger, Telegram e outros canais</li><li class="">Agente de IA 24/7, com áudio e imagem</li><li class="">Análise com IA do funil e de cada lead</li><li class="">Meta Ads com a origem do lead</li><li class="">API de leads, n8n e ManyChat</li><li class="">Onboarding assistido e suporte prioritário</li></ul>
   <details class="pc-more"><summary><span class="o">Ver a lista completa</span><span class="c">Fechar a lista completa</span></summary><div class="pc-full"><div class="pc-cat"><h5>Comercial · CRM</h5><ul><li class="">Painéis prontos e painel personalizado</li><li class="">Vários funis, em quadro ou lista</li><li class="">Ficha do lead com campos personalizados e histórico</li><li class="">Rastreio do lead (UTM e anúncio)</li><li class="">Agenda com atividades e lembrete ao lead</li><li class="">Equipe: chat interno e tarefas</li><li class="">Cargos e permissões por pessoa</li><li class="">Importar de outro CRM (Kommo, Pipedrive, RD Station, HubSpot, CSV)</li><li class="">Relatórios e leads em CSV e PDF</li></ul></div><div class="pc-cat"><h5>Atendimento</h5><ul><li class="">WhatsApp por QR Code, com proteção do número</li><li class="">Conversas com filtros, respostas rápidas e anotação interna</li><li class="">Grupos do WhatsApp com @menção</li><li class="">Mensagem programada para o lead</li><li class="">WhatsApp API Oficial com templates aprovados</li><li class="">Campanhas por template, com público e agendamento</li><li class="">Mensagens recorrentes</li><li class="">Instagram Direct e Facebook Messenger</li><li class="">Telegram, X, Bluesky, Reddit, TikTok e Google Business</li></ul></div><div class="pc-cat"><h5>Automações</h5><ul><li class="">Editor em texto e em canvas, com templates prontos</li><li class="">Gatilhos de lead, mensagem, etapa e tempo sem resposta</li><li class="">Botões, menus, perguntas, Se/Senão e esperas</li><li class="">Fila de envio, horário comercial e execuções</li></ul></div><div class="pc-cat"><h5>Inteligência Artificial</h5><ul><li class="">Agente de IA 24/7 no WhatsApp</li><li class="">Agente que marca horário, move etapa e passa ao humano</li><li class="">Transcrição de áudio e leitura de imagem</li><li class="">Análise com IA do funil e das oportunidades</li><li class="">Análise do lead na ficha (resumo e temperatura)</li></ul></div><div class="pc-cat"><h5>Integrações</h5><ul><li class="">Google Agenda</li><li class="">Meta Ads (Lead Ads) com a origem marcada</li><li class="">Feegow e eBrain (agenda de clínica)</li><li class="">API de leads</li><li class="">n8n e ManyChat</li><li class="">Importar o histórico das conexões</li></ul></div><div class="pc-cat"><h5>Suporte</h5><ul><li class="">Suporte pelo botão, com a equipe NEX</li><li class="">Migração de outro sistema e onboarding assistido</li><li class="">Suporte prioritário</li></ul></div></div></details>
 </article></div>
@@ -970,7 +973,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
       <div class="map rv" aria-label="Mapa com a localização da NEX em Petrolina, PE">
         <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="82" y="85" width="58" height="45" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="284" y="70" width="82" height="47" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="285" y="361" width="56" height="42" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="905" y="194" width="44" height="29" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="180" y="77" width="44" height="34" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="496" y="301" width="41" height="36" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="4" y="74" width="56" height="54" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="624" y="289" width="50" height="28" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="879" y="263" width="90" height="59" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="692" y="378" width="33" height="49" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="817" y="286" width="55" height="45" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="403" y="53" width="60" height="60" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="63" y="97" width="34" height="33" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="166" y="56" width="51" height="58" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="104" y="0" width="66" height="29" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="103" y="186" width="69" height="21" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="895" y="106" width="69" height="44" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="649" y="129" width="52" height="58" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="485" y="62" width="37" height="51" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="491" y="247" width="49" height="25" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="104" y="383" width="51" height="36" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="848" y="354" width="40" height="53" rx="6" fill="rgba(91,43,255,0.05)"/><rect x="210" y="270" width="53" height="29" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="556" y="13" width="78" height="53" rx="6" fill="rgba(91,43,255,0.08)"/><rect x="658" y="46" width="74" height="36" rx="6" fill="rgba(91,43,255,0.12)"/><rect x="375" y="85" width="52" height="34" rx="6" fill="rgba(91,43,255,0.12)"/><path d="M-20 331 Q 277 352 1020 354" stroke="rgba(160,130,255,0.1)" stroke-width="1.5" fill="none"/><path d="M-20 548 Q 248 561 1020 562" stroke="rgba(160,130,255,0.1)" stroke-width="4" fill="none"/><path d="M-20 219 Q 219 161 1020 214" stroke="rgba(160,130,255,0.14)" stroke-width="1.5" fill="none"/><path d="M-20 246 Q 246 307 1020 240" stroke="rgba(160,130,255,0.1)" stroke-width="4" fill="none"/><path d="M-20 126 Q 314 206 1020 140" stroke="rgba(160,130,255,0.1)" stroke-width="4" fill="none"/><path d="M-20 599 Q 403 531 1020 567" stroke="rgba(160,130,255,0.1)" stroke-width="4" fill="none"/><path d="M-20 136 Q 348 163 1020 94" stroke="rgba(160,130,255,0.2)" stroke-width="1.5" fill="none"/><path d="M-20 584 Q 357 647 1020 628" stroke="rgba(160,130,255,0.2)" stroke-width="1.5" fill="none"/><path d="M-20 105 Q 497 171 1020 126" stroke="rgba(160,130,255,0.1)" stroke-width="2" fill="none"/><path d="M-20 99 Q 480 35 1020 111" stroke="rgba(160,130,255,0.1)" stroke-width="4" fill="none"/><path d="M-20 210 Q 454 266 1020 204" stroke="rgba(160,130,255,0.14)" stroke-width="2" fill="none"/><path d="M-20 599 Q 432 611 1020 577" stroke="rgba(160,130,255,0.1)" stroke-width="1.5" fill="none"/><path d="M-20 249 Q 241 316 1020 227" stroke="rgba(160,130,255,0.2)" stroke-width="2" fill="none"/><path d="M-20 351 Q 429 344 1020 368" stroke="rgba(160,130,255,0.1)" stroke-width="1.5" fill="none"/><path d="M524 -20 Q 541 300 485 620" stroke="rgba(160,130,255,0.12)" stroke-width="1.5" fill="none"/><path d="M955 -20 Q 990 300 948 620" stroke="rgba(160,130,255,0.08)" stroke-width="3" fill="none"/><path d="M79 -20 Q 131 300 92 620" stroke="rgba(160,130,255,0.12)" stroke-width="2" fill="none"/><path d="M711 -20 Q 710 300 727 620" stroke="rgba(160,130,255,0.12)" stroke-width="3" fill="none"/><path d="M816 -20 Q 842 300 764 620" stroke="rgba(160,130,255,0.08)" stroke-width="2" fill="none"/><path d="M485 -20 Q 573 300 510 620" stroke="rgba(160,130,255,0.08)" stroke-width="1.5" fill="none"/><path d="M748 -20 Q 837 300 727 620" stroke="rgba(160,130,255,0.18)" stroke-width="3" fill="none"/><path d="M697 -20 Q 721 300 673 620" stroke="rgba(160,130,255,0.18)" stroke-width="2" fill="none"/><path d="M908 -20 Q 989 300 892 620" stroke="rgba(160,130,255,0.08)" stroke-width="2" fill="none"/><path d="M363 -20 Q 316 300 381 620" stroke="rgba(160,130,255,0.08)" stroke-width="2" fill="none"/><path d="M60 -20 Q 25 300 98 620" stroke="rgba(160,130,255,0.12)" stroke-width="1.5" fill="none"/><path d="M756 -20 Q 729 300 746 620" stroke="rgba(160,130,255,0.12)" stroke-width="2" fill="none"/><path d="M-20 520 C 200 470 330 560 520 500 S 820 430 1020 470 L1020 620 L-20 620 Z" fill="rgba(63,224,255,.08)"/><path d="M-20 520 C 200 470 330 560 520 500 S 820 430 1020 470" stroke="rgba(63,224,255,.35)" stroke-width="2" fill="none"/><text x="760" y="560" fill="rgba(63,224,255,.5)" font-size="16" font-family="JetBrains Mono, monospace" letter-spacing="3">RIO SÃO FRANCISCO</text></svg>
         <div class="pin"><i></i></div>
-        <div class="map-card"><div><b>NEX · Conexão Marketing e Tecnologia</b><span>Rua Manoel Clementino, 1002-1038, Sala 07, Centro, Petrolina (PE), CEP 56302-170</span></div><a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Rua+Manoel+Clementino+1002+Centro+Petrolina+PE+56302-170" target="_blank" rel="noopener">Como chegar →</a></div>
+        <div class="map-card"><div><b>NEX · Conexão Marketing e Tecnologia</b><span>Rua Manoel Clementino, 1002-1038, Sala 07, Centro, Petrolina (PE), CEP 56302-170</span></div><a class="btn btn-primary" data-meta-event="FindLocation" data-meta-name="Como chegar (Google Maps)" href="https://www.google.com/maps/search/?api=1&query=Rua+Manoel+Clementino+1002+Centro+Petrolina+PE+56302-170" target="_blank" rel="noopener">Como chegar →</a></div>
       </div>
       <div class="about purple-card rv">
         <span class="eyebrow">Sobre a NEX</span>
@@ -1024,7 +1027,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
       <h4>Redes sociais</h4>
       <div class="socials">
         <a href="https://www.instagram.com/nex_intelligence/" target="_blank" rel="noopener" aria-label="Instagram da NEX"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4.7a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-9.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg></a>
-        <a href="https://wa.me/5587988578910" target="_blank" rel="noopener" aria-label="WhatsApp da NEX: +55 87 98857-8910"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg></a>
+        <a href="https://wa.me/5587988578910" data-meta-event="Contact" data-meta-name="WhatsApp (rodapé)" target="_blank" rel="noopener" aria-label="WhatsApp da NEX: +55 87 98857-8910"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg></a>
       </div>
     </div>
   </div>
@@ -1065,125 +1068,8 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
 })();
 </script>
 
-<!-- COOKIES: banner + painel de preferências -->
-<style>
-.ck-bar{position:fixed;z-index:85;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(440px,calc(100% - 32px));padding:20px;border-radius:20px;border:1px solid rgba(139,92,246,.5);background:rgba(16,11,36,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 24px 70px -20px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.03);text-align:left;animation:ckIn .6s var(--ease) both}
-@keyframes ckIn{from{opacity:0;transform:translateY(20px)}}
-.ck-bar b{display:block;font:600 16px var(--f-display);letter-spacing:-.01em}
-.ck-bar p{margin-top:6px;font-size:13.5px;color:#c9c0ef;line-height:1.55}
-.ck-bar p a,.ck-panel a{color:#c4b5fd;text-decoration:underline;text-underline-offset:2px}
-.ck-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
-.ck-btn{padding:11px 12px;border-radius:12px;font:600 13.5px var(--f-body);cursor:pointer;border:1px solid rgba(139,92,246,.6);background:#7C3AED;color:#fff;transition:background .2s}
-.ck-btn:hover{background:#8B5CF6}
-.ck-link{margin-top:10px;background:none;border:0;padding:0;font:600 13px var(--f-body);color:#c4b5fd;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-.ck-modal{position:fixed;inset:0;z-index:95;display:grid;place-items:center;padding:20px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px))}
-.ck-modal[hidden],.ck-bar[hidden]{display:none!important}
-.ck-bg{position:absolute;inset:0;background:rgba(5,4,12,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.ck-panel{position:relative;width:min(540px,100%);max-height:calc(100vh - 40px);overflow:auto;border-radius:24px;padding:clamp(22px,4vw,30px);text-align:left;border:1px solid rgba(91,43,255,.6);background:linear-gradient(160deg,#1d0f4d,#120a33 55%,#0d0a1f);box-shadow:0 40px 120px -20px rgba(91,43,255,.7);animation:ckIn .45s var(--ease) both}
-.ck-panel h3{font-size:24px;font-weight:600;padding-right:40px}
-.ck-panel>p{margin-top:8px;font-size:14px;color:#c9c0ef}
-.ck-x{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(160,130,255,.35);background:rgba(255,255,255,.04);color:#fff;font-size:16px;cursor:pointer}
-.ck-cats{display:flex;flex-direction:column;gap:10px;margin-top:20px}
-.ck-cat{padding:14px 16px;border-radius:16px;border:1px solid rgba(160,130,255,.25);background:rgba(7,6,15,.5)}
-.ck-cat-hd{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.ck-cat-hd b{font-size:15px}
-.ck-cat p{margin-top:6px;font-size:13px;color:#b9b0e0;line-height:1.5}
-.ck-cat small{display:block;margin-top:6px;font:500 11px var(--f-mono);color:#8a80b8}
-.ck-always{font:600 11.5px var(--f-mono);color:#3ddc97;white-space:nowrap}
-.ck-sw{position:relative;flex:none;display:inline-flex;cursor:pointer}
-.ck-sw input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
-.ck-sw i{width:42px;height:24px;border-radius:99px;background:rgba(255,255,255,.15);position:relative;transition:background .25s}
-.ck-sw i::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .25s var(--ease)}
-.ck-sw input:checked+i{background:#7C3AED}.ck-sw input:checked+i::after{transform:translateX(18px)}
-.ck-sw input:focus-visible+i{outline:2px solid var(--accent-2);outline-offset:2px}
-.ck-acts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:20px}
-.ck-acts .ck-btn.ghost{background:transparent;color:#e4dcff;border-color:rgba(160,130,255,.4)}
-.ck-acts .ck-btn.ghost:hover{background:rgba(255,255,255,.06)}
-.ck-saved{margin-top:12px;font:500 12px var(--f-mono);color:#3ddc97;text-align:center}
-@media(max-width:520px){.ck-acts{grid-template-columns:1fr}.ck-row{grid-template-columns:1fr}}
-</style>
-<div class="ck-bar" id="ck-bar" role="region" aria-label="Aviso de cookies" hidden>
-  <b>Sua privacidade, sua escolha</b>
-  <p>Usamos cookies para o site funcionar e, com sua permissão, para medir os resultados dos nossos anúncios no Facebook e no Instagram. Saiba mais nos <a href="https://nexinteligence.com.br/termos" target="_blank" rel="noopener">Termos e Política</a>.</p>
-  <div class="ck-row"><button type="button" class="ck-btn" data-ck="all">Aceitar todos</button><button type="button" class="ck-btn" data-ck="none">Recusar opcionais</button></div>
-  <button type="button" class="ck-link" data-ck="open">Personalizar</button>
-</div>
-<div class="ck-modal" id="ck-modal" role="dialog" aria-modal="true" aria-labelledby="ck-title" hidden>
-  <div class="ck-bg" data-ck="close"></div>
-  <div class="ck-panel">
-    <button type="button" class="ck-x" data-ck="close" aria-label="Fechar">✕</button>
-    <span class="eyebrow">Preferências de cookies</span>
-    <h3 id="ck-title" style="margin-top:10px">Escolha o que podemos usar</h3>
-    <p>Você pode mudar estas escolhas quando quiser pelo link "Preferências de cookies", no rodapé.</p>
-    <div class="ck-cats">
-      <div class="ck-cat"><div class="ck-cat-hd"><b>Necessários</b><span class="ck-always">Sempre ativos</span></div><p>Fazem o site funcionar e guardam a sua escolha de cookies. Não podem ser desligados.</p><small>Preferência de consentimento · segurança</small></div>
-      <div class="ck-cat"><div class="ck-cat-hd"><b>Marketing</b><label class="ck-sw"><input type="checkbox" id="ck-mk" aria-label="Cookies de marketing"><i></i></label></div><p>Medem os resultados dos anúncios da NEX no Facebook e no Instagram e ajudam a mostrar anúncios mais relevantes.</p><small>Meta Pixel</small></div>
-    </div>
-    <div class="ck-acts"><button type="button" class="ck-btn ghost" data-ck="none">Recusar opcionais</button><button type="button" class="ck-btn ghost" data-ck="save">Salvar escolhas</button><button type="button" class="ck-btn" data-ck="all">Aceitar todos</button></div>
-    <p class="ck-saved" id="ck-saved" hidden>Preferências salvas.</p>
-  </div>
-</div>
-<script>
-/* Consentimento de cookies (LGPD).
-   Nenhuma tag opcional roda antes do aceite. Para ativar, preencha os IDs abaixo. */
-(() => {
-  const CFG = {
-    metaPixel: '4820743728147875'   // Pixel da Meta "NEX CRM"
-  };
-  const KEY = 'nex-cookie-consent-v1';
-  const $ = id => document.getElementById(id);
-  const bar = $('ck-bar'), modal = $('ck-modal'), mk = $('ck-mk');
-  const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } };
-  const write = c => { try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {} };
-  const loaded = {};
-  const addScript = src => { const s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); };
-  function apply(c) {
-    window.nexConsent = c;
-    if (c.marketing && CFG.metaPixel && !loaded.px) { loaded.px = 1;
-      !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', CFG.metaPixel); fbq('track', 'PageView'); }
-    document.dispatchEvent(new CustomEvent('nex:consent', { detail: c }));
-  }
-  function decide(c) {
-    c.date = new Date().toISOString(); write(c); apply(c);
-    bar.hidden = true;
-    if (!modal.hidden) { $('ck-saved').hidden = false; setTimeout(closePanel, 700); }
-  }
-  let last = null;
-  function openPanel(trigger) {
-    last = trigger || document.activeElement;
-    const c = read() || { marketing: false };
-    mk.checked = !!c.marketing; $('ck-saved').hidden = true;
-    modal.hidden = false; document.documentElement.style.overflow = 'hidden'; modal.querySelector('.ck-x').focus();
-  }
-  function closePanel() { modal.hidden = true; document.documentElement.style.overflow = ''; last && last.focus && last.focus(); }
-  document.addEventListener('click', e => {
-    const t = e.target.closest('[data-ck]'); if (!t) return;
-    const a = t.dataset.ck;
-    if (a === 'all') decide({ marketing: true });
-    else if (a === 'none') decide({ marketing: false });
-    else if (a === 'save') decide({ marketing: mk.checked });
-    else if (a === 'open') openPanel(t);
-    else if (a === 'close') closePanel();
-  });
-  document.querySelectorAll('a').forEach(l => { if (l.textContent.trim() === 'Preferências de cookies') { l.setAttribute('href', '#cookies'); l.setAttribute('role', 'button'); l.addEventListener('click', e => { e.preventDefault(); openPanel(l); }); } });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closePanel(); });
-
-  /* Eventos de conversão do Meta Pixel (só disparam com consentimento de marketing e Pixel carregado). */
-  const track = (name, params) => { try { if (window.nexConsent && window.nexConsent.marketing && window.fbq) fbq('track', name, params || {}); } catch (e) {} };
-  window.nexTrack = track;
-  document.addEventListener('click', e => {
-    const a = e.target.closest('a'); if (!a) return;
-    const h = a.getAttribute('href') || '';
-    if (a.classList.contains('pc-btn')) { const plan = a.textContent.replace('Assinar', '').trim(); const val = { Gold: 597, Platinum: 897, Black: 1297 }[plan]; track('InitiateCheckout', { content_name: 'Plano ' + plan, value: val, currency: 'BRL' }); }
-    else if (a.id === 'lead-wa') track('Lead', { content_name: 'Formulário do topo' });
-    else if (h.includes('wa.me')) track('Contact', { content_name: 'WhatsApp' });
-    else if (h.includes('diagnostico.html')) track('ViewContent', { content_name: 'Diagnóstico comercial' });
-  }, true);
-  const saved = read();
-  if (saved) apply(saved); else bar.hidden = false;
-})();
-</script>
+<!-- COOKIES (LGPD): banner e painel em nex-cookies.js / nex-cookies.css -->
+<script src="nex-cookies.js?v=1"></script>
 
 <button type="button" class="fc-fab" id="fc-fab" aria-haspopup="dialog"><span class="live"></span>Fale conosco</button>
 <div class="fc" id="fc" role="dialog" aria-modal="true" aria-labelledby="fc-title" hidden>
@@ -1194,12 +1080,12 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
     <h3 id="fc-title">Como você prefere começar?</h3>
     <p>Em 3 minutos você descobre onde seu comercial está perdendo vendas. Ou fale direto com o nosso time.</p>
     <div class="fc-opts">
-      <a class="fc-opt main" href="diagnostico.html">
+      <a class="fc-opt main" href="diagnostico.html" data-meta-event="ViewContent" data-meta-name="Diagnóstico comercial">
         <span class="fc-ic"><svg viewBox="0 0 24 24"><path d="M4 19h16v2H4zM6 10h3v7H6zm5-4h3v11h-3zm5 7h3v4h-3z"/></svg></span>
         <span><b>Fazer o diagnóstico do meu comercial</b><small>5 etapas rápidas. Você vê na hora os pontos fracos e o que resolve cada um.</small></span>
         <span class="go">→</span>
       </a>
-      <a class="fc-opt" href="https://wa.me/5587988578910?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20NEX%20e%20quero%20agendar%20uma%20apresenta%C3%A7%C3%A3o." target="_blank" rel="noopener">
+      <a class="fc-opt" data-meta-event="Contact" data-meta-name="WhatsApp (popup Fale conosco)" href="https://wa.me/5587988578910?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20NEX%20e%20quero%20agendar%20uma%20apresenta%C3%A7%C3%A3o." target="_blank" rel="noopener">
         <span class="fc-ic wa"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg></span>
         <span><b>Falar agora no WhatsApp</b><small>+55 87 98857-8910</small></span>
         <span class="go">→</span>
@@ -1240,6 +1126,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
     let first = null;
     checks.forEach(([id, ok]) => { $(id).closest('.fld').classList.toggle('invalid', !ok); if (!ok && !first) first = $(id); });
     if (first) { first.focus(); return; }
+    if (typeof window.trackMetaEvent === 'function') window.trackMetaEvent('Lead', { content_name: 'Formulário do topo' });
     const msg = `Olá! Vim pelo site da NEX e quero ver a NEX no meu negócio.\n\nNome: ${v.nome}\nEmpresa: ${v.emp}\nWhatsApp: ${v.whats}\nContatos por mês: ${v.leads}`;
     $('lead-wa').href = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
     $('lead-ok-t').textContent = `Pronto, ${v.nome.split(/\s+/)[0]}!`;

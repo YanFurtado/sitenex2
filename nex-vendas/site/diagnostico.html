@@ -140,6 +140,9 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
 .sel{font-size:13px;color:var(--dim);white-space:pre-wrap;background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:8px;user-select:all}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<link rel="stylesheet" href="nex-cookies.css?v=1">
+<!-- Meta Pixel (ID e eventos centralizados em nex-pixel.js; só carrega com consentimento de marketing) -->
+<script src="nex-pixel.js?v=1"></script>
 </head>
 <body>
 <div class="wrap">
@@ -338,7 +341,7 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
       <div><h3 style="font-size:18px;margin-bottom:14px">Saúde do seu comercial por área</h3><div class="areas" id="r-areas"></div></div>
       <div><h3 style="font-size:18px;margin-bottom:14px">O que resolve, por ordem de prioridade</h3><div class="recs" id="r-recs"></div></div>
       <div class="nav">
-        <a class="btn btn-wa" id="r-wa" href="#" target="_blank" rel="noopener">Enviar diagnóstico no WhatsApp →</a>
+        <a class="btn btn-wa" id="r-wa" data-meta-event="Contact" data-meta-name="WhatsApp (resultado do diagnóstico)" href="#" target="_blank" rel="noopener">Enviar diagnóstico no WhatsApp →</a>
         <button type="button" class="btn btn-ghost" id="r-copy">Copiar resumo</button>
       </div>
       <span class="copied" id="r-copied" hidden>Resumo copiado.</span>
@@ -354,19 +357,6 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
   </form>
 </div>
 
-<script>
-/* Meta Pixel "NEX CRM": só carrega se o visitante aceitou os cookies de marketing no site (mesma escolha salva pela página inicial). */
-(() => {
-  const PIXEL = '4820743728147875';
-  let ok = false;
-  try { ok = !!(JSON.parse(localStorage.getItem('nex-cookie-consent-v1') || 'null') || {}).marketing; } catch (e) {}
-  if (ok) {
-    !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', PIXEL); fbq('track', 'PageView');
-  }
-  window.nexTrack = (name, params) => { try { if (ok && window.fbq) fbq('track', name, params || {}); } catch (e) {} };
-})();
-</script>
 <script>
 (() => {
   const WA = '5587988578910';
@@ -444,7 +434,7 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
   form.addEventListener('submit', e => {
     e.preventDefault();
     if (!validate(cur)) return;
-    cur++; if (cur > TOTAL) { renderResult(); window.nexTrack('Lead', { content_name: 'Diagnóstico comercial' }); }
+    cur++; if (cur > TOTAL) { renderResult(); if (typeof window.trackMetaEvent === 'function') window.trackMetaEvent('Lead', { content_name: 'Diagnóstico comercial' }); }
     show(cur); save();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -546,10 +536,10 @@ input::placeholder,textarea::placeholder{color:#6f66a0}
     try { navigator.clipboard.writeText(summary).then(ok, fallback); } catch (e) { fallback(); }
   });
 
-  $('r-wa').addEventListener('click', () => window.nexTrack('Contact', { content_name: 'Diagnóstico no WhatsApp' }));
   document.querySelectorAll('[data-back]').forEach(a => a.addEventListener('click', e => { if (history.length > 1) { e.preventDefault(); history.back(); } }));
   restore(); show(cur);
 })();
 </script>
+<script src="nex-cookies.js?v=1"></script>
 </body>
 </html>
