@@ -422,6 +422,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 <link rel="stylesheet" href="nex-cookies.css?v=1">
+<link rel="stylesheet" href="parceiros.css?v=2">
 <!-- Meta Pixel (ID e eventos centralizados em nex-pixel.js; só carrega com consentimento de marketing) -->
 <script src="nex-pixel.js?v=1"></script>
 </head>
@@ -766,12 +767,13 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
 <header class="nav" id="nav">
   <div class="wrap">
     <a href="#top" class="logo"><svg class="logo-svg" viewBox="100 15 1820 640" role="img" aria-label="NEX"><path d="M112 105 L228 105 Q252 105 270 122 L612 440 L612 595 L216 243 L145 140 L216 282 L216 460 L112 548 Z"/><path d="M612 205 L612 150 Q612 105 660 105 L1100 105 L1200 205 Z M688 275 L1115 275 L1045 365 L752 365 Z M655 308 L750 395 L750 450 L1250 450 L1150 550 L700 550 Q655 550 655 505 Z"/><path d="M1165 105 L1330 105 L1502 268 L1440 330 Z M1140 640 L1830 25 L1772 102 L1900 105 L1610 350 L1830 550 L1665 550 L1505 400 Z"/></svg></a>
-    <ul>
+    <ul id="nav-menu">
       <li><a href="#sistema">Sistema</a></li><li><a href="#ia">Análise com IA</a></li>
       <li><a href="#planos">Planos</a></li><li><a href="#quem-somos">Quem somos</a></li>
-      <li><a href="#faq">FAQ</a></li>
+      <li><a href="parceiros.html">Parceiros</a></li><li><a href="#faq">FAQ</a></li>
     </ul>
     <a href="#demo" class="btn btn-primary btn-sm mag">Fale conosco</a>
+    <button type="button" class="nav-burger" aria-controls="nav-menu" aria-expanded="false" aria-label="Abrir menu"><svg class="b" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg><svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7l-1.4-1.4L9.2 12 2.9 5.7l1.4-1.4 6.3 6.3 6.3-6.3z"/></svg></button>
   </div>
 </header>
 <main id="top">
@@ -996,6 +998,24 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
     <div class="faq"><details open><summary>Preciso trocar meu número de WhatsApp?</summary><div class="ans">Não. A NEX conecta o número que sua empresa já usa. Os clientes continuam falando com você pelo mesmo contato, agora com tudo registrado no CRM.</div></details><details><summary>A IA pode responder algo errado para o meu cliente?</summary><div class="ans">O agente responde com base nas informações do seu negócio, definidas no briefing. Antes de publicar, você testa o agente por 3 a 5 dias. Assuntos sensíveis podem ser passados automaticamente para uma pessoa da equipe.</div></details><details><summary>Quanto tempo leva para começar a usar?</summary><div class="ans">Depois da reunião de briefing, configuramos o agente e o CRM em 10 a 20 dias. Em seguida vem o período de teste, e só então o agente vai para o ar.</div></details><details><summary>Funciona para o meu segmento?</summary><div class="ans">A NEX atende empresas que vendem pelo WhatsApp: clínicas, imobiliárias, escolas e cursos, serviços, construção, seguros e outros. O agente é treinado com a linguagem e as regras do seu negócio.</div></details><details><summary>Meus dados e os dos meus clientes ficam seguros?</summary><div class="ans">Sim. A plataforma segue a LGPD, usa conexão criptografada, dados criptografados no banco e controle de acesso por perfil. Os dados dos seus clientes pertencem à sua empresa.</div></details><details><summary>Tem fidelidade ou taxa de cancelamento?</summary><div class="ans">As condições de contratação, prazo e cancelamento ficam definidas no contrato, de acordo com o plano escolhido. Nosso time explica tudo na reunião de apresentação.</div></details></div>
   </div>
 </section>
+<section class="sec" id="parceiros" style="padding-top:40px" aria-labelledby="pt-title">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Rede de parceiros</span>
+      <h2 id="pt-title">Quem implanta a NEX com você.</h2>
+      <p>Parceiros certificados configuram o CRM, o Agente de IA e as automações do jeito do seu negócio, e treinam o seu time para usar tudo desde o primeiro dia.</p>
+    </div>
+    <div class="pt-home">
+      <article class="pt-feat purple-card rv" id="pt-home-feat" aria-label="Parceiro oficial em destaque"></article>
+      <article class="pt-more rv" aria-labelledby="pt-more-t">
+        <div class="pt-stack"><ul id="pt-home-stack" aria-hidden="true"></ul><span class="pt-count" id="pt-home-count">Parceiros homologados</span></div>
+        <h3 id="pt-more-t">Explore nossa rede de especialistas</h3>
+        <p>Consultores e agências certificados pela NEX, cada um focado num nicho: clínicas, imobiliárias, e-commerce, vendas B2B e serviços. Filtre por especialidade e encontre quem já conhece o seu mercado.</p>
+        <a class="btn btn-ghost" href="parceiros.html">Encontrar um parceiro <span class="arr">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
 <div class="wrap">
   <section class="cta2 rv" id="cta-final">
     <div class="big" id="cta-clock">00:00</div>
@@ -1017,7 +1037,7 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
     </div>
     <div class="ft-col">
       <h4>Produto</h4>
-      <ul><li><a href="#sistema">Sistema</a></li><li><a href="#ia">Análise com IA</a></li><li><a href="#planos">Planos</a></li><li><a href="#faq">Dúvidas</a></li><li><a href="#demo">Fale conosco</a></li></ul>
+      <ul><li><a href="#sistema">Sistema</a></li><li><a href="#ia">Análise com IA</a></li><li><a href="#planos">Planos</a></li><li><a href="parceiros.html">Parceiros</a></li><li><a href="#faq">Dúvidas</a></li><li><a href="#demo">Fale conosco</a></li></ul>
     </div>
     <div class="ft-col">
       <h4>Informações</h4>
@@ -1070,6 +1090,29 @@ section.block,section.sec:not(#sistema),footer{content-visibility:auto;contain-i
 
 <!-- COOKIES (LGPD): banner e painel em nex-cookies.js / nex-cookies.css -->
 <script src="nex-cookies.js?v=1"></script>
+<script src="nex-nav.js?v=1"></script>
+<script src="parceiros-data.js?v=2"></script>
+<script>
+/* Seção "Rede de parceiros" da Home: card do parceiro em destaque + convite para o diretório (dados em parceiros-data.js). */
+(() => {
+  const list = window.NEX_PARTNERS, h = window.nexPartners;
+  const feat = document.getElementById('pt-home-feat');
+  if (!list || !h || !feat) return;
+  const p = list.find(x => x.featured) || list[0];
+  const others = list.filter(x => x !== p);
+  feat.innerHTML = `
+    <span class="pt-seal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>Parceiro Oficial em Destaque</span>
+    <div class="pt-head">${h.logoHTML(p)}<div><h3>${h.esc(p.name)}</h3><span class="pt-loc">${h.esc(p.location)}</span></div></div>
+    <p>${h.esc(p.shortDescription)}</p>
+    <ul class="pt-tags" aria-label="Especialidades">${p.specialties.map(s => `<li>${h.esc(s)}</li>`).join('')}</ul>
+    <div class="pt-acts">
+      <a class="btn btn-primary" href="${h.esc(p.contactUrl)}" target="_blank" rel="noopener" data-meta-event="Contact" data-meta-name="Parceiro ${h.esc(p.name)} (Home)">Falar com a ${h.esc(p.name.replace(/^Assessoria\s+/, ''))} <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href="${h.profileUrl(p)}">Ver detalhes</a>
+    </div>`;
+  document.getElementById('pt-home-stack').innerHTML = others.slice(0, 5).map(x => `<li>${h.logoHTML(x)}</li>`).join('');
+  document.getElementById('pt-home-count').textContent = `+${others.length} parceiros homologados`;
+})();
+</script>
 
 <button type="button" class="fc-fab" id="fc-fab" aria-haspopup="dialog"><span class="live"></span>Fale conosco</button>
 <div class="fc" id="fc" role="dialog" aria-modal="true" aria-labelledby="fc-title" hidden>
